@@ -77,6 +77,10 @@ function Register() {
                 required: true,
                 message: "Please enter your email!",
               },
+              {
+                type: "email",
+                message: "Your email is not valid!",
+              },
             ]}
           >
             <Input placeholder="Enter your email" />
