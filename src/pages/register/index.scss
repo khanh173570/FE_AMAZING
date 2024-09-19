@@ -1,4 +1,4 @@
-.Authen {
+.Register {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,6 +7,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  Button {
+    width: 500px;
+    background-color: #4a771a;
+    color: #fff;
+    padding: 20px 0px;
+    font-size: 20px;
   }
 
   a {
@@ -34,6 +42,7 @@
 
   &__icon {
     font-size: 15px;
+    color: #000;
   }
 
   &__navigate {
