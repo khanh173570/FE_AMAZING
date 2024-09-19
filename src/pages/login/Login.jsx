@@ -89,7 +89,7 @@ function Login() {
             navigate("/register");
           }
         } catch (error) {
-          console.log("Error fetching accounts:", error);
+          console.log("Error fetching:", error);
           toast.error("Failed to login with Google.");
         }
       })
