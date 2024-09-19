@@ -21,8 +21,6 @@ import Staff from "./pages/StaffPage";
 
 
 
-//Customer
-import Customer from "./pages/CustomerPage";
 
 
 function App() {
