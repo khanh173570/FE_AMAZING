@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import Admin from "./pages/AdminPage";
 import Censor from "./pages/CensorPage";
 import Staff from "./pages/StaffPage";
