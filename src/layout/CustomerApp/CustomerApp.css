@@ -1,0 +1,27 @@
+/* Định dạng toàn bộ chiều cao của bố cục */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 100% chiều cao của khung nhìn */
+  }
+  
+  .header {
+    flex: 0 0 20%; /* Chiếm 20% chiều cao */
+    background-color: lightgray; /* Màu nền cho dễ nhìn */
+  }
+  
+  .main {
+    flex: 1 0 auto; /* Chiếm 80% chiều cao (tự động điều chỉnh) */
+    background-color: white;
+  }
+  
+  .footer {
+    flex: 0 0 20%; /* Chiếm 20% chiều cao */
+    background-color: lightgray;
+  }
+  
