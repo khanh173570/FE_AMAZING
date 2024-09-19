@@ -1,33 +1,25 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-
-
-
-// admin
 import Admin from "./pages/AdminPage";
-
-
-
-// Censor
 import Censor from "./pages/CensorPage";
-
-
-
-
-//Staff
 import Staff from "./pages/StaffPage";
 
-
-
-
-
+// Layout and Pages
+import CustomerApp from './layout/CustomerApp/CustomerApp.jsx';
+import HomePage from './pages/CustomerPage/HomePage.jsx';
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <div>Hello world!</div>,
+      path: "/", 
+      element: <CustomerApp />,  // Root path points to CustomerApp
+      children: [
+        {
+          index: true,  // HomePage is displayed by default at "/"
+          element: <HomePage />,
+        },
+      ],
     },
     {
       path: "/login",
@@ -50,6 +42,7 @@ function App() {
       element: <Staff />,
     },
   ]);
+
   return <RouterProvider router={router} />;
 }
 
