@@ -1,9 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login";
-import Admin from "./pages/AdminPage";
-import Censor from "./pages/CensorPage";
-import Staff from "./pages/StaffPage";
 import Register from "./pages/register/Register";
+
+
+
+// admin
+import Admin from "./pages/AdminPage";
+
+
+
+// Censor
+import Censor from "./pages/CensorPage";
+
+
+
+
+//Staff
+import Staff from "./pages/StaffPage";
+
+
+
+
+//Customer
+import Customer from "./pages/CustomerPage";
+
 
 function App() {
   const router = createBrowserRouter([
