@@ -9,7 +9,7 @@ import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
 import HomePage from "./pages/CustomerPage/HomePage.jsx";
 import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
 import Admin from "./pages/AdminPage/index.jsx";
-import Layout from "./layout/index.jsx";
+import NotFound from "./pages/notFoundPage/NotFound.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -34,6 +34,10 @@ function App() {
         {
           path: "/register",
           element: <Register />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
         },
       ],
     },
