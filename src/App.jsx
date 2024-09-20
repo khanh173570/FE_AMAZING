@@ -10,6 +10,7 @@ import HomePage from "./pages/CustomerPage/HomePage.jsx";
 import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
 import Admin from "./pages/AdminPage/index.jsx";
 import NotFound from "./pages/notFoundPage/NotFound.jsx";
+import Profile from "./components/componentAdmin/profile/Profile.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -41,6 +42,7 @@ function App() {
         },
       ],
     },
+
     {
       path: "/admin",
       element: <PrivateRoute />,
@@ -48,9 +50,16 @@ function App() {
         {
           path: "/admin",
           element: <Admin />,
+          children: [
+            {
+              path: "profile",
+              element: <Profile />,
+            },
+          ],
         },
       ],
     },
+
     {
       path: "/censor",
       element: <Censor />,
