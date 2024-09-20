@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../table";
-import { Button } from "antd";
+import { Button, message } from "antd";
 
 function Profile() {
-  const [id, setId] = useState({});
-  const [name, setName] = useState({});
+  const [id, setId] = useState(null); // Initial state null to ensure it's ready before the API call
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const account = localStorage.getItem("account");
-    const parseAccount = JSON.parse(account);
-    const { id, name } = parseAccount;
-    console.log("ID: ", id);
-    setId(id);
-    setName(name);
+    if (account) {
+      const parseAccount = JSON.parse(account);
+      const { id, name } = parseAccount;
+      console.log("ID: ", id);
+      setId(id);
+      setName(name);
+    } else {
+      message.error("No account found in localStorage");
+    }
   }, []);
 
   const columns = [
@@ -47,6 +51,10 @@ function Profile() {
       ),
     },
   ];
+
+  if (!id) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
