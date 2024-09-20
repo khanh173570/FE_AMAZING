@@ -1,37 +1,51 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Admin from "./pages/AdminPage";
 import Censor from "./pages/CensorPage";
 import Staff from "./pages/StaffPage";
 
 // Layout and Pages
-import CustomerApp from './layout/CustomerApp/CustomerApp.jsx';
-import HomePage from './pages/CustomerPage/HomePage.jsx';
+import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
+import HomePage from "./pages/CustomerPage/HomePage.jsx";
+import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
+import Admin from "./pages/AdminPage/index.jsx";
+import Layout from "./layout/index.jsx";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/", 
-      element: <CustomerApp />,  // Root path points to CustomerApp
+      path: "/",
+      element: <CustomerApp />, // Root path points to CustomerApp
       children: [
         {
-          index: true,  // HomePage is displayed by default at "/"
+          index: true, // HomePage is displayed by default at "/"
           element: <HomePage />,
         },
       ],
     },
     {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
+      path: "/",
+      element: <CustomerApp />,
+      children: [
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+      ],
     },
     {
       path: "/admin",
-      element: <Admin />,
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "/admin",
+          element: <Admin />,
+        },
+      ],
     },
     {
       path: "/censor",
