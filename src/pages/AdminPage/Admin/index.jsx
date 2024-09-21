@@ -11,14 +11,19 @@ function getItem(label, key, icon, children) {
     key,
     icon,
     children,
-    label: <Link to={key}>{label}</Link>,
+    label,
   };
 }
 
 const items = [
-  getItem("Profile", "profile", <UserOutlined />, [
-    getItem("Your profile", "profile"),
-    getItem("Change password", "change-password"),
+  getItem("Profile", "sub1", <UserOutlined />, [
+    getItem(<Link to="profile">Your profile</Link>, "profile"),
+    getItem(<Link to="change-password">Change password</Link>, "change-password"),
+  ]),
+  getItem("Account", "sub2", <UserOutlined />, [
+    getItem(<Link to="total-account">Total</Link>, "total-account"),
+    getItem(<Link to="list-user">User</Link>, "list-user"),
+    getItem(<Link to="list-staff">Staff</Link>, "list-staff"),
   ]),
 ];
 

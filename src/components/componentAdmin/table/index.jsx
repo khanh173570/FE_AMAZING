@@ -10,11 +10,20 @@ function TableComponent({ columns, api, title, reload }) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(api);
-      console.log("Response: ", response.data);
-      const data = Array.isArray(response.data) ? response.data : [response.data];
-      setDataSource(data);
-      setLoading(false);
+      if (title == "List of user") {
+        const response = await axios.get(api);
+        const sortedData = response.data.sort((a, b) => b.id - a.id);
+        const filterUser = sortedData.filter((user) => user.role == "user");
+        console.log("FilterUSer: ", filterUser);
+        setDataSource(filterUser);
+        setLoading(false);
+      } else {
+        const response = await axios.get(api);
+        console.log("Response: ", response.data);
+        const data = Array.isArray(response.data) ? response.data : [response.data];
+        setDataSource(data);
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Failed to fetch table data:", error);
       setLoading(false);
@@ -22,9 +31,9 @@ function TableComponent({ columns, api, title, reload }) {
   };
 
   useEffect(() => {
-    fetchData(); 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reload]); 
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reload]);
 
   return (
     <div className="TableComponent">
