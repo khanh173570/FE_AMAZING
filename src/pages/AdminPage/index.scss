@@ -1,0 +1,34 @@
+.admin {
+  .admin__welcome {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+
+    .ant-layout-sider-collapsed & {
+      justify-content: center;
+      font-size: 14px;
+    }
+  }
+
+  a {
+    font-size: 16px;
+  }
+
+  &__sidebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+      width: 100%;
+      transition: width 0.3s ease;
+
+      .ant-layout-sider-collapsed & {
+        width: 150px;
+      }
+    }
+  }
+}

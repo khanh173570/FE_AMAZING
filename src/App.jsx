@@ -1,35 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Censor from "./pages/CensorPage";
+import Staff from "./pages/StaffPage";
+
+// Layout and Pages
+import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
+import HomePage from "./pages/CustomerPage/HomePage.jsx";
+import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
+import Admin from "./pages/AdminPage/index.jsx";
+import NotFound from "./pages/notFoundPage/NotFound.jsx";
+import Profile from "./components/componentAdmin/profile/Profile.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <CustomerApp />, // Root path points to CustomerApp
+      children: [
+        {
+          index: true, // HomePage is displayed by default at "/"
+          element: <HomePage />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <CustomerApp />,
+      children: [
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+      ],
+    },
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    {
+      path: "/admin",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "/admin",
+          element: <Admin />,
+          children: [
+            {
+              path: "profile",
+              element: <Profile />,
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      path: "/censor",
+      element: <Censor />,
+    },
+    {
+      path: "/staff",
+      element: <Staff />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
