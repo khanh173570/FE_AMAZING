@@ -75,6 +75,7 @@ function ChangePassword() {
         title={`Change password`}
         formItems={formItems}
         api={`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`}
+        loadingStatus={true}
       />
     </div>
   );
