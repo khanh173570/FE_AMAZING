@@ -1,4 +1,4 @@
-.Authen {
+.Login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,6 +7,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__layout {
+    &__button {
+      width: 500px;
+      background-color: #4a771a;
+      color: #fff;
+      padding: 20px 0px;
+      font-size: 20px;
+    }
   }
 
   a {
@@ -34,10 +44,37 @@
 
   &__icon {
     font-size: 15px;
+    color: #000;
   }
 
   &__navigate {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 20px;
+  }
+
+  .or {
+    margin: 15px 0px;
+  }
+
+  .google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 20px;
+
+    img {
+      margin-right: 10px;
+      width: 20px;
+      height: auto;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+    }
   }
 }
