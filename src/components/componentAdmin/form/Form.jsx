@@ -4,11 +4,20 @@ import "./index.scss";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import emailjs from "emailjs-com";
 
 // eslint-disable-next-line react/prop-types
 function FormComponent({ formItems, title, api }) {
   const [form] = useForm();
   const [passwordUpdateStatus, setPasswordUpdateStatus] = useState(false);
+  const [email, setEmail] = useState(null);
+
+  useEffect(() => {
+    const account = localStorage.getItem("account");
+    const parseAccount = JSON.parse(account);
+    const { email } = parseAccount;
+    setEmail(email);
+  }, []);
 
   const handleFinish = async (values) => {
     console.log("values: ", values);
@@ -22,6 +31,20 @@ function FormComponent({ formItems, title, api }) {
         });
         console.log("Response: ", response);
         setPasswordUpdateStatus(true);
+
+        const emailData = {
+          to_email: email,
+          user_password: values.newPassword,
+        };
+
+        emailjs
+          .send("service_r83vtoa", "template_hjnvc0e", emailData, "bcPGKA4QICBzO0bg7")
+          .then((result) => {
+            console.log("Email successfully sent:", result.text);
+          })
+          .catch((error) => {
+            console.error("Error sending email:", error);
+          });
       }
     }
   };
