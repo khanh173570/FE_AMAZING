@@ -8,9 +8,10 @@ import Staff from "./pages/StaffPage";
 import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
 import HomePage from "./pages/CustomerPage/HomePage.jsx";
 import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
-import Admin from "./pages/AdminPage/index.jsx";
 import NotFound from "./pages/notFoundPage/NotFound.jsx";
-import Profile from "./components/componentAdmin/profile/Profile.jsx";
+import Admin from "./pages/AdminPage/Admin/index.jsx";
+import Profile from "./pages/AdminPage/profile/Profile.jsx";
+import ChangePassword from "./pages/AdminPage/change-password/ChangePassword.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -54,6 +55,10 @@ function App() {
             {
               path: "profile",
               element: <Profile />,
+            },
+            {
+              path: "change-password",
+              element: <ChangePassword />,
             },
           ],
         },
