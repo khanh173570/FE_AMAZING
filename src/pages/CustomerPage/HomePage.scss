@@ -1,0 +1,365 @@
+.payment-method-container{
+  
+
+  .payment-form-container {
+        border: 0.5px solid #351010;
+        padding: 20px;
+        padding-bottom: 10px;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 2%;
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight:bolder ;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 40px;
+      color: #ca0f0f;
+    }
+  
+    .payment-form {
+      .payment-options-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+  
+        .payment-option {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          padding: 10px;
+          margin-right: 10px;
+  
+          &:last-child {
+            margin-right: 0;
+          }
+  
+          label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            font-weight: bolder;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #333;
+            
+            img {
+              width: 30%;
+              height: 50%;
+              margin-right: 10px;
+              object-fit: contain;
+            }
+          }
+  
+          input {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border 0.3s;
+  
+            &:focus {
+              border-color: #007bff;
+              outline: none;
+            }
+  
+            &:disabled {
+              background-color: #e9d9d9;
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
+  
+      .update-button {
+        display: block;
+        width: 10%;
+        padding: 12px;
+        background-color: #be1919;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bolder;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        cursor: pointer;
+        text-align: center;
+        margin: 0 auto;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+  
+  .payment-navigation {
+    display: flex;
+    justify-content: space-around;
+    /* Các mục cách đều nhau */
+    margin-bottom: 10px;
+    /* Đường viền dưới cho phần điều hướng */
+    padding-top: 15px;
+    padding-bottom: 1px;
+  
+    .nav-item {
+      display: flex;
+      align-items: center;
+      /* Hình ảnh và text căn giữa dọc */
+      cursor: pointer;
+      padding: 10px 15px;
+      /* Tạo khoảng cách bên trong các mục */
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      /* Thêm transition cho cả background và màu chữ */
+  
+      img {
+        max-width: 10%;
+      }
+  
+      span {
+        font-size: 15px;
+        /* Kích thước chữ */
+        color: #000000;
+        /* Màu mặc định */
+        transition: color 0.3s ease;
+        /* Hiệu ứng chuyển đổi màu chữ */
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+  
+      &:hover {
+        background-color: #d41010;
+        /* Nền nâu khi mục được chọn */
+        color: white;
+        /* Đổi màu chữ sang trắng khi hover */
+  
+        span {
+          color: white;
+          /* Đổi màu chữ sang trắng khi hover */
+        }
+      }
+  
+      &.active {
+        background-color: #f7d0d0;
+        /* Nền nâu khi mục được chọn */
+        color: white;
+        /* Màu chữ trắng khi mục được chọn */
+  
+        span {
+          color: rgb(5, 5, 5);
+          /* Đổi màu chữ sang trắng khi được chọn */
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+      }
+    }
+  }
+  
+ 
+
+  .user-profile-container {
+    max-width: 80%;
+    margin: 2rem auto;
+    padding: 3rem;
+    background-color: #fff;
+    border: 1px solid #d9b9a4;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    
+    display: flex;
+    justify-content: space-between;
+  
+    .profile-image {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20%;
+      height: 100%;
+  
+      img {
+        width: 80%;
+        height: 100%;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        max-width: 100%;
+      }
+  
+      .change-avatar-button {
+        background-color: #a1450f;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-size: 0.7rem;
+  
+        &:hover {
+          background-color: #a05e1c;
+        }
+      }
+    }
+  
+    form {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-left: 2rem;
+  
+      .form-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+  
+        label {
+          font-size: 0.85rem;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+          color: #555;
+        }
+  
+        input, .ant-picker {
+          width: 100%;
+          padding: 0.5rem;
+          border-radius: 0.375rem;
+          border: 1px solid #cbd5e0;
+          font-size: 0.85rem;
+          color: #333;
+        }
+  
+        .gender-group {
+          display: flex;
+          gap: 0.75rem;
+  
+          label {
+            font-size: 0.85rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: bolder;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+  
+            input {
+              margin-right: 0.5rem;
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+  
+      .submit-button {
+        width: 20%;
+        padding: 0.75rem;
+        background-color: #9e745b;
+        margin-top: 1%;
+        color: white;
+        font-size: 0.9rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        margin-left: 20%;
+        
+  
+        &:hover {
+          background-color: #805d49;
+        }
+      }
+    }
+  }
+  
+  
+  
+  .user-profile-container {
+    width: 100%;
+  }
+  
+  .form-columns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .form-column {
+    width: 100%; /* Mỗi cột chiếm 48% chiều rộng */
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  }
+
+
+
+  .card-wrapper {
+    display: flex;
+    justify-content: left; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+  }
+  
+  .card-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    background-color: #e7dddd;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    position: relative;
+    flex-direction: row-reverse; /* Swap the order of children */
+    margin-top: 1%;
+    right: -3%;
+  }
+  
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    font-size: xx-small;
+  }
+  
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .column {
+    flex: 1; /* Makes each column take equal space */
+    text-align: center; /* Center aligns text in each column */
+  }
+  
+  .price, .quantity, .total {
+    margin: 0; /* Removes default margin */
+  }
+
+  
+  .image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    left: -2%; /* Move the image to the left */
+  }
+  
+  .food-image {
+    width: 8vw; /* Sử dụng đơn vị vw để chiều rộng tỷ lệ theo chiều rộng của viewport */
+    height: auto; /* Đảm bảo tỷ lệ khung hình được giữ nguyên */
+    max-width: none; /* Không giới hạn chiều rộng tối đa */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  
