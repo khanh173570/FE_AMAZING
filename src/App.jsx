@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Censor from "./pages/CensorPage";
+import Censor from "./pages/CensorPage/CensorPage.jsx";
 import Staff from "./pages/StaffPage";
 
 // Layout and Pages
 import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
+import CensorApp from "./layout/CensorApp/CensorApp.jsx";
 import HomePage from "./pages/CustomerPage/HomePage.jsx";
 import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
 import NotFound from "./pages/notFoundPage/NotFound.jsx";
@@ -86,9 +87,18 @@ function App() {
     },
 
     {
-      path: "/censor",
-      element: <Censor />,
-    },
+
+    path: "/censor",
+    element: <CensorApp />, // Root path points to CustomerApp
+    children: [
+      {
+        index: true, // HomePage is displayed by default at "/"
+        element: <Censor />,
+      },
+    ],
+  },
+
+
     {
       path: "/staff",
       element: <Staff />,

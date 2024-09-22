@@ -4,7 +4,7 @@ html, body, #root {
     margin: 0;
   }
   
-  .container {
+  .all {
     display: flex;
     flex-direction: column;
     height: 100vh; /* 100% chiều cao của khung nhìn */

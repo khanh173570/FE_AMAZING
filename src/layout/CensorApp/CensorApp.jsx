@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import Footer from '../../components/componentCustomer/Footer/FooterCustomer.jsx';
-import Header from '../../components/componentCustomer/Header/HeaderCustomer.jsx';
+import Footer from '../../components/componentCensor/Footer/FooterCensor.jsx';
+import Header from '../../components/componentCensor/Header/HeaderCensor.jsx';
 import React from 'react';
-import './CustomerApp.css'; // Import CSS để định dạng
 
-function CustomerApp() {
+
+function CensorApp() {
   return (
     <div className="all">
       <header className="header">
@@ -20,4 +20,4 @@ function CustomerApp() {
   );
 }
 
-export default CustomerApp;
+export default CensorApp;
