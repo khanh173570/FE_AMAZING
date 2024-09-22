@@ -1,0 +1,42 @@
+
+.payment-navigation {
+  .nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Căn giữa nội dung theo chiều dọc */
+    padding: 10px; /* Tăng thêm padding để viền không quá sát nội dung */
+    border: 2px solid #ddd; /* Độ dày viền */
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 10%; /* Đảm bảo độ cao full của cột */
+    width: 50%;
+    
+    &:hover {
+      background-color: #2a0cd3;
+      color: white;
+    }
+
+    img {
+      max-width: 50%;
+      padding-left: 70px;
+      padding-right: 3%;
+    }
+
+    span {
+      font-size: 20px;
+      font-weight:bolder ;
+      padding-right: 60px;
+    }
+
+    &.active {
+      background-color: #2b2f5e;
+    }
+  }
+  .row {
+    width: 100%; /* Đảm bảo hàng chiếm toàn bộ chiều rộng */
+  }
+}
