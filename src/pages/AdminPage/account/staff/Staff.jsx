@@ -5,13 +5,13 @@ import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function User() {
+function ListStaff() {
   const [open, setOpen] = useState(false);
   const [form] = useForm();
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(null);
-  const [edit, setEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const columns = [
     {
@@ -49,9 +49,9 @@ function User() {
           <Button
             type="primary"
             onClick={() => {
-              form.setFieldsValue(record);
               setId(id);
-              setEdit(true);
+              setIsEdit(true);
+              form.setFieldsValue(record);
               setOpen(true);
             }}
           >
@@ -59,7 +59,7 @@ function User() {
           </Button>
           <Popconfirm
             title="Delete"
-            description="Are you sure to delete this user?"
+            description="Are you sure to delete this staff?"
             onConfirm={() => {
               handleDelete(id);
             }}
@@ -74,25 +74,24 @@ function User() {
   ];
 
   const handleDelete = async (id) => {
-    setLoading(true);
     try {
       const response = await axios.put(`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`, {
         status: false,
       });
       console.log("Delete response: ", response);
-      toast.success("Delete user successfully");
+      toast.success("Delete staff successfully");
       setReload(!reload);
     } catch (error) {
-      console.error("Error deleting user: ", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleOpenModal = () => {
-    setOpen(true);
-    setEdit(false);
     form.resetFields();
+    setIsEdit(false);
+    setOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -100,31 +99,31 @@ function User() {
   };
 
   const handleFinish = async (values) => {
+    console.log(values);
     setLoading(true);
     try {
-      console.log("Values: ", values);
-      if (edit && id) {
+      if (isEdit && id) {
         const response = await axios.put(`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`, {
           name: values.name,
           phone: values.phone,
           email: values.email,
           password: values.password,
-          role: "user",
+          role: "staff",
           status: true,
         });
-        console.log("Response: ", response);
-        toast.success("Update user successfully");
+        console.log(response);
+        toast.success("Update staff successfully");
       } else {
         const response = await axios.post("https://6692a166346eeafcf46da14d.mockapi.io/account", {
           name: values.name,
           phone: values.phone,
           email: values.email,
           password: values.password,
-          role: "user",
+          role: "staff",
           status: true,
         });
-        console.log("Response: ", response);
-        toast.success("Add user successfully");
+        console.log(response);
+        toast.success("Add new staff successfully");
       }
     } catch (error) {
       console.log(error);
@@ -137,26 +136,26 @@ function User() {
   };
 
   return (
-    <div>
+    <div className="ListStaff">
       <Button type="primary" onClick={handleOpenModal}>
-        Add new user
+        Add new staff
       </Button>
       <TableComponent
         columns={columns}
-        api={`https://6692a166346eeafcf46da14d.mockapi.io/account`}
-        title={`List of user`}
+        api="https://6692a166346eeafcf46da14d.mockapi.io/account"
+        title={`List of staff`}
         reload={reload}
       />
       <Modal
         open={open}
-        title={edit ? "Update user" : "Add new user"}
-        onCancel={() => setOpen(false)}
+        title={isEdit ? "Update staff" : "Add new staff"}
+        onCancel={handleCloseModal}
         footer={[
-          <Button key="back" onClick={() => setOpen(false)} disabled={loading}>
-            Back
+          <Button key="back" onClick={handleCloseModal} disabled={loading}>
+            Return
           </Button>,
           <Button key="submit" type="primary" onClick={() => form.submit()} disabled={loading} loading={loading}>
-            {edit ? "Update" : "Add"}
+            {isEdit ? "Update" : "Add"}
           </Button>,
         ]}
       >
@@ -195,7 +194,7 @@ function User() {
               },
               {
                 type: "email",
-                message: "Email is not valid type!",
+                message: "Email is not valid!",
               },
             ]}
           >
@@ -219,4 +218,4 @@ function User() {
   );
 }
 
-export default User;
+export default ListStaff;

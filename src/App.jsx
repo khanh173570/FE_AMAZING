@@ -13,6 +13,7 @@ import Admin from "./pages/AdminPage/Admin/index.jsx";
 import Profile from "./pages/AdminPage/profile/Profile.jsx";
 import ChangePassword from "./pages/AdminPage/change-password/ChangePassword.jsx";
 import User from "./pages/AdminPage/account/user/User.jsx";
+import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -64,6 +65,10 @@ function App() {
             {
               path: "list-user",
               element: <User />,
+            },
+            {
+              path: "list-staff",
+              element: <ListStaff />,
             },
           ],
         },

@@ -17,6 +17,13 @@ function TableComponent({ columns, api, title, reload }) {
         console.log("FilterUSer: ", filterUser);
         setDataSource(filterUser);
         setLoading(false);
+      } else if (title == "List of staff") {
+        const response = await axios.get(api);
+        const sortedData = response.data.sort((a, b) => b.id - a.id);
+        const filterUser = sortedData.filter((user) => user.role == "staff");
+        console.log("FilterUSer: ", filterUser);
+        setDataSource(filterUser);
+        setLoading(false);
       } else {
         const response = await axios.get(api);
         console.log("Response: ", response.data);
