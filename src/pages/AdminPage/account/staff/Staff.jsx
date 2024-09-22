@@ -137,9 +137,11 @@ function ListStaff() {
 
   return (
     <div className="ListStaff">
-      <Button type="primary" onClick={handleOpenModal}>
-        Add new staff
-      </Button>
+      <div className="button">
+        <Button type="primary" onClick={handleOpenModal}>
+          Add new staff
+        </Button>
+      </div>
       <TableComponent
         columns={columns}
         api="https://6692a166346eeafcf46da14d.mockapi.io/account"

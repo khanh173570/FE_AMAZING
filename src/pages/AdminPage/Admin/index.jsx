@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./index.scss";
+import { toast } from "react-toastify";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
   return {
@@ -25,6 +26,7 @@ const items = [
     getItem(<Link to="list-user">User</Link>, "list-user"),
     getItem(<Link to="list-staff">Staff</Link>, "list-staff"),
   ]),
+  getItem("Logout", "logout", <LogoutOutlined />),
 ];
 
 const Admin = () => {
@@ -34,11 +36,10 @@ const Admin = () => {
   } = theme.useToken();
 
   const [name, setName] = useState("");
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   const pathSnippets = location.pathname.split("/").filter((i) => i);
-
   const breadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join("/")}`;
     return (
@@ -50,49 +51,44 @@ const Admin = () => {
 
   useEffect(() => {
     const account = localStorage.getItem("account");
-
     const parseAccount = JSON.parse(account);
-    console.log(parseAccount);
-
-    const { name } = parseAccount;
-    setName(name);
+    setName(parseAccount.name);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("account");
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
 
   return (
     <div className="admin">
-      <Layout
-        style={{
-          minHeight: "100vh",
-        }}
-      >
+      <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} collapsedWidth={150}>
           <div className="admin__sidebar">
             <div className="admin__sidebar__content">
               <div className="demo-logo-vertical" />
               <h1 className="admin__welcome">Welcome {name}</h1>
-              <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" items={items} />
+              <Menu
+                theme="dark"
+                defaultSelectedKeys={["1"]}
+                mode="inline"
+                items={items.map((item) => {
+                  if (item.key === "logout") {
+                    return {
+                      ...item,
+                      onClick: handleLogout, // Assign logout handler
+                    };
+                  }
+                  return item;
+                })}
+              />
             </div>
           </div>
         </Sider>
         <Layout>
-          <Header
-            style={{
-              padding: 0,
-              background: colorBgContainer,
-            }}
-          ></Header>
-          <Content
-            style={{
-              margin: "0 16px",
-            }}
-          >
-            <Breadcrumb
-              style={{
-                margin: "16px 0",
-              }}
-            >
-              {breadcrumbItems}
-            </Breadcrumb>
+          <Content style={{ margin: "0 16px" }}>
+            <Breadcrumb style={{ margin: "16px 0" }}>{breadcrumbItems}</Breadcrumb>
             <div
               style={{
                 padding: 24,
@@ -101,16 +97,10 @@ const Admin = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              {<Outlet />}
+              <Outlet />
             </div>
           </Content>
-          <Footer
-            style={{
-              textAlign: "center",
-            }}
-          >
-            {new Date().getFullYear()}
-          </Footer>
+          <Footer style={{ textAlign: "center" }}>{new Date().getFullYear()}</Footer>
         </Layout>
       </Layout>
     </div>

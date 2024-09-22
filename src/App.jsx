@@ -14,6 +14,7 @@ import Profile from "./pages/AdminPage/profile/Profile.jsx";
 import ChangePassword from "./pages/AdminPage/change-password/ChangePassword.jsx";
 import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
+import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -69,6 +70,10 @@ function App() {
             {
               path: "list-staff",
               element: <ListStaff />,
+            },
+            {
+              path: "total-account",
+              element: <TotalAccount />,
             },
           ],
         },
