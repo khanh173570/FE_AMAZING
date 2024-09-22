@@ -15,6 +15,7 @@ import ChangePassword from "./pages/AdminPage/change-password/ChangePassword.jsx
 import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
+import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +40,10 @@ function App() {
         {
           path: "/register",
           element: <Register />,
+        },
+        {
+          path: "/forgot-password",
+          element: <ForgotPassword />,
         },
         {
           path: "*",

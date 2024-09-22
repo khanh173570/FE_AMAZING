@@ -1,0 +1,19 @@
+.ForgotPassword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__button {
+    width: 500px;
+    background-color: #4a771a;
+    color: #fff;
+    padding: 20px 0px;
+    font-size: 20px;
+    margin-top: 15px;
+  }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+}

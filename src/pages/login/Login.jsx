@@ -134,6 +134,9 @@ function Login() {
           >
             <Input.Password placeholder="Enter your password" />
           </Form.Item>
+          <Link to="/forgot-password" className="forgot">
+            Forgot password?
+          </Link>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="Login__layout__button">
               Login
