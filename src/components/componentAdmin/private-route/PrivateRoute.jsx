@@ -13,6 +13,12 @@ function PrivateRoute() {
       return navigate("/login");
     }
 
+    const parseAccount = JSON.parse(account);
+    if (parseAccount.role !== "admin") {
+      toast.error("Your role cannot going to this page!");
+      return navigate("/login");
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,9 +1,10 @@
 import { Button, Form, Input, Modal, Popconfirm, Tag } from "antd";
 import TableComponent from "../../../../components/componentAdmin/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import jsPDF from "jspdf";
 
 function User() {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,8 @@ function User() {
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+
+  const [users, setUsers] = useState([]);
 
   const columns = [
     {
@@ -136,11 +139,42 @@ function User() {
     }
   };
 
+  const fetchData = async () => {
+    const response = await axios.get("https://6692a166346eeafcf46da14d.mockapi.io/account");
+    const filterUsers = response.data.filter((user) => user.role == "user");
+    setUsers(filterUsers);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const exportPDF = () => {
+    const doc = new jsPDF();
+    doc.text("List of Users", 10, 10);
+
+    const columns = ["Name", "Phone", "Email", "Role", "Status"];
+
+    const rows = users.map((user) => [
+      user.name,
+      user.phone,
+      user.email,
+      user.role,
+      user.status ? "Active" : "Not active",
+    ]);
+
+    doc.autoTable({
+      head: [columns],
+      body: rows,
+    });
+
+    doc.save("list_of_user.pdf");
+  };
+
   return (
     <div>
       <Button type="primary" onClick={handleOpenModal}>
         Add new user
       </Button>
+      <Button onClick={exportPDF}>Export to PDF</Button>
       <TableComponent
         columns={columns}
         api={`https://6692a166346eeafcf46da14d.mockapi.io/account`}
