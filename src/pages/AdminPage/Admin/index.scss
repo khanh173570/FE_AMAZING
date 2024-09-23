@@ -6,6 +6,9 @@
     align-items: center;
     text-align: center;
     height: 100%;
+    font-size: 25px;
+    padding: 15px 0px;
+    margin: 0px;
 
     .ant-layout-sider-collapsed & {
       justify-content: center;
@@ -30,5 +33,9 @@
         width: 150px;
       }
     }
+  }
+
+  a {
+    text-decoration: none;
   }
 }
