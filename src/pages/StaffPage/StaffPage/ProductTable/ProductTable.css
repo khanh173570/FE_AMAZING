@@ -1,0 +1,83 @@
+.producttable{
+    width: 80%;
+    padding: 10px;
+    font-family: sans-serif;
+    margin: 0 40px;
+}
+
+.producttable-top h1{
+    font-weight: 400;
+}
+
+.search-bar {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    background-color: #e0e0e0;
+}
+
+.search-bar button {
+    margin-left: -12px;
+    width: 4%;
+    padding: 10px;
+    background-color: #483434;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    background: #fff;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #483434;
+    color: white;
+}
+
+.upload-btn, .edit-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.upload-btn {
+    color: #4CAF50;
+    font-size: 25px;
+}
+
+.edit-btn {
+    color: #ed8200;
+    font-size: 25px;
+}
+
+.product-name{
+    cursor: pointer;
+}

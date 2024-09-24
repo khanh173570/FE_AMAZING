@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Censor from "./pages/CensorPage/CensorPage.jsx";
-import Staff from "./pages/StaffPage";
+import Staff from "./pages/StaffPage/StaffPage/StaffPage.jsx";
 
 // Layout and Pages
 import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
@@ -17,6 +17,9 @@ import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
+import StaffApp from './layout/StaffApp/StaffApp.jsx'
+import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
+import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -99,10 +102,28 @@ function App() {
   },
 
 
-    {
-      path: "/staff",
-      element: <Staff />,
-    },
+  {
+    path: "/staff",
+    element: <StaffApp/>,
+    children: [
+      {
+        index: true,
+        element: <Staff />,
+      },
+      {
+        path: "/staff/editproduct/:id",
+        element: <ProductEditPage />,
+      },
+      {
+        path: "/staff/censorstaff",
+        element: <CensorStaffPage />,
+      },
+      // {
+      //   path: "logout",
+      //   element: <Logout />,
+      // },
+    ],
+  },
   ]);
 
   return <RouterProvider router={router} />;

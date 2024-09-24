@@ -1,0 +1,76 @@
+.editstaff {
+    margin: 0 40px;
+}
+
+.editstaff h1 {
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.edit-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 150%;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-family: sans-serif;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="number"] {
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.edit-form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.edit-form-row div {
+    flex: 1;
+}
+
+.edit-form-row input[type="text"],
+.edit-form-row input[type="number"] {
+    width: 96%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.edit-form-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .edit-form button {
+    padding: 10px 20px;
+    background-color: #483434;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 15%;
+  }
+
+.edit-form button:hover {
+    background-color: #4b3c3c;
+}
+
+label {
+    font-weight: 700;
+    font-size: 14px;
+}
