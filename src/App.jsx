@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Censor from "./pages/CensorPage/CensorPage.jsx";
+import Censor from "./pages/CensorPage/CensorPages.jsx";
 import Staff from "./pages/StaffPage/StaffPage/StaffPage.jsx";
 
 // Layout and Pages

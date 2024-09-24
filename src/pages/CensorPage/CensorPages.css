@@ -1,0 +1,39 @@
+
+.border-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  border: 2px solid black; /* Đường viền */
+  padding: 20px; /* Khoảng cách bên trong */
+  border-radius: 8px; /* Bo góc */
+  width: 100%; /* Đặt chiều rộng 100% để chiếm toàn bộ màn hình */
+  height: calc(100vh - 50px); /* Chiều cao toàn bộ màn hình trừ chiều cao của header */
+  box-sizing: border-box; /* Đảm bảo padding và border không vượt quá chiều rộng */
+  align-items: center; /* Căn giữa nội dung bên trong nếu cần */
+  margin-top: 100px;
+ height: 400px;
+}
+
+
+.product-header {
+  font-weight: bold; /* Làm đậm chữ */
+  text-align: center; /* Căn giữa văn bản */
+
+}
+.title {
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: 100px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+}
+.all-in {
+  background-color: rgb(115, 232, 108); /* Màu nền xanh cho toàn bộ div */
+  padding: 20px; /* Thêm khoảng cách để không bị chèn */
+}
+
+.border-container {
+  background-color: white; /* Màu nền trắng cho phần bên trong */
+  margin-bottom: 140px;
+  border-radius: 10px; /* Tạo viền bo cho phần bên trong */
+}
