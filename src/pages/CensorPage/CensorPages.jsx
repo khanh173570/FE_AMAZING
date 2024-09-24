@@ -60,7 +60,7 @@ const CensorPage = () => {
     const results = data.filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.id.includes(searchTerm)
+         item.category.includes(searchTerm)
     );
     setFilteredData(results);
     setCurrentPage(1); // Đặt lại trang hiện tại về 1
@@ -111,10 +111,10 @@ const CensorPage = () => {
         >
           <Form.Control
             type="text"
-            placeholder="Tìm kiếm theo ID hoặc Tên"
+            placeholder="Tìm kiếm theo tên hoặc danh mục"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ marginRight: "10px", width: "350px", textAlign: "center" }} // Thêm khoảng cách bên phải
+            style={{ marginRight: "10px", width: "450px", textAlign: "center" }} // Thêm khoảng cách bên phải
           />
           <Button variant="primary" onClick={handleSearch}>
             Search
