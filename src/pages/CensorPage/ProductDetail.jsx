@@ -104,6 +104,9 @@ const ProductDetail = () => {
             <strong>Danh mục:</strong> {product.category}
           </p>
           <p>
+            <strong>Số Lương:</strong> {product.quantity}
+          </p>
+          <p>
             <strong>Kích thước:</strong>{" "}
             {`Chiều cao: ${product.detail.height}, Cân nặng: ${product.detail.weight}, Chiều dài: ${product.detail.length}`}
           </p>
