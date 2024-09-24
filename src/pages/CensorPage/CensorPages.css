@@ -1,39 +1,56 @@
 
+.product-header {
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center text */
+}
+
+.title {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100; /* Use a valid number for font-weight */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
+}
+.all-in {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  background-color: rgb(115, 232, 108); /* Background color */
+  padding: 20px; /* Add padding for spacing */
+  min-height: 100vh; /* Minimum height to fill the viewport */
+}
+
 .border-container {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
-  border: 2px solid black; /* Đường viền */
-  padding: 20px; /* Khoảng cách bên trong */
-  border-radius: 8px; /* Bo góc */
-  width: 100%; /* Đặt chiều rộng 100% để chiếm toàn bộ màn hình */
-  height: calc(100vh - 50px); /* Chiều cao toàn bộ màn hình trừ chiều cao của header */
-  box-sizing: border-box; /* Đảm bảo padding và border không vượt quá chiều rộng */
-  align-items: center; /* Căn giữa nội dung bên trong nếu cần */
-  margin-top: 100px;
- height: 400px;
+  margin-top: 100px; /* Necessary margin */
+  padding: 20px; /* Inner spacing */
+  border-radius: 8px; /* Rounded corners */
+  background-color: white; /* White background for inner container */
+  width: 90%; /* Adjust width as needed */
+  height: auto; /* Set to auto to fit content */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
 }
-
 
 .product-header {
-  font-weight: bold; /* Làm đậm chữ */
-  text-align: center; /* Căn giữa văn bản */
-
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center text */
 }
+
 .title {
   margin-bottom: 10px;
   font-size: 30px;
-  font-weight: 100px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  
-}
-.all-in {
-  background-color: rgb(115, 232, 108); /* Màu nền xanh cho toàn bộ div */
-  padding: 20px; /* Thêm khoảng cách để không bị chèn */
+  font-weight: 100; /* Use a valid number for font-weight */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
 }
 
-.border-container {
-  background-color: white; /* Màu nền trắng cho phần bên trong */
-  margin-bottom: 140px;
-  border-radius: 10px; /* Tạo viền bo cho phần bên trong */
+table {
+  width: 100%; /* Set table width to 100% to stretch across the container */
+  margin: 20px 0; /* Center the table vertically with spacing */
+  border-collapse: collapse; /* Collapse borders for a cleaner look */
 }
+
+
+
+

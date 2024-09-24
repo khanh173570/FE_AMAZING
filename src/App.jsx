@@ -20,7 +20,8 @@ import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
 import StaffApp from './layout/StaffApp/StaffApp.jsx'
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
 import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
-import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx'
+import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx';
+import ProductDetail from './pages/CensorPage/ProductDetail.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -99,6 +100,10 @@ function App() {
         index: true, // HomePage is displayed by default at "/"
         element: <Censor />,
       },
+      {
+        path: "/censor/product/:id",
+        element: <ProductDetail/>
+      }
     ],
   },
 
