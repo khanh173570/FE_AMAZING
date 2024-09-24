@@ -1,0 +1,49 @@
+.header-top {
+  background-color: white; /* Màu nền cho header-top */
+  padding: 5px;             /* Khoảng cách bên trong */
+  text-align: center;        /* Căn giữa văn bản */
+  overflow: hidden;    
+}
+.header-top {
+    width: 100%;               /* Chiều rộng 100% */
+    max-height: 30px;        /* Giới hạn chiều cao nếu cần */
+    object-fit: cover;        /* Đảm bảo hình ảnh giữ tỷ lệ */
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+  }
+.header-logo {
+    width: 190px; /* Kích thước ảnh logo */
+    height: 120px;
+    flex: 0 0 auto; /* Không cho logo mở rộng */
+    margin-right: 60px; /* Khoảng cách giữa logo và chữ */
+}
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;  /* Ngăn chặn việc ngắt dòng */
+  }
+  
+.nav li {
+    cursor: pointer;
+    display: flex;         /* Để căn giữa nội dung bên trong */
+    flex-direction: column; /* Để icon và text nằm trên cùng một trục */
+    align-items: center;   /* Căn giữa theo chiều dọc */
+    font-size: 17px;
+    font-weight: bold;
+    
+  }
+.icon {
+    font-size: 30px;
+    cursor: pointer;
+  }
+.icon:hover {
+    transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
+  }

@@ -1,0 +1,103 @@
+.footer {
+    background-color: white;
+    padding: 10px;
+    text-align: left;
+    border-top: 2px solid red;
+    min-height: 200px; /* Chiều cao tối thiểu của footer */
+    display: flex;
+    flex-direction: column; /* Đảm bảo nội dung xếp từ trên xuống dưới */
+    justify-content: space-between; /* Đảm bảo phần nội dung được giãn đều */
+}
+.footer-top {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.company-logo {
+    width: 150px; /* Kích thước ảnh logo */
+    height: 100px;
+    margin-right: 1px; /* Khoảng cách giữa logo và chữ */
+}
+
+.company-name {
+    font-size: 30px;
+    font-style: italic;
+    color: red;
+}
+.company-license {
+    font-size: 16px;
+    color: black;
+    margin-top: 5px;
+}
+.footer-gpkd {
+    width: 150px; /* Kích thước ảnh logo */
+    height: 35px;
+}
+.footer-bocongthuong {
+    width: 260px; /* Kích thước ảnh logo */
+    height: 80px;
+}
+.footer-pay {
+    width: 260px; /* Kích thước ảnh logo */
+    height: 45px;
+}
+.footer-section {
+    display: flex;
+    justify-content: space-around; /* Căn các cột đều nhau */
+    align-items: flex-start; /* Đẩy các cột lên phía trên */
+    gap: 70px; /* Tạo khoảng cách giữa các phần */
+    margin: 0;
+    padding: 0; /* Xóa toàn bộ padding trong phần này */
+}
+
+.footer-contact, .footer-services, .footer-about, .footer-policy {
+    flex: 1;
+    padding: 0 15px;
+    margin: 0;
+    text-align: left; /* Căn trái cho tất cả các phần */
+}
+
+.footer-contact h4, .footer-services h4, .footer-about h4, .footer-policy h4{
+    margin: 0; /* Xóa bỏ margin trên các tiêu đề để đẩy lên sát phần trên */
+    padding: 0; /* Đảm bảo không có padding */
+    font-size: 16px;
+    line-height: 1.5; /* Thay đổi giá trị này để điều chỉnh khoảng cách dòng */
+}
+
+.footer-contact p, .footer-services ul, .footer-about ul, .footer-policy ul {   
+    margin: 5px 0;
+    line-height: 2.0; /* Thay đổi giá trị này để điều chỉnh khoảng cách dòng */
+}
+
+.footer-services ul, .footer-about ul, .footer-policy ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-services li, .footer-about li, .footer-policy li {
+    margin-bottom: 5px;
+}
+.icon {
+    margin-right: px;
+}
+
+.icon-home::before {
+    content: '🏠'; /* Biểu tượng nhà */
+}
+
+.icon-phone::before {
+    content: '📞'; /* Biểu tượng điện thoại */
+}
+
+.icon-email::before {
+    content: '✉️'; /* Biểu tượng email */
+}
+.footer-bottom {
+    width: 100%;
+    text-align: left; /* Căn trái cho nội dung */
+    padding: 10px;
+    background-color: white;
+    font-size: 16px;
+    color: #666;
+}
+
