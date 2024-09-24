@@ -2,6 +2,7 @@
 import React from 'react';
 import './HeaderCustomer.css'; // Nhớ tạo file header.css để định dạng
 import companyLogo from "/assets/assetsCustomer/company_logo.png";
+import { UserOutlined } from '@ant-design/icons';
 const HeaderCustomer = () => {
     return (
         <div>
@@ -14,11 +15,9 @@ const HeaderCustomer = () => {
                     <li>Giới thiệu</li>
                     <li>Tin tức</li>
                     <li>Liên hệ</li>
-                    <li className="icon">🔍</li> {/* Icon tìm kiếm */}
-                    <li className="icon">👤</li> {/* Icon người dùng */}
-                    <li className="icon">🛒</li> {/* Icon giỏ hàng */}
                 </ul>
             </nav>
+            <UserOutlined className="user-icon" /> {/* Thêm icon con người */}
         </header>
         </div>
     );

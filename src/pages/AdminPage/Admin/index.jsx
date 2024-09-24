@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { UserOutlined, LogoutOutlined,DashboardOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./index.scss";
@@ -17,6 +17,9 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
+  getItem("Dashboard", "dashboard", <DashboardOutlined />, [
+    getItem(<Link to="dashboard">Overview</Link>, "dashboard"),
+  ]),
   getItem("Profile", "sub1", <UserOutlined />, [
     getItem(<Link to="profile">Your profile</Link>, "profile"),
     getItem(<Link to="change-password">Change password</Link>, "change-password"),

@@ -36,14 +36,15 @@
     display: flex;         /* Để căn giữa nội dung bên trong */
     flex-direction: column; /* Để icon và text nằm trên cùng một trục */
     align-items: center;   /* Căn giữa theo chiều dọc */
-    font-size: 17px;
+    font-size: 20px;
     font-weight: bold;
-    
   }
-.icon {
-    font-size: 30px;
+.user-icon {
+    font-size: 45px;
     cursor: pointer;
-  }
-.icon:hover {
+    margin-left: 150px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
+    margin-bottom: 15px; 
+}
+.user-icon:hover {
     transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
   }

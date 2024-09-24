@@ -11,6 +11,7 @@ import HomePage from "./pages/CustomerPage/HomePage.jsx";
 import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
 import NotFound from "./pages/notFoundPage/NotFound.jsx";
 import Admin from "./pages/AdminPage/Admin/index.jsx";
+import Dashboard from "./pages/AdminPage/dashboard/Dashboard.jsx";
 import Profile from "./pages/AdminPage/profile/Profile.jsx";
 import ChangePassword from "./pages/AdminPage/change-password/ChangePassword.jsx";
 import User from "./pages/AdminPage/account/user/User.jsx";
@@ -66,6 +67,10 @@ function App() {
           path: "/admin",
           element: <Admin />,
           children: [
+            {
+              path:"dashboard",
+              element: <Dashboard />,
+            },
             {
               path: "profile",
               element: <Profile />,
