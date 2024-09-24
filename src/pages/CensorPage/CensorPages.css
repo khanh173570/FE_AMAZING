@@ -24,7 +24,7 @@
 .border-container {
   display: flex;
   flex-direction: column;
-  margin-top: 100px; /* Necessary margin */
+  margin-top: 25px; /* Necessary margin */
   padding: 20px; /* Inner spacing */
   border-radius: 8px; /* Rounded corners */
   background-color: white; /* White background for inner container */
@@ -49,6 +49,22 @@ table {
   width: 100%; /* Set table width to 100% to stretch across the container */
   margin: 20px 0; /* Center the table vertically with spacing */
   border-collapse: collapse; /* Collapse borders for a cleaner look */
+}
+
+.h5 {
+  background-color: aqua;
+}
+.a {
+
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  color: black;
+
+}
+.col-md-6 product {
+ display: flex;
+ justify-content: left;
 }
 
 
