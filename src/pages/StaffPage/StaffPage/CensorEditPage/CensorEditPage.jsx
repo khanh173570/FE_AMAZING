@@ -1,11 +1,11 @@
 import React from 'react'
-import CensorStaff from '../CensorStaff/CensorStaff'
 import { Link } from 'react-router-dom'
 import { LuPackageOpen } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
-import './CensorStaffPage.css'
+import './CensorEditPage.css'
+import CensorEdit from '../CensorEdit/CensorEdit';
 
 const CensorStaffPage = () => {
   return (
@@ -21,7 +21,7 @@ const CensorStaffPage = () => {
             <li><Link to=""><MdOutlineLogout />Đăng xuất</Link></li>
           </ul>
         </div>
-        <CensorStaff />
+        <CensorEdit />
       </div>
     </>
   )

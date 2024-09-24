@@ -20,6 +20,7 @@ import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
 import StaffApp from './layout/StaffApp/StaffApp.jsx'
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
 import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
+import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -118,10 +119,10 @@ function App() {
         path: "/staff/censorstaff",
         element: <CensorStaffPage />,
       },
-      // {
-      //   path: "logout",
-      //   element: <Logout />,
-      // },
+      {
+        path: "/staff/addstaff",
+        element: <CensorAddPage />,
+      },
     ],
   },
   ]);
