@@ -52,23 +52,36 @@ const ProductTable = () => {
         setIsConfirmOpen(true); // Open confirmation popup
     };
 
-    // Function to upload the product to MockAPI
+    // Function to delete the product from MockAPI after upload
+    const deleteProductFromMockAPI = async (productId) => {
+        try {
+            await axios.delete(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productId}`);
+            console.log(`Product with ID ${productId} deleted successfully.`);
+        } catch (error) {
+            console.error(`Error deleting product with ID ${productId}:`, error);
+        }
+    };
+
+    // Function to upload the product to the second API link
     const handleConfirmUpload = async () => {
         try {
             // Upload the product to the second API link
             await axios.post('https://666a8f987013419182cfc970.mockapi.io/api/example', productToUpload);
     
-            // After successful upload, remove the product from the table
+            // After successful upload, remove the product from the table and delete from the original MockAPI
             const updatedProducts = products.filter(product => product.id !== productToUpload.id);
             const updatedFilteredProducts = filteredProducts.filter(product => product.id !== productToUpload.id);
     
             setProducts(updatedProducts); // Update the products state
             setFilteredProducts(updatedFilteredProducts); // Update the filtered products state
-    
-            alert('Sản phẩm đã được tải lên thành công!');
+
+            // Call delete function to remove from MockAPI
+            await deleteProductFromMockAPI(productToUpload.id);
+
+            alert('Sản phẩm đã được tải lên và xóa thành công!');
         } catch (error) {
-            console.error('Error uploading product:', error);
-            alert('Có lỗi xảy ra khi tải lên sản phẩm.');
+            console.error('Error uploading or deleting product:', error);
+            alert('Có lỗi xảy ra khi tải lên hoặc xóa sản phẩm.');
         } finally {
             setIsConfirmOpen(false); // Close the confirmation popup
             setProductToUpload(null); // Clear the product to upload
