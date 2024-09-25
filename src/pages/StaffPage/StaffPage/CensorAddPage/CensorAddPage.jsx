@@ -18,7 +18,7 @@ const CensorStaffPage = () => {
           </ul>
           <ul className='sidenav-bottom'>
             <li><Link to="/info"><IoInformationCircleOutline />Thông tin nhân viên</Link></li>
-            <li><Link to=""><MdOutlineLogout />Đăng xuất</Link></li>
+            <li><Link to="/login"><MdOutlineLogout />Đăng xuất</Link></li>
           </ul>
         </div>
         <CensorAdd />

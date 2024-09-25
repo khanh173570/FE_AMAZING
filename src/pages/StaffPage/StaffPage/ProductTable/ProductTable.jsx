@@ -14,6 +14,10 @@ const ProductTable = () => {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false); // State for confirmation popup
     const [productToUpload, setProductToUpload] = useState(null); // Product to be uploaded
 
+    // Pagination states
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 6;
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -39,6 +43,7 @@ const ProductTable = () => {
             product.artist.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredProducts(filtered);
+        setCurrentPage(1); // Reset to the first page after search
     };
 
     // Handle click on upload icon to open confirmation popup
@@ -80,6 +85,14 @@ const ProductTable = () => {
         setSelectedProductId(null);
     };
 
+    // Calculate the index range for the current page
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className='producttable'>
             <div className="producttable-top">
@@ -108,7 +121,7 @@ const ProductTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredProducts.map((product) => (
+                        {currentProducts.map((product) => (
                             <tr key={product.id}>
                                 <td>
                                     <span 
@@ -135,6 +148,19 @@ const ProductTable = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Pagination controls */}
+            <div className="pagination">
+                {Array.from({ length: Math.ceil(filteredProducts.length / productsPerPage) }, (_, i) => (
+                    <button
+                        key={i + 1}
+                        onClick={() => paginate(i + 1)}
+                        className={currentPage === i + 1 ? 'active' : ''}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
             </div>
 
             {isModalOpen && (
