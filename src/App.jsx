@@ -18,12 +18,10 @@ import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
-import StaffApp from './layout/StaffApp/StaffApp.jsx'
-import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
-import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
-import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx';
-import CensorEditPage from './pages/StaffPage/StaffPage/CensorEditPage/CensorEditPage.jsx'
-import ProductDetail from './pages/CensorPage/ProductDetail.jsx';
+import DistributorApp from './layout/DistributorApp/DistributorApp';
+import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
+import SellerProductDetail from "./pages/DistributorPage/SellerProductDetail/SellerProductDetail.jsx";
+import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
 
 function App() {
   const router = createBrowserRouter([
@@ -114,32 +112,31 @@ function App() {
   },
 
 
-  {
-    path: "/staff",
-    element: <StaffApp/>,
-    children: [
-      {
-        index: true,
-        element: <Staff />,
-      },
-      {
-        path: "/staff/editproduct/:id",
-        element: <ProductEditPage />,
-      },
-      {
-        path: "/staff/censorstaff",
-        element: <CensorStaffPage />,
-      },
-      {
-        path: "/staff/addstaff",
-        element: <CensorAddPage />,
-      },
-      {
-        path: "/staff/editstaff/:id",
-        element: <CensorEditPage />,
-      },
-    ],
-  },
+    {
+      path: "/staff",
+      element: <Staff />,
+    },
+
+    {
+      path: "/seller",
+      element: <DistributorApp />,
+      children: [
+        {
+          index: true, // DistributorHomePage is displayed by default at "/seller"
+          element: <DistributorHomePage />,
+        },
+        {
+          path: "product/:id", // No leading slash; it appends to the parent path "/seller"
+          element: <SellerProductDetail />,
+        },
+        {
+          path: "add-product",
+          element: <SellerAddProduct />,
+        },
+       
+      ],
+    },
+    
   ]);
 
   return <RouterProvider router={router} />;
