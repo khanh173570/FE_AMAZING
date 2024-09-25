@@ -108,36 +108,37 @@ const DistributorHomePage = () => {
 
   return (
     <>
-    {/* Customized Heading */}
-    <h2 style={{ fontWeight: 'bold', margin: '16px 0' }}>
-      List of products that are sent
-    </h2>
+      {/* Customized Heading */}
+      <h2 style={{ fontWeight: 'bold', margin: '16px 0', textAlign: 'center' }}>
+        Danh sách sản phẩm đã gửi
+      </h2>
 
-    {/* Add Product button using Material-UI */}
-    <Box display="flex" justifyContent="flex-end" mb={2}>
-      <NavLink to="/seller/add-product" style={{ textDecoration: 'none' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<FaPlus />} // Use the react-icons plus icon here
-        >
-          Add Product
-        </Button>
-      </NavLink>
-    </Box>
 
-    {/* Ant Design Table */}
-    <Table
-      columns={columns}
-      dataSource={data}
-      loading={loading}
-      pagination={{ pageSize: 5 }}
-      scroll={{ x: 'max-content' }} // Ensures scrollable table if content overflows
-      onRow={(record) => ({
-        onClick: () => handleRowClick(record), // Redirect when a row is clicked
-      })}
-    />
-  </>
+      {/* Add Product button using Material-UI */}
+      <Box display="flex" justifyContent="flex-end" mb={2}>
+        <NavLink to="/seller/add-product" style={{ textDecoration: 'none' }}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<FaPlus />} // Use the react-icons plus icon here
+          >
+            Add Product
+          </Button>
+        </NavLink>
+      </Box>
+
+      {/* Ant Design Table */}
+      <Table
+        columns={columns}
+        dataSource={data}
+        loading={loading}
+        pagination={{ pageSize: 5 }}
+        scroll={{ x: 'max-content' }} // Ensures scrollable table if content overflows
+        onRow={(record) => ({
+          onClick: () => handleRowClick(record), // Redirect when a row is clicked
+        })}
+      />
+    </>
   );
 };
 

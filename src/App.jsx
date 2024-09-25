@@ -22,6 +22,7 @@ import DistributorApp from './layout/DistributorApp/DistributorApp';
 import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
 import SellerProductDetail from "./pages/DistributorPage/SellerProductDetail/SellerProductDetail.jsx";
 import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
+import ProductDetail from './pages/CensorPage/ProductDetail';
 
 function App() {
   const router = createBrowserRouter([
