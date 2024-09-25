@@ -22,7 +22,12 @@ import DistributorApp from './layout/DistributorApp/DistributorApp';
 import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
 import SellerProductDetail from "./pages/DistributorPage/SellerProductDetail/SellerProductDetail.jsx";
 import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
-import ProductDetail from './pages/CensorPage/ProductDetail';
+import StaffApp from './layout/StaffApp/StaffApp.jsx'
+import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
+import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
+import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx';
+import CensorEditPage from './pages/StaffPage/StaffPage/CensorEditPage/CensorEditPage.jsx'
+import ProductDetail from './pages/CensorPage/ProductDetail.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -113,10 +118,32 @@ function App() {
   },
 
 
-    {
-      path: "/staff",
-      element: <Staff />,
-    },
+  {
+    path: "/staff",
+    element: <StaffApp/>,
+    children: [
+      {
+        index: true,
+        element: <Staff />,
+      },
+      {
+        path: "/staff/editproduct/:id",
+        element: <ProductEditPage />,
+      },
+      {
+        path: "/staff/censorstaff",
+        element: <CensorStaffPage />,
+      },
+      {
+        path: "/staff/addstaff",
+        element: <CensorAddPage />,
+      },
+      {
+        path: "/staff/editstaff/:id",
+        element: <CensorEditPage />,
+      },
+    ],
+  },
 
     {
       path: "/seller",
