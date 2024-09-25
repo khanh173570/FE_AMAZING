@@ -50,10 +50,10 @@ function App() {
           path: "/forgot-password",
           element: <ForgotPassword />,
         },
-        // {
-        //   path: "*",
-        //   element: <NotFound />,
-        // },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
       ],
     },
 
@@ -124,10 +124,7 @@ function App() {
           path: "add-product",
           element: <AddProduct />,
         },
-        // {
-        //   path: "*",
-        //   element: <NotFound />,
-        // },
+       
       ],
     },
     
