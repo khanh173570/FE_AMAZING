@@ -17,6 +17,10 @@ import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
+import DistributorApp from './layout/DistributorApp/DistributorApp';
+import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
+import ProductDetail from './pages/DistributorPage/ProductDetail.jsx/ProductDetail';
+import AddProduct from './pages/DistributorPage/AddProduct/AddProduct';
 
 function App() {
   const router = createBrowserRouter([
@@ -46,10 +50,10 @@ function App() {
           path: "/forgot-password",
           element: <ForgotPassword />,
         },
-        {
-          path: "*",
-          element: <NotFound />,
-        },
+        // {
+        //   path: "*",
+        //   element: <NotFound />,
+        // },
       ],
     },
 
@@ -103,6 +107,30 @@ function App() {
       path: "/staff",
       element: <Staff />,
     },
+
+    {
+      path: "/seller",
+      element: <DistributorApp />,
+      children: [
+        {
+          index: true, // DistributorHomePage is displayed by default at "/seller"
+          element: <DistributorHomePage />,
+        },
+        {
+          path: "product/:id", // No leading slash; it appends to the parent path "/seller"
+          element: <ProductDetail />,
+        },
+        {
+          path: "add-product",
+          element: <AddProduct />,
+        },
+        // {
+        //   path: "*",
+        //   element: <NotFound />,
+        // },
+      ],
+    },
+    
   ]);
 
   return <RouterProvider router={router} />;
