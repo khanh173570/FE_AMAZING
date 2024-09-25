@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
 
 const { TextArea } = Input; // Ant Design TextArea for description
 
-const AddProduct = () => {
+const SellerAddProduct = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // For navigation after successful submission
 
@@ -184,4 +184,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default SellerAddProduct;

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Form } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons'; // Import an icon for the delete button
 
-const ProductDetail = () => {
+const SellerProductDetail = () => {
   const { id } = useParams(); // Get product id from URL
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -93,4 +93,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default SellerProductDetail;
