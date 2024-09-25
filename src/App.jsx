@@ -22,6 +22,7 @@ import StaffApp from './layout/StaffApp/StaffApp.jsx'
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
 import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
 import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx';
+import CensorEditPage from './pages/StaffPage/StaffPage/CensorEditPage/CensorEditPage.jsx'
 import ProductDetail from './pages/CensorPage/ProductDetail.jsx';
 
 function App() {
@@ -132,6 +133,10 @@ function App() {
       {
         path: "/staff/addstaff",
         element: <CensorAddPage />,
+      },
+      {
+        path: "/staff/editstaff/:id",
+        element: <CensorEditPage />,
       },
     ],
   },

@@ -1,16 +1,16 @@
-.stafftable{
+.stafftable {
     width: 80%;
     padding: 10px;
     font-family: sans-serif;
     margin: 0 40px;
 }
 
-.stafftable-actions{
+.stafftable-actions {
     display: flex;
     justify-content: space-between;
 }
 
-.add-staff-btn{
+.add-staff-btn {
     width: 25%;
     background: #483434;
     height: 40px;
@@ -19,7 +19,7 @@
     cursor: pointer;
 }
 
-.add-staff-btn a{
+.add-staff-btn a {
     color: #fff;
     text-decoration: none;
     display: flex;
@@ -28,7 +28,7 @@
     margin-top: 7px;
 }
 
-.stafftable-top h1{
+.stafftable-top h1 {
     font-weight: 400;
 }
 
@@ -73,7 +73,8 @@ thead {
     background-color: #f2f2f2;
 }
 
-th, td {
+th,
+td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -84,7 +85,8 @@ th {
     color: white;
 }
 
-.delete-btn, .edit-btn{
+.delete-btn,
+.edit-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -101,3 +103,78 @@ th {
     font-size: 25px;
 }
 
+.confirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.confirm-modal-actions {
+    margin-top: 15px;
+}
+
+.confirm-modal-actions .confirm-btn,
+.confirm-modal-actions .cancel-btn {
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.confirm-btn:hover,
+.cancel-btn:hover {
+    background: #483434;
+    color: #fff;
+}
+
+.details-modal,
+.confirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-modal-content,
+.confirm-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+}
+
+.close-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #483434;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #573f3f;
+}
+
+.name-btn{
+    cursor: pointer;
+}

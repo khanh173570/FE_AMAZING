@@ -11,13 +11,19 @@ const ProductTable = () => {
     const [filteredProducts, setFilteredProducts] = useState([]); // New state for filtered products
     const [selectedProductId, setSelectedProductId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false); // State for confirmation popup
+    const [productToUpload, setProductToUpload] = useState(null); // Product to be uploaded
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570');
-                setProducts(response.data);
-                setFilteredProducts(response.data); // Initially set filtered products to all products
+                
+                // Filter products by status 'accepted'
+                const acceptedProducts = response.data.filter(product => product.status === 'Accepted');
+                
+                setProducts(acceptedProducts);
+                setFilteredProducts(acceptedProducts); // Initially set filtered products to accepted products
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -33,6 +39,35 @@ const ProductTable = () => {
             product.artist.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredProducts(filtered);
+    };
+
+    // Handle click on upload icon to open confirmation popup
+    const handleUploadClick = (product) => {
+        setProductToUpload(product); // Set the product to be uploaded
+        setIsConfirmOpen(true); // Open confirmation popup
+    };
+
+    // Function to upload the product to MockAPI
+    const handleConfirmUpload = async () => {
+        try {
+            // Upload the product to the second API link
+            await axios.post('https://666a8f987013419182cfc970.mockapi.io/api/example', productToUpload);
+    
+            // After successful upload, remove the product from the table
+            const updatedProducts = products.filter(product => product.id !== productToUpload.id);
+            const updatedFilteredProducts = filteredProducts.filter(product => product.id !== productToUpload.id);
+    
+            setProducts(updatedProducts); // Update the products state
+            setFilteredProducts(updatedFilteredProducts); // Update the filtered products state
+    
+            alert('Sản phẩm đã được tải lên thành công!');
+        } catch (error) {
+            console.error('Error uploading product:', error);
+            alert('Có lỗi xảy ra khi tải lên sản phẩm.');
+        } finally {
+            setIsConfirmOpen(false); // Close the confirmation popup
+            setProductToUpload(null); // Clear the product to upload
+        }
     };
 
     const handleProductClick = (productId) => {
@@ -87,7 +122,7 @@ const ProductTable = () => {
                                 <td>{product.artist}</td>
                                 <td>{product.status}</td>
                                 <td>
-                                    <button className="upload-btn">
+                                    <button className="upload-btn" onClick={() => handleUploadClick(product)}>
                                         <AiOutlineCloudUpload />
                                     </button>
                                     <button className="edit-btn" >
@@ -107,6 +142,18 @@ const ProductTable = () => {
                     productId={selectedProductId} 
                     onClose={handleCloseModal} 
                 />
+            )}
+
+            {/* Confirmation popup for upload */}
+            {isConfirmOpen && (
+                <div className="confirm-popup">
+                    <div className="confirm-popup-content">
+                        <h3>Xác nhận</h3>
+                        <p>Bạn có chắc chắn muốn tải lên sản phẩm này không?</p>
+                        <button onClick={handleConfirmUpload}>Xác nhận</button>
+                        <button onClick={() => setIsConfirmOpen(false)}>Hủy</button>
+                    </div>
+                </div>
             )}
         </div>
     );

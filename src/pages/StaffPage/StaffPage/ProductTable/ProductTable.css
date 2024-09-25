@@ -81,3 +81,41 @@ th {
 .product-name{
     cursor: pointer;
 }
+
+.confirm-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.confirm-popup-content h3 {
+    margin-bottom: 10px;
+}
+
+.confirm-popup-content p {
+    margin-bottom: 20px;
+}
+
+.confirm-popup-content button {
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.confirm-popup-content button:hover{
+    background: #483434;
+    color: #fff;
+}

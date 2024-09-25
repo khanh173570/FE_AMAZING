@@ -52,7 +52,7 @@ const ProductEdit = () => {
             name="name"
             value={product.name}
             onChange={handleChange}
-            required
+            readOnly // Restricts editing
           />
         </div>
         <div>
@@ -85,7 +85,7 @@ const ProductEdit = () => {
               name="category"
               value={product.category}
               onChange={handleChange}
-              required
+              readOnly // Restricts editing
             />
           </div>
         </div>
@@ -96,11 +96,11 @@ const ProductEdit = () => {
             name="type"
             value={product.type}
             onChange={handleChange}
-            required
+            readOnly // Restricts editing
           />
         </div>
         <div className="edit-form-button-container">
-          <button type="submit">Save</button>
+          <button type="submit">Lưu sản phẩm</button>
         </div>
       </form>
     </div>
