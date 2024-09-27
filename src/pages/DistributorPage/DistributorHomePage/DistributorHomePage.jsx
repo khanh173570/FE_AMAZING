@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Avatar, message, Tag } from 'antd';
+import { Table, Avatar, message, Tag, Input } from 'antd';
 import axios from 'axios';
-import { useNavigate, NavLink } from 'react-router-dom'; // Import useNavigate and NavLink
-import { Button, Box } from '@mui/material'; // Import Material-UI Button and Box for layout
-import { FaPlus } from 'react-icons/fa'; // Import the plus icon from react-icons
+import { useNavigate, NavLink } from 'react-router-dom';
+import { Button, Box } from '@mui/material';
+import { FaPlus } from 'react-icons/fa';
+
+const { Search } = Input; // Destructure Search from Input
 
 const columns = [
-  // ... (same columns as before)
   {
     title: 'Name',
     dataIndex: 'name',
@@ -30,20 +31,29 @@ const columns = [
     dataIndex: 'type',
     key: 'type',
     width: 130,
+    filters: [
+      { text: 'Budget', value: 'Budget' },
+      { text: 'Luxury', value: 'Luxury' },
+      { text: 'Standard', value: 'Standard' },
+      { text: 'Special', value: 'Special' },
+    ],
+    filterMultiple: true,
+    onFilter: (value, record) => record.type === value,
   },
   {
     title: 'Price',
     dataIndex: 'price',
     key: 'price',
     width: 90,
-    render: (text) => `$${text}`, // Format price with a dollar sign
+    render: (text) => `$${text}`,
   },
   {
     title: 'Date',
-    dataIndex: ['detail', 'date'], // Accessing nested date from the detail object
+    dataIndex: ['detail', 'date'],
     key: 'date',
     width: 160,
-    render: (text) => new Date(text).toLocaleDateString(), // Format date
+    sorter: (a, b) => new Date(a.detail.date) - new Date(b.detail.date),
+    render: (text) => new Date(text).toLocaleDateString(),
   },
   {
     title: 'Image',
@@ -59,12 +69,28 @@ const columns = [
     dataIndex: 'status',
     key: 'status',
     width: 100,
+    filters: [
+      {
+        text: <Tag color="green">Accepted</Tag>,
+        value: 'Accepted',
+      },
+      {
+        text: <Tag color="red">Rejected</Tag>,
+        value: 'Rejected',
+      },
+      {
+        text: <Tag color="yellow">Pending</Tag>,
+        value: 'Pending',
+      },
+    ],
+    filterMultiple: true,
+    onFilter: (value, record) => record.status.includes(value),
     render: (status) => {
       let color = 'default';
       if (status === 'Accepted') color = 'green';
       else if (status === 'Rejected') color = 'red';
       else if (status === 'Pending') color = 'yellow';
-      return <Tag color={color}>{status}</Tag>; // Use Tag component with conditional color
+      return <Tag color={color}>{status}</Tag>;
     },
   },
 ];
@@ -72,16 +98,17 @@ const columns = [
 const DistributorHomePage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Use useNavigate to handle navigation
+  const [pageSize, setPageSize] = useState(5);
+  const [searchValue, setSearchValue] = useState(''); // State for search input
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetching data from API
     axios
       .get('https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570')
       .then((response) => {
         const mappedData = response.data.map((item) => ({
-          key: item.id, // Ant Design requires 'key' for each row
-          id: item.id,  // Passing id for routing
+          key: item.id,
+          id: item.id,
           name: item.name,
           artist: item.artist,
           price: item.price,
@@ -89,7 +116,7 @@ const DistributorHomePage = () => {
           status: item.status,
           img: item.img,
           category: item.category,
-          detail: item.detail, // Passing detail for nested date access
+          detail: item.detail,
         }));
         setData(mappedData);
         setLoading(false);
@@ -106,6 +133,11 @@ const DistributorHomePage = () => {
     navigate(`/seller/product/${record.id}`);
   };
 
+  // Filter data based on the search input
+  const filteredData = data.filter((item) =>
+    item.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <>
       {/* Customized Heading */}
@@ -113,29 +145,44 @@ const DistributorHomePage = () => {
         Danh sách sản phẩm đã gửi
       </h2>
 
-
-      {/* Add Product button using Material-UI */}
-      <Box display="flex" justifyContent="flex-end" mb={2}>
+      {/* Container for Add Product button and Search Bar */}
+      <Box display="flex" justifyContent="space-between" mb={2}>
+        {/* Add Product button using Material-UI */}
         <NavLink to="/seller/add-product" style={{ textDecoration: 'none' }}>
           <Button
             variant="contained"
             color="primary"
-            startIcon={<FaPlus />} // Use the react-icons plus icon here
+            startIcon={<FaPlus />}
           >
             Add Product
           </Button>
         </NavLink>
+
+        {/* Search Bar */}
+        <Search
+          placeholder="Search by name"
+          allowClear
+          onSearch={(value) => setSearchValue(value)}
+          onChange={(e) => setSearchValue(e.target.value)}
+          style={{ width: 300 }} // Set the width of the search bar
+        />
       </Box>
+
 
       {/* Ant Design Table */}
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={filteredData} // Use filtered data for the table
         loading={loading}
-        pagination={{ pageSize: 5 }}
-        scroll={{ x: 'max-content' }} // Ensures scrollable table if content overflows
+        pagination={{
+          pageSize: pageSize,
+          showSizeChanger: true,
+          pageSizeOptions: ['5', '10', '15', '20'],
+          onShowSizeChange: (_, newPageSize) => setPageSize(newPageSize),
+        }}
+        scroll={{ x: 'max-content' }}
         onRow={(record) => ({
-          onClick: () => handleRowClick(record), // Redirect when a row is clicked
+          onClick: () => handleRowClick(record),
         })}
       />
     </>

@@ -66,7 +66,7 @@ const SellerAddProduct = () => {
           </Form.Item>
 
           <Form.Item
-            label="Price (VND)"
+            label="Price ($)"
             name="price"
             rules={[{ required: true, message: 'Please enter the price' }]}
           >

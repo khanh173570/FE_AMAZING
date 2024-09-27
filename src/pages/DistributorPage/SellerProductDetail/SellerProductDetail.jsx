@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Descriptions, Avatar, Spin, message, Button } from 'antd';
-import { useParams, NavLink, useNavigate } from 'react-router-dom'; // Use useNavigate for redirection
+import { Descriptions, Avatar, Spin, message, Button, Tag } from 'antd'; // Import Tag from antd
+import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Form } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons'; // Import an icon for the delete button
+import { DeleteOutlined } from '@ant-design/icons';
 
 const SellerProductDetail = () => {
-  const { id } = useParams(); // Get product id from URL
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch product data based on id
     axios
       .get(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${id}`)
       .then((response) => {
@@ -27,12 +26,11 @@ const SellerProductDetail = () => {
   }, [id]);
 
   const handleDelete = () => {
-    // Confirm deletion
     axios
       .delete(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${id}`)
       .then(() => {
         message.success('Product deleted successfully');
-        navigate('/seller'); // Redirect to /seller after deletion
+        navigate('/seller');
       })
       .catch((error) => {
         console.error('Error deleting product:', error);
@@ -48,6 +46,20 @@ const SellerProductDetail = () => {
     return <div>No product found</div>;
   }
 
+  // Function to determine the tag color based on product status
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Accepted':
+        return 'green';
+      case 'Rejected':
+        return 'red';
+      case 'Pending':
+        return 'yellow';
+      default:
+        return 'default'; // Fallback color
+    }
+  };
+
   return (
     <div>
       <Descriptions title="Product Details" bordered layout="vertical">
@@ -59,7 +71,9 @@ const SellerProductDetail = () => {
         <Descriptions.Item label="Date">
           {new Date(product.detail.date).toLocaleDateString()}
         </Descriptions.Item>
-        <Descriptions.Item label="Status">{product.status}</Descriptions.Item>
+        <Descriptions.Item label="Status">
+          <Tag color={getStatusColor(product.status)}>{product.status}</Tag>
+        </Descriptions.Item>
         <Descriptions.Item label="Description">
           {product.description}
         </Descriptions.Item>
@@ -77,12 +91,12 @@ const SellerProductDetail = () => {
             <Button
               type="primary"
               danger
-              icon={<DeleteOutlined />} // Add an icon to the button
+              icon={<DeleteOutlined />}
               onClick={handleDelete}
-              style={{ marginTop: '12px', marginLeft: '12px' }} // Added margin for spacing
-              ghost // Apply ghost style for a transparent button
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.1)')} // Change background on hover
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')} // Revert on mouse leave
+              style={{ marginTop: '12px', marginLeft: '12px' }}
+              ghost
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.1)')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
             >
               Delete
             </Button>
