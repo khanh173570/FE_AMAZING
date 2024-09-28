@@ -13,30 +13,18 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     height: 10%; /* Đảm bảo độ cao full của cột */
-    width: 50%;
+    width:35%;
     
-    &:hover {
-      background-color: #2a0cd3;
-      color: white;
-    }
 
     img {
-      max-width: 50%;
+      max-width: 35%;
       padding-left: 70px;
       padding-right: 3%;
-    }
-
-    span {
-      font-size: 20px;
-      font-weight:bolder ;
-      padding-right: 60px;
     }
 
     &.active {
       background-color: #2b2f5e;
     }
   }
-  .row {
-    width: 100%; /* Đảm bảo hàng chiếm toàn bộ chiều rộng */
-  }
 }
+

@@ -28,6 +28,8 @@ import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorS
 import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx';
 import CensorEditPage from './pages/StaffPage/StaffPage/CensorEditPage/CensorEditPage.jsx'
 import ProductDetail from './pages/CensorPage/ProductDetail.jsx';
+import ProductUserDetail from "./pages/CustomerPage/ProductUserDetail.jsx";
+import MiniShoppingCart from "./pages/CustomerPage/MiniShoppingCart.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -60,6 +62,14 @@ function App() {
         {
           path: "*",
           element: <NotFound />,
+        },
+        {
+          path: "/productUserDetail",
+          element: <ProductUserDetail />,
+        },
+        {
+          path: "/minishoppingcart",
+          element: <MiniShoppingCart />,
         },
       ],
     },

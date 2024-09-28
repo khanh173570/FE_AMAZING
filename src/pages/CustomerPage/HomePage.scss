@@ -1,29 +1,29 @@
-.payment-method-container{
-  
+.payment-method-container {
+
 
   .payment-form-container {
-        border: 0.5px solid #351010;
-        padding: 20px;
-        padding-bottom: 10px;
-        width: 80%;
-        margin: 0 auto;
-        margin-bottom: 2%;
-  
+    border: 0.5px solid #351010;
+    padding: 20px;
+    padding-bottom: 10px;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2%;
+
     h1 {
       text-align: center;
       margin-bottom: 25px;
-      font-weight:bolder ;
+      font-weight: bolder;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       font-size: 40px;
       color: #ca0f0f;
     }
-  
+
     .payment-form {
       .payment-options-row {
         display: flex;
         justify-content: space-between;
         margin-bottom: 25px;
-  
+
         .payment-option {
           flex: 1;
           display: flex;
@@ -33,11 +33,11 @@
           border-radius: 5px;
           padding: 10px;
           margin-right: 10px;
-  
+
           &:last-child {
             margin-right: 0;
           }
-  
+
           label {
             flex: 1;
             display: flex;
@@ -46,7 +46,7 @@
             font-weight: bolder;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             color: #333;
-            
+
             img {
               width: 30%;
               height: 50%;
@@ -54,7 +54,7 @@
               object-fit: contain;
             }
           }
-  
+
           input {
             flex: 1;
             padding: 10px;
@@ -62,12 +62,12 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             transition: border 0.3s;
-  
+
             &:focus {
               border-color: #007bff;
               outline: none;
             }
-  
+
             &:disabled {
               background-color: #e9d9d9;
               cursor: not-allowed;
@@ -75,12 +75,12 @@
           }
         }
       }
-  
+
       .update-button {
         display: block;
         width: 10%;
         padding: 12px;
-        background-color: #be1919;
+        background-color: red;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -91,275 +91,791 @@
         cursor: pointer;
         text-align: center;
         margin: 0 auto;
-  
+
         &:hover {
           background-color: #0056b3;
         }
       }
     }
   }
-  
-  .payment-navigation {
+}
+
+.payment-navigation {
+  .nav-item {
     display: flex;
-    justify-content: space-around;
-    /* Các mục cách đều nhau */
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Căn giữa nội dung theo chiều dọc */
+    padding: 10px; /* Tăng thêm padding để viền không quá sát nội dung */
+    border: 2px solid #ddd; /* Độ dày viền */
+    border-radius: 5px;
+    text-align: center;
     margin-bottom: 10px;
-    /* Đường viền dưới cho phần điều hướng */
-    padding-top: 15px;
-    padding-bottom: 1px;
-  
-    .nav-item {
-      display: flex;
-      align-items: center;
-      /* Hình ảnh và text căn giữa dọc */
-      cursor: pointer;
-      padding: 10px 15px;
-      /* Tạo khoảng cách bên trong các mục */
-      border-radius: 5px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      /* Thêm transition cho cả background và màu chữ */
-  
-      img {
-        max-width: 10%;
-      }
-  
-      span {
-        font-size: 15px;
-        /* Kích thước chữ */
-        color: #000000;
-        /* Màu mặc định */
-        transition: color 0.3s ease;
-        /* Hiệu ứng chuyển đổi màu chữ */
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      }
-  
-      &:hover {
-        background-color: #d41010;
-        /* Nền nâu khi mục được chọn */
-        color: white;
-        /* Đổi màu chữ sang trắng khi hover */
-  
-        span {
-          color: white;
-          /* Đổi màu chữ sang trắng khi hover */
-        }
-      }
-  
-      &.active {
-        background-color: #f7d0d0;
-        /* Nền nâu khi mục được chọn */
-        color: white;
-        /* Màu chữ trắng khi mục được chọn */
-  
-        span {
-          color: rgb(5, 5, 5);
-          /* Đổi màu chữ sang trắng khi được chọn */
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-      }
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 10%; /* Đảm bảo độ cao full của cột */
+    width: 25%;
+    
+    &:hover {
+      background-color: #edecf5;
+      color: white;
+    }
+
+    img {
+      height: 5%;
+      
+      display: block; /* hoặc display: inline; */
+      visibility: visible;
+    }
+
+    span {
+      font-size: 15px;
+      font-weight:bolder ;
+      color: black;
+    }
+
+    &.active {
+      background-color:rgb(218, 207, 207);
     }
   }
-  
- 
+  .row {
+    width: 100%; /* Đảm bảo hàng chiếm toàn bộ chiều rộng */
+  }
+}
 
-  .user-profile-container {
-    max-width: 80%;
-    margin: 2rem auto;
-    padding: 3rem;
-    background-color: #fff;
-    border: 1px solid #d9b9a4;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    
-    display: flex;
-    justify-content: space-between;
-  
-    .profile-image {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 20%;
-      height: 100%;
-  
-      img {
-        width: 80%;
-        height: 100%;
-        border-radius: 50%;
-        margin-bottom: 1rem;
-        max-width: 100%;
-      }
-  
-      .change-avatar-button {
-        background-color: #a1450f;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 0.375rem;
-        cursor: pointer;
-        font-size: 0.7rem;
-  
-        &:hover {
-          background-color: #a05e1c;
-        }
-      }
+
+
+
+$orange-100: #fffaf0;
+$orange-200: #feebc8;
+$orange-500: #ed8936;
+$orange-600: #dd6b20;
+$orange-800: #9c4221;
+$yellow-100: #fffff0;
+$red-100: #fff5f5;
+$red-500: #f56565;
+$green-700: #2f855a;
+$white: #ffffff;
+$gray-200: #edf2f7;
+$gray-600: #718096;
+$gray-800: #2d3748;
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.product-column {
+
+  max-height: 450px;
+  /* Chiều cao tối đa */
+  overflow-y: auto;
+  /* Hiển thị thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+}
+
+.sticky-buttons {
+  position: sticky;
+  bottom: 0;
+  /* Đặt nút ở đáy của container */
+  background-color: rgb(250, 245, 245);
+  /* Màu nền cho nút */
+  padding-top: 40px;
+  padding-bottom: 20px;
+  z-index: 10;
+  /* Đảm bảo nút nằm trên các phần tử khác */
+  display: flex;
+  justify-content: center;
+  /* Căn giữa hai nút */
+  margin-left: -6%;
+
+
+  .continue-button,
+  .update-cart-button {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    margin: 0 5px;
+    /* Khoảng cách giữa các nút */
+    cursor: pointer;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #c22712;
+      /* Màu nền khi hover */
     }
-  
-    form {
-      flex: 1;
+  }
+}
+
+
+
+
+
+.card-container {
+  display: flex;
+  background: $white;
+  border-radius: 100px;
+  border: 1px solid #c5b2b2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 80%;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 5%;
+
+
+}
+
+.select-product {
+  margin-right: auto;
+  /* Đẩy ô tick sang bên phải */
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.select-product input {
+  margin-right: 1px;
+  margin-left: 10px;
+  width: 15px;
+  height: 20px;
+}
+
+.item-container {
+  margin-bottom: 10px;
+}
+
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  /* Căn giữa theo chiều ngang */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  max-width: 10%;
+
+  .food-image {
+    width: 100%;
+    height: 80%;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 30px;
+    margin-right: 20px;
+  }
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-around;
+  /* Để tạo khoảng cách đều nhau giữa các cột */
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.column {
+
+  min-width: 100px;
+  /* Đặt chiều rộng tối thiểu */
+  margin: 0 10px;
+  /* Tạo khoảng cách giữa các cột */
+}
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: $gray-600;
+  margin-bottom: 0.25rem;
+}
+
+.item {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: $gray-800;
+}
+
+.column.quantity {
+  display: flex;
+  align-items: center; // Căn giữa theo trục dọc
+  justify-content: center; // Căn giữa theo trục ngang
+  padding: 10px;
+
+  .item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .quantity-control {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-left: 2rem;
-  
-      .form-group {
-        flex: 1;
+      align-items: center;
+
+      .quantity-buttons {
         display: flex;
-        flex-direction: column;
-  
-        label {
-          font-size: 0.85rem;
-          font-weight: 500;
-          margin-bottom: 0.5rem;
-          color: #555;
-        }
-  
-        input, .ant-picker {
-          width: 100%;
-          padding: 0.5rem;
-          border-radius: 0.375rem;
-          border: 1px solid #cbd5e0;
-          font-size: 0.85rem;
-          color: #333;
-        }
-  
-        .gender-group {
+        align-items: center;
+
+
+        .quantity-button {
           display: flex;
-          gap: 0.75rem;
-  
-          label {
-            font-size: 0.85rem;
+          background-color: red;
+          border: 1px solid #ccc;
+          padding: 0 6px;
+          margin: 0 auto;
+          border-radius: 50%;
+          font-size: 20px;
+          cursor: pointer;
+          color: white;
+
+          &:hover {
+            background-color: red;
+          }
+        }
+
+        .quantity-display {
+          .quantity-input {
+            margin-left: 10px;
+            width: 50px;
+            text-align: center;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-weight: bolder;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-  
-            input {
-              margin-right: 0.5rem;
-              transform: scale(1.2);
-            }
+            font-weight: bold;
+            border: none;
+            background: transparent;
+            font-size: 20px;
           }
         }
       }
-  
-      .submit-button {
-        width: 20%;
-        padding: 0.75rem;
-        background-color: #9e745b;
-        margin-top: 1%;
-        color: white;
-        font-size: 0.9rem;
-        border-radius: 0.375rem;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        margin-left: 20%;
-        
-  
-        &:hover {
-          background-color: #805d49;
+    }
+  }
+}
+
+
+
+@media (max-width: 640px) {
+  .card-container {
+    flex-direction: column;
+  }
+
+
+  .image-container {
+    max-width: 100%;
+  }
+
+  .column {
+    min-width: 100%;
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: left;
+  /* Căn giữa các nút */
+  margin-top: 20px;
+  /* Khoảng cách giữa danh sách sản phẩm và các nút */
+  margin-left: 25%;
+
+
+}
+
+
+.delete-button {
+  display: flex;
+  justify-content: center;
+  margin-right: 20px;
+  /* Space between button and product */
+  background-color: none;
+  /* Button color */
+  cursor: pointer;
+  /* Pointer cursor */
+  border: none;
+}
+
+
+.delete-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  /* Set a size for the icon */
+  height: 40px;
+  /* Set a size for the icon */
+}
+
+
+
+
+.additional-column {
+  width: 40%;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.additional-heading {
+  text-align: center;
+  font-weight: bold;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-top: 0;
+}
+
+
+
+.order-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1px;
+}
+
+.order-summary th,
+.order-summary td {
+  padding: 1px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.order-summary th {
+  font-weight: bold;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.order-item {
+  display: table-row;
+  height: auto;
+}
+
+.order-item-qty,
+.order-item-name,
+.order-item-price {
+  display: table-cell;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.order-total {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-weight: bold;
+  padding-top: 10px;
+  border-top: 2px solid #e0e0e0;
+  margin-left: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: sticky;
+  bottom: 0;
+  /* Đặt nút ở đáy của container */
+  background-color: rgb(250, 245, 245);
+  /* Màu nền cho nút */
+  z-index: 10;
+  /* Đảm bảo nút nằm trên các phần tử khác */
+  display: flex;
+  margin-left: 4%;
+}
+
+.order-total h3 {
+  margin: 0;
+  font-size: 1.1em;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.order-total-amount {
+  font-size: 1.2em;
+  color: #4CAF50;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.order-button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  margin-top: 1.3rem;
+
+}
+
+.order-button:hover {
+  background-color: #45a049;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between; // Để khoảng cách giữa hai nút
+  margin-top: auto; // Đẩy nút xuống dưới cùng của container
+}
+
+// Nếu bạn cần định dạng cho các nút
+.continue-button,
+.update-cart-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  // Các kiểu khác nếu cần
+}
+
+
+
+
+.fixed-buttons {
+  position: fixed;
+  bottom: 15%;
+  /* Cách từ đáy của viewport */
+  left: 20px;
+  /* Cách từ bên trái */
+  right: 20px;
+  /* Cách từ bên phải */
+  display: flex;
+  justify-content: left;
+  /* Căn giữa hai nút */
+
+}
+
+
+
+
+
+
+.user-profile-container {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid rgb(175, 172, 169);
+  margin-bottom: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bolder;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 40px;
+    color: #ca0f0f
+  }
+}
+
+.user-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &.full-width {
+    flex-basis: 100%;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  label {
+    font-weight: 600;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+
+
+    &:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+}
+
+.submit-button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 45%;
+
+  &:hover {
+    background-color: #3a7bc8;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-column {
+    width: 100%;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+}
+
+
+
+
+
+.order-form {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  max-width: 80%;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid #2f855a;
+  margin-bottom: 20px;
+
+  h2 {
+    text-align: center;
+    color: red;
+    margin-bottom: 5px;
+    font-size: 30px;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .customer-info,
+  .order-summary1 {
+    width: 45%;
+  }
+
+  .customer-info {
+    .input-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      .input-group {
+        width: 50%;
+
+        h3 {
+          color: #333;
+          font-size: 16px;
+        }
+
+        input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .full-width {
+      margin-bottom: 15px;
+
+      h3 {
+        color: #333;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+    }
+
+    .payment-methods {
+
+      h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+
+        button {
+          flex: 1;
+          padding: 10px;
+          border: 1px solid #ccc;
+          background-color: #f9f9f9;
+          color: #333;
+          cursor: pointer;
+          font-size: 14px;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-weight: bold;
+          transition: all 0.3s ease;
+
+          &.active {
+            background-color:red;
+            color: white;
+            border-color: #8B4513;
+          }
         }
       }
     }
   }
-  
-  
-  
-  .user-profile-container {
-    width: 100%;
-  }
-  
-  .form-columns {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .form-column {
-    width: 100%; /* Mỗi cột chiếm 48% chiều rộng */
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  }
+
+  .order-summary1 {
+    background-color: #fff;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4px;
 
 
 
-  .card-wrapper {
-    display: flex;
-    justify-content: left; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-  }
-  
-  .card-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 40%;
-    background-color: #e7dddd;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    position: relative;
-    flex-direction: row-reverse; /* Swap the order of children */
-    margin-top: 1%;
-    right: -3%;
-  }
-  
+      h3 {
+        color: #333;
+        font-size: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
 
-  .details {
-    display: flex;
-    flex-direction: column;
-    font-size: xx-small;
-  }
-  
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .column {
-    flex: 1; /* Makes each column take equal space */
-    text-align: center; /* Center aligns text in each column */
-  }
-  
-  .price, .quantity, .total {
-    margin: 0; /* Removes default margin */
-  }
+        .edit {
+          color: #959ba3;
+          font-size: 25px;
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+    
 
-  
-  .image-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    left: -2%; /* Move the image to the left */
+    .order-items {
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: black;
+      }
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10%;
+      border-top: 1px solid #e0e0e0;
+      font-weight: bold;
+      font-size: 20px;
+
+      .price {
+        color: #FF0000;
+      }
+    }
+
+    .checkout-button {
+      width: 100%;
+      padding: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: bold;
+
+      &:hover {
+        background-color:red;
+      }
+    }
   }
-  
-  .food-image {
-    width: 8vw; /* Sử dụng đơn vị vw để chiều rộng tỷ lệ theo chiều rộng của viewport */
-    height: auto; /* Đảm bảo tỷ lệ khung hình được giữ nguyên */
-    max-width: none; /* Không giới hạn chiều rộng tối đa */
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .order-form {
+    .form-container {
+      flex-direction: column;
+    }
+
+    .customer-info,
+    .order-summary1 {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .customer-info {
+      .input-row {
+        flex-direction: column;
+
+        .input-group {
+          width: 70%;
+          margin-bottom: 15px;
+        }
+      }
+    }
   }
-  
-  
+}

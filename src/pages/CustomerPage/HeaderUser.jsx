@@ -26,19 +26,20 @@ class HeaderUser extends Component {
             <span>Thông tin của tôi</span>
           </div>
           <div
-            className={`col-md-3 nav-item ${selectedItem === 'address' ? 'active' : ''}`}
-            onClick={() => onSelectItem('address')}
-          >
-            <img src={house} alt="Địa chỉ" />
-            <span>Địa chỉ nhận hàng</span>
-          </div>
-          <div
             className={`col-md-3 nav-item ${selectedItem === 'payment' ? 'active' : ''}`}
             onClick={() => onSelectItem('payment')}
           >
             <img src={pay}  alt="Phương thức" />
             <span>Phương thức thanh toán</span>
           </div>
+          <div
+            className={`col-md-3 nav-item ${selectedItem === 'address' ? 'active' : ''}`}
+            onClick={() => onSelectItem('acceptpayment')}
+          >
+            <img src={house} alt="Địa chỉ" />
+            <span>Xác nhận đặt hàng</span>
+          </div>
+
         </div>
 
     );
