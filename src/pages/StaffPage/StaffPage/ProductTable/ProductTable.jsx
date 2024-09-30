@@ -58,17 +58,17 @@ const ProductTable = () => {
             // Upload the product to the second API link
             await axios.post('https://666a8f987013419182cfc970.mockapi.io/api/example', productToUpload);
     
-            // After successful upload, remove the product from the table and delete from the original MockAPI
+            // After successful upload, delete the product from the original MockAPI
+            await axios.delete(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productToUpload.id}`);
+    
+            // Remove the deleted product from the table by updating the products and filteredProducts states
             const updatedProducts = products.filter(product => product.id !== productToUpload.id);
             const updatedFilteredProducts = filteredProducts.filter(product => product.id !== productToUpload.id);
     
             setProducts(updatedProducts); // Update the products state
             setFilteredProducts(updatedFilteredProducts); // Update the filtered products state
-
-            // Call delete function to remove from MockAPI
-            await deleteProductFromMockAPI(productToUpload.id);
-
-            alert('Sản phẩm đã được tải lên thành công!');
+    
+            alert('Sản phẩm đã được tải lên và xóa thành công!');
         } catch (error) {
             console.error('Error uploading or deleting product:', error);
             alert('Có lỗi xảy ra khi tải lên hoặc xóa sản phẩm.');
@@ -77,6 +77,7 @@ const ProductTable = () => {
             setProductToUpload(null); // Clear the product to upload
         }
     };
+    
 
     const handleProductClick = (productId) => {
         setSelectedProductId(productId);

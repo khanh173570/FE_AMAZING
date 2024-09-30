@@ -28,14 +28,24 @@ const ProductDetailModal = ({ productId, onClose }) => {
 
     const handleConfirmUpload = async () => {
         try {
+            // Step 1: Upload the product to the second API link
             await axios.post('https://666a8f987013419182cfc970.mockapi.io/api/example', productDetail);
-            alert("Sản phẩm đã được tải lên thành công!");
-            setShowConfirmation(false); // Close the confirmation pop-up
+            
+            // Step 2: After successful upload, delete the product from the original MockAPI
+            await axios.delete(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productDetail.id}`);
+            
+            // Success message
+            alert('Sản phẩm đã được tải lên và xóa khỏi MockAPI thành công!');
+            
+            // Step 3: Close the modal and confirmation popup
+            setShowConfirmation(false);
+            onClose(); // Close the modal
         } catch (error) {
-            console.error("Error uploading product:", error);
-            alert("Failed to upload product.");
+            console.error('Error uploading or deleting product:', error);
+            alert('Có lỗi xảy ra khi tải lên hoặc xóa sản phẩm.');
         }
     };
+    
 
     const handleCancelUpload = () => {
         setShowConfirmation(false); // Close the confirmation pop-up without uploading
