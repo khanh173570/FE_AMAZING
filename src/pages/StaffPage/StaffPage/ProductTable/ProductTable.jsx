@@ -52,16 +52,6 @@ const ProductTable = () => {
         setIsConfirmOpen(true); // Open confirmation popup
     };
 
-    // Function to delete the product from MockAPI after upload
-    const deleteProductFromMockAPI = async (productId) => {
-        try {
-            await axios.delete(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productId}`);
-            console.log(`Product with ID ${productId} deleted successfully.`);
-        } catch (error) {
-            console.error(`Error deleting product with ID ${productId}:`, error);
-        }
-    };
-
     // Function to upload the product to the second API link
     const handleConfirmUpload = async () => {
         try {
@@ -78,7 +68,7 @@ const ProductTable = () => {
             // Call delete function to remove from MockAPI
             await deleteProductFromMockAPI(productToUpload.id);
 
-            alert('Sản phẩm đã được tải lên và xóa thành công!');
+            alert('Sản phẩm đã được tải lên thành công!');
         } catch (error) {
             console.error('Error uploading or deleting product:', error);
             alert('Có lỗi xảy ra khi tải lên hoặc xóa sản phẩm.');
