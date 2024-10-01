@@ -148,13 +148,45 @@ const StaffTable = () => {
       {/* Staff Details Modal */}
       {showDetailsModal && selectedStaff && (
         <div className="details-modal">
+          <div className="tabbar1">
+            <h3>Thông tin nhân viên</h3>
+            <span className="close1" onClick={closeDetailsModal}>&times;</span>
+          </div>
           <div className="details-modal-content">
-            <h2>Chi tiết nhân viên</h2>
-            <p><strong>Tên:</strong> {selectedStaff.name}</p>
-            <p><strong>Email:</strong> {selectedStaff.email}</p>
-            <p><strong>Số điện thoại:</strong> {selectedStaff.phone}</p>
-            <p><strong>Vai trò:</strong> {selectedStaff.role}</p>
-            <button className="close-btn" onClick={closeDetailsModal}>Đóng</button>
+            <div className="detail-left">
+              <div>
+                <label>Tên nhân viên</label>
+                <input type="text" value={selectedStaff.name} readOnly />
+              </div>
+              <div>
+                <label>Email</label>
+                <input type="text" value={selectedStaff.email} readOnly />
+              </div>
+            </div>
+
+            <div className="detail-right">
+              <div>
+                <label>Số điện thoại</label>
+                <input type="text" value={selectedStaff.phone} readOnly />
+              </div>
+              <div>
+                <label>Vai trò</label>
+                <input type="text" value={selectedStaff.role} readOnly />
+              </div>
+            </div>
+          </div>
+
+          <div className="modal-buttons1">
+            <button className='edit-button1'>
+              <Link to={`/staff/editstaff/${selectedStaff.id}`}>
+                Chỉnh sửa
+              </Link>
+            </button>
+            <button
+              className="delete-btn1"
+              onClick={() => openConfirmModal(selectedStaff.id)}>
+              Xóa
+            </button>
           </div>
         </div>
       )}
