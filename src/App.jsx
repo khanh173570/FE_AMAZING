@@ -18,16 +18,16 @@ import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
-import DistributorApp from './layout/DistributorApp/DistributorApp';
-import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
+import DistributorApp from "./layout/DistributorApp/DistributorApp";
+import DistributorHomePage from "./pages/DistributorPage/DistributorHomePage/DistributorHomePage";
 import SellerProductDetail from "./pages/DistributorPage/SellerProductDetail/SellerProductDetail.jsx";
-import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
-import StaffApp from './layout/StaffApp/StaffApp.jsx'
+import SellerAddProduct from "./pages/DistributorPage/SellerAddProduct/SellerAddProduct";
+import StaffApp from "./layout/StaffApp/StaffApp.jsx";
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
 import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
-import CensorAddPage from './pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx';
-import CensorEditPage from './pages/StaffPage/StaffPage/CensorEditPage/CensorEditPage.jsx'
-import ProductDetail from './pages/CensorPage/ProductDetail.jsx';
+import CensorAddPage from "./pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx";
+import CensorEditPage from "./pages/StaffPage/StaffPage/CensorEditPage/CensorEditPage.jsx";
+import ProductDetail from "./pages/CensorPage/ProductDetail.jsx";
 import ProductUserDetail from "./pages/CustomerPage/ProductUserDetail.jsx";
 import MiniShoppingCart from "./pages/CustomerPage/MiniShoppingCart.jsx";
 
@@ -83,7 +83,7 @@ function App() {
           element: <Admin />,
           children: [
             {
-              path:"dashboard",
+              path: "dashboard",
               element: <Dashboard />,
             },
             {
@@ -112,69 +112,78 @@ function App() {
     },
 
     {
+      path: "/censor",
+      element: (
+        <PrivateRoute>
+          <CensorApp /> {/* CensorApp chứa header, footer và Outlet */}
+        </PrivateRoute>
+      ),
+      children: [
+        {
+          index: true, // HomePage is displayed by default at "/censor"
+          element: <Censor />,
+        },
+        {
+          path: "product/:id", // Không có dấu "/" ở đầu, ghép vào "/censor"
+          element: <ProductDetail />,
+        },
+      ],
+    },
+    
 
-    path: "/censor",
-    element: <CensorApp />, // Root path points to CustomerApp
-    children: [
-      {
-        index: true, // HomePage is displayed by default at "/"
-        element: <Censor />,
-      },
-      {
-        path: "/censor/product/:id",
-        element: <ProductDetail/>
-      }
-    ],
-  },
-
-
-  {
-    path: "/staff",
-    element: <StaffApp/>,
-    children: [
-      {
-        index: true,
-        element: <Staff />,
-      },
-      {
-        path: "/staff/editproduct/:id",
-        element: <ProductEditPage />,
-      },
-      {
-        path: "/staff/censorstaff",
-        element: <CensorStaffPage />,
-      },
-      {
-        path: "/staff/addstaff",
-        element: <CensorAddPage />,
-      },
-      {
-        path: "/staff/editstaff/:id",
-        element: <CensorEditPage />,
-      },
-    ],
-  },
+    {
+      path: "/staff",
+      element: (
+        <PrivateRoute>
+          <StaffApp />
+        </PrivateRoute>
+      ),
+      children: [
+        {
+          index: true,
+          element: <Staff />,
+        },
+        {
+          path: "/staff/editproduct/:id",
+          element: <ProductEditPage />,
+        },
+        {
+          path: "/staff/censorstaff",
+          element: <CensorStaffPage />,
+        },
+        {
+          path: "/staff/addstaff",
+          element: <CensorAddPage />,
+        },
+        {
+          path: "/staff/editstaff/:id",
+          element: <CensorEditPage />,
+        },
+      ],
+    },
 
     {
       path: "/seller",
-      element: <DistributorApp />,
+      element: (
+        <PrivateRoute>
+          <DistributorApp />
+        </PrivateRoute>
+      ),
       children: [
         {
-          index: true, // DistributorHomePage is displayed by default at "/seller"
+          index: true,
           element: <DistributorHomePage />,
         },
         {
-          path: "product/:id", // No leading slash; it appends to the parent path "/seller"
+          path: "product/:id",
           element: <SellerProductDetail />,
         },
         {
           path: "add-product",
           element: <SellerAddProduct />,
         },
-       
       ],
     },
-    
   ]);
 
   return <RouterProvider router={router} />;
