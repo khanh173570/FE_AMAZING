@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function PrivateRoute() {
+function PrivateRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,15 +14,17 @@ function PrivateRoute() {
     }
 
     const parseAccount = JSON.parse(account);
-    if (parseAccount.role !== "admin") {
-      toast.error("Your role cannot going to this page!");
+    const { role } = parseAccount;
+
+    if (!["admin", "staff", "censor", "seller"].includes(role)) {
+      toast.error("Your role cannot access this page!");
       return navigate("/login");
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // Kiểm tra nếu role là hợp lệ nhưng không điều hướng đi đâu cả
+  }, [navigate]);
 
-  return <Outlet />;
+  return children; // Trả về các phần tử con, ví dụ: CensorApp
 }
 
 export default PrivateRoute;
