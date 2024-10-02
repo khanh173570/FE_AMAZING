@@ -20,7 +20,6 @@ import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
 import DistributorApp from './layout/DistributorApp/DistributorApp';
 import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
-import SellerProductDetail from "./pages/DistributorPage/SellerProductDetail/SellerProductDetail.jsx";
 import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
 import StaffApp from './layout/StaffApp/StaffApp.jsx'
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
@@ -163,10 +162,7 @@ function App() {
           index: true, // DistributorHomePage is displayed by default at "/seller"
           element: <DistributorHomePage />,
         },
-        {
-          path: "product/:id", // No leading slash; it appends to the parent path "/seller"
-          element: <SellerProductDetail />,
-        },
+       
         {
           path: "add-product",
           element: <SellerAddProduct />,
