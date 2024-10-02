@@ -18,11 +18,10 @@ import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
-import DistributorApp from "./layout/DistributorApp/DistributorApp";
-import DistributorHomePage from "./pages/DistributorPage/DistributorHomePage/DistributorHomePage";
-import SellerProductDetail from "./pages/DistributorPage/SellerProductDetail/SellerProductDetail.jsx";
-import SellerAddProduct from "./pages/DistributorPage/SellerAddProduct/SellerAddProduct";
-import StaffApp from "./layout/StaffApp/StaffApp.jsx";
+import DistributorApp from './layout/DistributorApp/DistributorApp';
+import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
+import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
+import StaffApp from './layout/StaffApp/StaffApp.jsx'
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
 import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
 import CensorAddPage from "./pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx";
@@ -174,10 +173,7 @@ function App() {
           index: true,
           element: <DistributorHomePage />,
         },
-        {
-          path: "product/:id",
-          element: <SellerProductDetail />,
-        },
+       
         {
           path: "add-product",
           element: <SellerAddProduct />,

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Avatar, message, Tag, Input } from 'antd';
+import { Table, Avatar, message, Tag, Input, Button } from 'antd';
 import axios from 'axios';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { Button, Box } from '@mui/material';
 import { FaPlus } from 'react-icons/fa';
+import './DistributorHomePage.css';
+import SellerProductDetailModal from './../SellerProductDetail/SellerProductDetailModal';
 
-const { Search } = Input; // Destructure Search from Input
+const { Search } = Input;
 
 const columns = [
   {
@@ -13,18 +14,27 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     width: 130,
+    render: (text) => (
+      <span style={{ color: '#1890ff', fontWeight: 'bold' }}>{text}</span>
+    ), // Apply custom color and font style
   },
   {
     title: 'Artist',
     dataIndex: 'artist',
     key: 'artist',
     width: 130,
+    render: (text) => (
+      <span style={{ color: '#ff5722', fontWeight: 'bold' }}>{text}</span>
+    ), // Apply custom color for artist
   },
   {
     title: 'Category',
     dataIndex: 'category',
     key: 'category',
     width: 130,
+    render: (text) => (
+      <span style={{ color: '#3f51b5', fontWeight: 'bold' }}>{text}</span>
+    ), // Another custom color for category
   },
   {
     title: 'Type',
@@ -39,13 +49,18 @@ const columns = [
     ],
     filterMultiple: true,
     onFilter: (value, record) => record.type === value,
+    render: (text) => (
+      <span style={{ fontStyle: 'italic', color: '#ff9800', fontWeight: 'bold' }}>{text}</span>
+    ), // Custom style for type
   },
   {
     title: 'Price',
     dataIndex: 'price',
     key: 'price',
     width: 90,
-    render: (text) => `$${text}`,
+    render: (text) => (
+      <span style={{ color: 'green', fontWeight: 'bold' }}>${text}</span>
+    ), // Custom color for price
   },
   {
     title: 'Date',
@@ -53,7 +68,11 @@ const columns = [
     key: 'date',
     width: 160,
     sorter: (a, b) => new Date(a.detail.date) - new Date(b.detail.date),
-    render: (text) => new Date(text).toLocaleDateString(),
+    render: (text) => (
+      <span style={{ color: '#607d8b', fontWeight: 'bold' }}>
+        {new Date(text).toLocaleDateString()}
+      </span>
+    ),
   },
   {
     title: 'Image',
@@ -90,19 +109,36 @@ const columns = [
       if (status === 'Accepted') color = 'green';
       else if (status === 'Rejected') color = 'red';
       else if (status === 'Pending') color = 'yellow';
-      return <Tag color={color}>{status}</Tag>;
+
+      return (
+        <Tag color={color}>
+          <span style={{ fontWeight: 'bold' }}>{status}</span> {/* Bold the status text */}
+        </Tag>
+      );
     },
-  },
+  }
 ];
 
 const DistributorHomePage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pageSize, setPageSize] = useState(5);
-  const [searchValue, setSearchValue] = useState(''); // State for search input
+  const [searchValue, setSearchValue] = useState('');
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const filteredData = data.filter((item) =>
+    item.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    fetchData(); // Fetch data on mount
+  }, []);
+
+  const fetchData = () => {
+    setLoading(true);
     axios
       .get('https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570')
       .then((response) => {
@@ -126,64 +162,58 @@ const DistributorHomePage = () => {
         message.error('Failed to load data');
         setLoading(false);
       });
-  }, []);
-
-  // Handle row click to navigate to ProductDetail page
-  const handleRowClick = (record) => {
-    navigate(`/seller/product/${record.id}`);
   };
 
-  // Filter data based on the search input
-  const filteredData = data.filter((item) =>
-    item.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const handleRowClick = (record) => {
+    setSelectedProductId(record.id);
+    setModalVisible(true);
+  };
 
   return (
     <>
-      {/* Customized Heading */}
       <h2 style={{ fontWeight: 'bold', margin: '16px 0', textAlign: 'center' }}>
         Danh sách sản phẩm đã gửi
       </h2>
 
-      {/* Container for Add Product button and Search Bar */}
-      <Box display="flex" justifyContent="space-between" mb={2}>
-        {/* Add Product button using Material-UI */}
-        <NavLink to="/seller/add-product" style={{ textDecoration: 'none' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<FaPlus />}
-          >
+      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
+        <NavLink to="/seller/add-product" style={{ textDecoration: 'none', marginRight: '16px' }}>
+          <Button type="primary" icon={<FaPlus />}>
             Add Product
           </Button>
         </NavLink>
 
-        {/* Search Bar */}
         <Search
           placeholder="Search by name"
           allowClear
           onSearch={(value) => setSearchValue(value)}
           onChange={(e) => setSearchValue(e.target.value)}
-          style={{ width: 300 }} // Set the width of the search bar
+          style={{ width: 300 }}
         />
-      </Box>
+      </div>
 
+      <div className="table-container">
+        <Table
+          columns={columns}
+          dataSource={filteredData}
+          loading={loading}
+          pagination={{
+            pageSize: pageSize,
+            showSizeChanger: true,
+            pageSizeOptions: ['5', '10', '15', '20'],
+            onShowSizeChange: (_, newPageSize) => setPageSize(newPageSize),
+          }}
+          scroll={{ x: 'max-content' }}
+          onRow={(record) => ({
+            onClick: () => handleRowClick(record),
+          })}
+        />
+      </div>
 
-      {/* Ant Design Table */}
-      <Table
-        columns={columns}
-        dataSource={filteredData} // Use filtered data for the table
-        loading={loading}
-        pagination={{
-          pageSize: pageSize,
-          showSizeChanger: true,
-          pageSizeOptions: ['5', '10', '15', '20'],
-          onShowSizeChange: (_, newPageSize) => setPageSize(newPageSize),
-        }}
-        scroll={{ x: 'max-content' }}
-        onRow={(record) => ({
-          onClick: () => handleRowClick(record),
-        })}
+      <SellerProductDetailModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        productId={selectedProductId}
+        refreshData={fetchData} // Pass the refresh function to the modal
       />
     </>
   );

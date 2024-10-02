@@ -1,0 +1,10 @@
+.gray-row {
+    background-color: #f0f0f0; /* Light gray background color */
+  }
+  .table-container {
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  }
+  
