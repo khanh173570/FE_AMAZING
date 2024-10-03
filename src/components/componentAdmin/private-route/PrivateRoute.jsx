@@ -8,23 +8,27 @@ function PrivateRoute({ children }) {
   useEffect(() => {
     const account = localStorage.getItem("account");
 
+    // Redirect to login if no account is found
     if (!account) {
-      toast.error("You must login before going to this page!");
-      return navigate("/login");
+      toast.error("You must log in before accessing this page!");
+      navigate("/login");
+      return;
     }
 
     const parseAccount = JSON.parse(account);
     const { role } = parseAccount;
 
+    // Redirect to login if the role is not permitted
     if (!["admin", "staff", "censor", "seller"].includes(role)) {
       toast.error("Your role cannot access this page!");
-      return navigate("/login");
+      navigate("/login");
+      return;
     }
 
-    // Kiểm tra nếu role là hợp lệ nhưng không điều hướng đi đâu cả
+    // Allow access if role is valid
   }, [navigate]);
 
-  return children; // Trả về các phần tử con, ví dụ: CensorApp
+  return children; // Render the child components
 }
 
 export default PrivateRoute;
