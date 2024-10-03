@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Spinner, Button, Table, Alert, Form } from "react-bootstrap";
-import Swal from "sweetalert2";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CensorPages.css";
@@ -78,17 +77,7 @@ const CensorPage = () => {
 
   const statusCounts = countStatuses();
 
-  const handleLogout = () => {
-    localStorage.removeItem("account");
-    Swal.fire({
-      title: "Logged out!",
-      text: "You have successfully logged out.",
-      icon: "success",
-      confirmButtonText: "OK",
-    }).then(() => {
-      navigate("/login");
-    });
-  };
+
 
   if (loading) {
     return <Spinner animation="border" />;
@@ -143,11 +132,7 @@ const CensorPage = () => {
           />
           <Button variant="primary" onClick={handleSearch}>
             Search
-          </Button>
-          {/* Logout Button */}
-          <Button variant="danger" onClick={handleLogout} style={{ marginLeft: "10px" }}>
-            Logout
-          </Button>
+          </Button>   
         </div>
       </div>
 
