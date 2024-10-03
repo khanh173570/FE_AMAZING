@@ -32,6 +32,12 @@ const columns = [
     dataIndex: 'category',
     key: 'category',
     width: 130,
+    filters: [
+      { text: 'Gỗ', value: 'Gỗ' },
+      { text: 'Tre', value: 'Tre' },
+    ],
+    filterMultiple: true,
+    onFilter: (value, record) => record.category === value,
     render: (text) => (
       <span style={{ color: '#3f51b5', fontWeight: 'bold' }}>{text}</span>
     ), // Another custom color for category
