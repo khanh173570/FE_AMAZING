@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import PieChart from "../../../../components/componentAdmin/piechart/pieChart";
 import { Table } from "antd";
+import PieChart from './../../../../components/componentAdmin/piechart/PieChart';
 
 function TotalAccount() {
   const [admin, setAdminCount] = useState(0);
