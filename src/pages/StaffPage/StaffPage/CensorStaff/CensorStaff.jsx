@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Censorstaff.css';
+import './CensorStaff.css';
 import { AiOutlineSearch, AiOutlineEdit, AiOutlinePlus, AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
