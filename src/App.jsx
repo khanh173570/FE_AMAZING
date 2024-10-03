@@ -30,6 +30,7 @@ import ProductDetail from "./pages/CensorPage/ProductDetail.jsx";
 import ProductUserDetail from "./pages/CustomerPage/ProductUserDetail.jsx";
 import MiniShoppingCart from "./pages/CustomerPage/MiniShoppingCart.jsx";
 import Private from "./components/Private/Private.jsx"
+import PrivateStaff from "./components/Private/PrivateStaff.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -134,9 +135,9 @@ function App() {
     {
       path: "/staff",
       element: (
-        <Private>
+        <PrivateStaff>
           <StaffApp />
-        </Private>
+        </PrivateStaff>
       ),
 
       children: [

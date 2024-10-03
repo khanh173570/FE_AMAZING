@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Private({ children }) {
+function PrivateStaff({ children }) { // Accept children as a prop
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,15 +14,15 @@ function Private({ children }) {
     }
 
     const parseAccount = JSON.parse(account);
-    if (![ "seller", "censor"].includes(parseAccount.role)) {
-      toast.error("Your role cannot access this page!");
+    if (parseAccount.role !== "staff") {
+      toast.error("Your role cannot go to this page!");
       return navigate("/login");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
-  return children; // Return the wrapped children (CensorApp in this case)
+  return children; // Return the children prop to render the wrapped components
 }
 
-export default Private;
+export default PrivateStaff;
