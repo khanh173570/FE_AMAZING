@@ -1,13 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Card, FormControl, InputGroup } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './HomePageCustomer.css';
 
 const HomePageCustomer = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [data, setData] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570");
+        const result = await response.json();
+        
+        // Filter the results to only include products with status "accepted"
+        const acceptedProducts = result.filter(item => item.status === 'Accepted');
+        
+        setData(acceptedProducts); // Set the filtered data
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearch = () => {
     // Handle search logic based on the searchTerm
     console.log(`Searching for ${searchTerm}`);
+  };
+
+  const handleViewDetail = (id) => {
+    // Navigate to the detail page
+    navigate(`/products/${id}`); // Change this to your detail page route
   };
 
   return (
@@ -38,42 +65,28 @@ const HomePageCustomer = () => {
         {/* Main Content */}
         <div className="main-content">
           <div className="row">
-            <div className="col-md-4">
-              <Card>
-                <Card.Img variant="top" src="https://via.placeholder.com/150" />
-                <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                  </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </div>
-            <div className="col-md-4">
-              <Card>
-                <Card.Img variant="top" src="https://via.placeholder.com/150" />
-                <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                  </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </div>
-            <div className="col-md-4">
-              <Card>
-                <Card.Img variant="top" src="https://via.placeholder.com/150" />
-                <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                  </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </div>
+            {data.map((item) => (
+              <div className="col-md-6 col-lg-4 mb-4" key={item.id}>
+                <Card>
+                  <Card.Img variant="top" src={item.img} alt={item.name} />
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text  > 
+                      <div className="titles">Nghệ nhân: {item.artist}</div> <br />
+                      <div className="titles" style={{color:"red"}}>Giá trị: ${item.price}</div> 
+                      <div className="titles">Loại:  {item.type}</div>
+                      <div className="titles">Danh mục:  {item.category}</div> 
+                      <div className="titles">Số lượng:  {item.quantity}</div>
+                      
+                    </Card.Text>
+                    <Button variant="primary" style={{marginLeft:"10px", backgroundColor:"#E0FFFF", color:"#1E90FF"}} onClick={() => handleViewDetail(item.id)} >
+                      Xem Chi Tiết
+                    </Button>
+                    <Button variant="primary" style={{marginLeft:"10px", backgroundColor:"#E0FFFF", color:"#1E90FF"}}>Mua ngay</Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import Staff from "./pages/StaffPage/StaffPage/StaffPage.jsx";
 // Layout and Pages
 import CustomerApp from "./layout/CustomerApp/CustomerApp.jsx";
 import CensorApp from "./layout/CensorApp/CensorApp.jsx";
-import HomePage from "./pages/CustomerPage/HomePage.jsx";
+import Detail from "./pages/CustomerPage/HomePage.jsx";
 import PrivateRoute from "./components/componentAdmin/private-route/PrivateRoute.jsx";
 import NotFound from "./pages/notFoundPage/NotFound.jsx";
 import Admin from "./pages/AdminPage/Admin/index.jsx";
@@ -31,23 +31,19 @@ import ProductUserDetail from "./pages/CustomerPage/ProductUserDetail.jsx";
 import MiniShoppingCart from "./pages/CustomerPage/MiniShoppingCart.jsx";
 import Private from "./components/Private/Private.jsx"
 import PrivateStaff from "./components/Private/PrivateStaff.jsx";
+import Home from "./pages/CustomerPage/HomePageCustomer/HomePageCustomer.jsx";
+import ProductHome from "./pages/CustomerPage/HomePageCustomer/ProductDetail.jsx";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <CustomerApp />, // Root path points to CustomerApp
+      element: <CustomerApp />,
       children: [
         {
           index: true, // HomePage is displayed by default at "/"
-          element: <HomePage />,
+          element: <Home />,
         },
-      ],
-    },
-    {
-      path: "/",
-      element: <CustomerApp />,
-      children: [
         {
           path: "/login",
           element: <Login />,
@@ -71,6 +67,11 @@ function App() {
         {
           path: "/minishoppingcart",
           element: <MiniShoppingCart />,
+        },
+
+        {
+          path: "products/:id", // Không có dấu "/" ở đầu, ghép vào "/censor"
+          element: <ProductHome />,
         },
       ],
     },
@@ -106,6 +107,10 @@ function App() {
             {
               path: "total-account",
               element: <TotalAccount />,
+            },
+            {
+              path: "product/:id", // Không có dấu "/" ở đầu, ghép vào "/censor"
+              element: <ProductHome />,
             },
           ],
         },
