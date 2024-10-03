@@ -4,13 +4,7 @@
   text-align: center; /* Center text */
 }
 
-.title {
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 100; /* Use a valid number for font-weight */
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
-}
+
 .all-in {
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Stack children vertically */
@@ -41,6 +35,8 @@
 .title {
   margin-bottom: 10px;
   font-size: 30px;
+  width: 200px;
+  height: 50px;
   font-weight: 100; /* Use a valid number for font-weight */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
 }
@@ -66,7 +62,3 @@ table {
  display: flex;
  justify-content: left;
 }
-
-
-
-

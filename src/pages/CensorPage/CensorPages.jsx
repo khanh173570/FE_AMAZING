@@ -77,8 +77,6 @@ const CensorPage = () => {
 
   const statusCounts = countStatuses();
 
-
-
   if (loading) {
     return <Spinner animation="border" />;
   }
@@ -122,7 +120,10 @@ const CensorPage = () => {
             </div>
           </h5>
         </div>
-        <div className="col-md-6 search">
+        <div
+          className="col-md-6 search"
+          style={{ display: "flex", alignItems: "center" }}
+        >
           <Form.Control
             type="text"
             placeholder="Tìm kiếm theo tên hoặc danh mục"
@@ -132,12 +133,15 @@ const CensorPage = () => {
           />
           <Button variant="primary" onClick={handleSearch}>
             Search
-          </Button>   
+          </Button>
         </div>
       </div>
 
       <div className="border-container">
-        <div className="title">Danh Sách Sản Phẩm Đang Chờ Duyệt</div>
+      <div style={{ backgroundColor: "red", textAlign: "center", height: "100px", lineHeight: "100px",color:"white", fontSize: "50px" }}>
+    Danh Sách Sản Phẩm Đang Chờ Duyệt
+</div>
+
         <Table striped bordered hover>
           <thead className="header-row">
             <tr style={{ textAlign: "center" }}>
