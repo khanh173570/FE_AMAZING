@@ -91,10 +91,11 @@ input[readonly] {
 .modal-content img {
     max-width: 100%;
     width: 30%;
-    height: auto;
+    height: 180px;
     margin-bottom: 20px;
     margin-left: 35%;
     margin-top: 20px;
+    align-items: center;
 }
 
 h2 {

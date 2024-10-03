@@ -1,26 +1,35 @@
-.staffpage{
+.staffpage {
     display: flex;
-    background: #e6e6e6;
+    background-color: #e6e6e6;
 }
 
-.sidenav{
-    width: 16%;
+.sidenav {
     background: #483434;
     position: relative;
     height: 100vh;
+    transition: all 0.3s ease;
+    overflow: hidden;
     padding: 0 30px;
-    transition: all 1s;
 }
 
-ul{
+.sidenav.open {
+    width: 17%;
+}
+
+.sidenav.closed {
+    width: 85px;
+    padding: 0 10px;
+}
+
+ul {
     padding: 0;
 }
 
-ul li{
+ul li {
     list-style-type: none;
 }
 
-ul li a{
+ul li a {
     color: #fff;
     text-decoration: none;
     font-size: 15px;
@@ -28,23 +37,42 @@ ul li a{
     padding: 12px 10px;
     border-radius: 8px;
     font-family: sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
 }
 
-ul li a svg{
+ul li a:hover,
+ul li a:active {
+    background-color: #543f3f;
+}
+
+.icon {
     margin-right: 10px;
     font-size: 18px;
     margin-bottom: -3px;
 }
 
-ul li a:hover,
-ul li a:active{
-    background: #543f3f;
-}
-
-.sidenav-bottom{
+.sidenav-bottom {
     margin-top: 450px;
+    margin-left: 13px;
 }
 
-.sidenav-top{
-    margin-top: 50px;
+.sidenav-top {
+    margin-left: 13px;
+    margin-top: 90px;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    background-color: #543f3f;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1;
 }

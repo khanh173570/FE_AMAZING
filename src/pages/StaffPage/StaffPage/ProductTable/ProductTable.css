@@ -144,3 +144,38 @@ th {
 .pagination button:hover:not(.active) {
     background-color: #ddd;
 }
+
+@media (max-width: 1024px) {
+    .producttable {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .producttable {
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px) {
+    .producttable-top {
+        flex-direction: column;
+    }
+
+    table {
+        font-size: 30px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .pagination button {
+        padding: 6px 10px;
+    }
+
+    .confirm-popup-content {
+        padding: 15px;
+    }
+}
