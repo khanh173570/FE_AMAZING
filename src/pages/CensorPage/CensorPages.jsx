@@ -7,15 +7,15 @@ import "./CensorPages.css";
 import { Pagination } from "../../components/Pagination/Pagination.jsx";
 
 const CensorPage = () => {
-  const [data, setData] = useState([]); // Dữ liệu sản phẩm
-  const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
-  const [error, setError] = useState(null); // Trạng thái lỗi
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const postsPerPage = 5; // Số sản phẩm mỗi trang
-  const [searchTerm, setSearchTerm] = useState(""); // State cho tìm kiếm
-  const [filteredData, setFilteredData] = useState([]); // State cho dữ liệu đã lọc
-  const navigate = useNavigate(); // Khởi tạo navigate
-  const location = useLocation(); // Khởi tạo location để lấy URL
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -39,7 +39,7 @@ const CensorPage = () => {
           new Set(result.map((item) => item.id))
         ).map((id) => result.find((item) => item.id === id));
         setData(uniqueData);
-        setFilteredData(uniqueData); // Khởi tạo filteredData với toàn bộ dữ liệu
+        setFilteredData(uniqueData);
       } catch (error) {
         setError(error.toString());
       } finally {
@@ -47,26 +47,24 @@ const CensorPage = () => {
       }
     };
 
-    fetchData(); // Gọi hàm fetchData
+    fetchData();
   }, []);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    navigate(`/censor?page=${pageNumber}`); // Cập nhật URL
+    navigate(`/censor?page=${pageNumber}`);
   };
 
-  // Tìm kiếm sản phẩm theo ID hoặc Tên
   const handleSearch = () => {
     const results = data.filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-         item.category.includes(searchTerm)
+        item.category.includes(searchTerm)
     );
     setFilteredData(results);
-    setCurrentPage(1); // Đặt lại trang hiện tại về 1
+    setCurrentPage(1);
   };
 
-  // Đếm số lượng trạng thái
   const countStatuses = () => {
     return {
       accepted: data.filter((item) => item.status === "Accepted").length,
@@ -80,6 +78,18 @@ const CensorPage = () => {
 
   const statusCounts = countStatuses();
 
+  const handleLogout = () => {
+    localStorage.removeItem("account");
+    Swal.fire({
+      title: "Logged out!",
+      text: "You have successfully logged out.",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      navigate("/login");
+    });
+  };
+
   if (loading) {
     return <Spinner animation="border" />;
   }
@@ -92,32 +102,51 @@ const CensorPage = () => {
     <div className="all-in">
       <div className="row">
         <div className="col-md-6 product">
-          <h5 style={{ display: "flex"}}>
+          <h5 style={{ display: "flex" }}>
             Số sản phẩm Accepted:
-            <div className="a" style={{marginLeft:"5px", backgroundColor:"green"}}> {statusCounts.accepted}</div>
+            <div
+              className="a"
+              style={{ marginLeft: "5px", backgroundColor: "green" }}
+            >
+              {" "}
+              {statusCounts.accepted}
+            </div>
           </h5>
           <h5 style={{ display: "flex" }}>
             Số sản phẩm Rejected:
-            <div className="a" style={{marginLeft:"10px", backgroundColor:"red"}}> {statusCounts.rejected}</div>
+            <div
+              className="a"
+              style={{ marginLeft: "10px", backgroundColor: "red" }}
+            >
+              {" "}
+              {statusCounts.rejected}
+            </div>
           </h5>
-          <h5 style={{ display: "flex"}}>
+          <h5 style={{ display: "flex" }}>
             Số sản phẩm khác:
-            <div className="a" style={{marginLeft:"45px", backgroundColor:"yellow"}}> {statusCounts.other}</div>
+            <div
+              className="a"
+              style={{ marginLeft: "45px", backgroundColor: "yellow" }}
+            >
+              {" "}
+              {statusCounts.other}
+            </div>
           </h5>
         </div>
-        <div
-          className="col-md-6 search"
-          style={{ display: "flex", alignItems: "center" }}
-        >
+        <div className="col-md-6 search">
           <Form.Control
             type="text"
             placeholder="Tìm kiếm theo tên hoặc danh mục"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ marginRight: "10px", width: "450px", textAlign: "center" }} // Thêm khoảng cách bên phải
+            style={{ marginRight: "10px", width: "450px", textAlign: "center" }}
           />
           <Button variant="primary" onClick={handleSearch}>
             Search
+          </Button>
+          {/* Logout Button */}
+          <Button variant="danger" onClick={handleLogout} style={{ marginLeft: "10px" }}>
+            Logout
           </Button>
         </div>
       </div>
@@ -173,7 +202,7 @@ const CensorPage = () => {
                   <td style={{ display: "flex", justifyContent: "center" }}>
                     <Link to={`/censor/product/${item.id}`}>
                       <Button variant="info" style={{ marginRight: "10px" }}>
-                      Xem Chi Tiết
+                        Xem Chi Tiết
                       </Button>
                     </Link>
                   </td>
@@ -182,7 +211,6 @@ const CensorPage = () => {
           </tbody>
         </Table>
 
-        {/* Thêm phân trang */}
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={filteredData.length}

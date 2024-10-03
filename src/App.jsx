@@ -18,10 +18,10 @@ import User from "./pages/AdminPage/account/user/User.jsx";
 import ListStaff from "./pages/AdminPage/account/staff/Staff.jsx";
 import TotalAccount from "./pages/AdminPage/account/total/index.jsx";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword.jsx";
-import DistributorApp from './layout/DistributorApp/DistributorApp';
-import DistributorHomePage from './pages/DistributorPage/DistributorHomePage/DistributorHomePage';
-import SellerAddProduct from './pages/DistributorPage/SellerAddProduct/SellerAddProduct';
-import StaffApp from './layout/StaffApp/StaffApp.jsx'
+import DistributorApp from "./layout/DistributorApp/DistributorApp";
+import DistributorHomePage from "./pages/DistributorPage/DistributorHomePage/DistributorHomePage";
+import SellerAddProduct from "./pages/DistributorPage/SellerAddProduct/SellerAddProduct";
+import StaffApp from "./layout/StaffApp/StaffApp.jsx";
 import ProductEditPage from "./pages/StaffPage/StaffPage/ProductEditPage/ProductEditPage.jsx";
 import CensorStaffPage from "./pages/StaffPage/StaffPage/CensorStaffPage/CensorStaffPage.jsx";
 import CensorAddPage from "./pages/StaffPage/StaffPage/CensorAddPage/CensorAddPage.jsx";
@@ -29,6 +29,7 @@ import CensorEditPage from "./pages/StaffPage/StaffPage/CensorEditPage/CensorEdi
 import ProductDetail from "./pages/CensorPage/ProductDetail.jsx";
 import ProductUserDetail from "./pages/CustomerPage/ProductUserDetail.jsx";
 import MiniShoppingCart from "./pages/CustomerPage/MiniShoppingCart.jsx";
+import Private from "./components/Private/Private.jsx"
 
 function App() {
   const router = createBrowserRouter([
@@ -113,10 +114,11 @@ function App() {
     {
       path: "/censor",
       element: (
-        <PrivateRoute>
-          <CensorApp /> {/* CensorApp chứa header, footer và Outlet */}
-        </PrivateRoute>
+        <Private>
+          <CensorApp />
+        </Private>
       ),
+
       children: [
         {
           index: true, // HomePage is displayed by default at "/censor"
@@ -128,15 +130,15 @@ function App() {
         },
       ],
     },
-    
 
     {
       path: "/staff",
       element: (
-        <PrivateRoute>
+        <Private>
           <StaffApp />
-        </PrivateRoute>
+        </Private>
       ),
+
       children: [
         {
           index: true,
@@ -164,16 +166,17 @@ function App() {
     {
       path: "/seller",
       element: (
-        <PrivateRoute>
+        <Private>
           <DistributorApp />
-        </PrivateRoute>
+        </Private>
       ),
+
       children: [
         {
           index: true,
           element: <DistributorHomePage />,
         },
-       
+
         {
           path: "add-product",
           element: <SellerAddProduct />,
