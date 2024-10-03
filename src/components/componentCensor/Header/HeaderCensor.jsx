@@ -27,7 +27,7 @@ const HeaderCensor = () => {
                 <nav className="nav">
                     <ul>
                         <li>Trang chủ</li>
-                        <li>Đăng sản phẩm</li>A
+                        <li>Đăng sản phẩm</li>
                         <li>Chỉnh sửa</li>
                         <li>Giới thiệu</li>
                         <li>Liên hệ</li>
