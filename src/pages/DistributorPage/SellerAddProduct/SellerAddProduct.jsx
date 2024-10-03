@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Input, InputNumber, Button, Row, Col, message } from 'antd';
+import { Form, Input, InputNumber, Button, Row, Col, message, Select } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import for navigation
 import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
 
 const { TextArea } = Input; // Ant Design TextArea for description
+const { Option } = Select;  // Ant Design Select component
 
 const SellerAddProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -77,20 +78,30 @@ const SellerAddProduct = () => {
             />
           </Form.Item>
 
+          {/* Dropdown for Type */}
           <Form.Item
             label="Type"
             name="type"
-            rules={[{ required: true, message: 'Please enter the product type' }]}
+            rules={[{ required: true, message: 'Please select the product type' }]}
           >
-            <Input placeholder="Enter product type" />
+            <Select placeholder="Select product type">
+              <Option value="Budget">Budget</Option>
+              <Option value="Standard">Standard</Option>
+              <Option value="Luxury">Luxury</Option>
+              <Option value="Special">Special</Option>
+            </Select>
           </Form.Item>
 
+          {/* Dropdown for Category */}
           <Form.Item
             label="Category"
             name="category"
-            rules={[{ required: true, message: 'Please enter the category' }]}
+            rules={[{ required: true, message: 'Please select the category' }]}
           >
-            <Input placeholder="Enter product category" />
+            <Select placeholder="Select category">
+              <Option value="Gỗ">Gỗ</Option>
+              <Option value="Tre">Tre</Option>
+            </Select>
           </Form.Item>
 
           <Form.Item
@@ -166,20 +177,16 @@ const SellerAddProduct = () => {
         </Col>
       </Row>
 
-
       <Form.Item>
-  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-    <NavLink to="/seller" style={{ marginRight: '8px' }}>
-      <Button type="default">
-        Back
-      </Button>
-    </NavLink>
-    <Button type="primary" htmlType="submit" loading={loading}>
-      Add Product
-    </Button>
-  </div>
-</Form.Item>
-
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <NavLink to="/seller" style={{ marginRight: '8px' }}>
+            <Button type="default">Back</Button>
+          </NavLink>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Add Product
+          </Button>
+        </div>
+      </Form.Item>
     </Form>
   );
 };
