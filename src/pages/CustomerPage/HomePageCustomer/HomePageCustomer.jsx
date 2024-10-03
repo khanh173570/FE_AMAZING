@@ -82,7 +82,7 @@ const HomePageCustomer = () => {
                     <Button variant="primary" style={{marginLeft:"10px", backgroundColor:"#E0FFFF", color:"#1E90FF"}} onClick={() => handleViewDetail(item.id)} >
                       Xem Chi Tiết
                     </Button>
-                    <Button variant="primary" style={{marginLeft:"10px", backgroundColor:"#E0FFFF", color:"#1E90FF"}}>Mua ngay</Button>
+                    <Button variant="primary" style={{marginLeft:"10px", backgroundColor:"#E0FFFF", color:"#1E90FF"}}>Thêm vào giỏ</Button>
                   </Card.Body>
                 </Card>
               </div>
