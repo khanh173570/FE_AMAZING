@@ -44,6 +44,10 @@ function Login() {
         localStorage.setItem("account", JSON.stringify(matchedAccount));
         toast.success("Login successfully");
         navigate("/staff");
+      } else if (matchedAccount.role === "seller") {
+        localStorage.setItem("account", JSON.stringify(matchedAccount));
+        toast.success("Login successfully");
+        navigate("/seller");
       }
     } else {
       toast.error("Invalid phone or password!");
