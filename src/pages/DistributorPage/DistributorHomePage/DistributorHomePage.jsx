@@ -86,7 +86,7 @@ const columns = [
     key: 'img',
     width: 100,
     render: (imgUrl, record) => (
-      <Avatar src={imgUrl} alt={record.name} shape="square" size={60} />
+      <Avatar src={imgUrl} alt={record.name} shape="circle" size={60} />
     ),
   },
   {
