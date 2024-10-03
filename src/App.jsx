@@ -33,6 +33,7 @@ import Private from "./components/Private/Private.jsx"
 import PrivateStaff from "./components/Private/PrivateStaff.jsx";
 import Home from "./pages/CustomerPage/HomePageCustomer/HomePageCustomer.jsx";
 import ProductHome from "./pages/CustomerPage/HomePageCustomer/ProductDetail.jsx";
+import HomePage from "./pages/CustomerPage/HomePage.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -72,6 +73,10 @@ function App() {
         {
           path: "products/:id", // Không có dấu "/" ở đầu, ghép vào "/censor"
           element: <ProductHome />,
+        },
+        {
+          path: "addToCart", // Không có dấu "/" ở đầu, ghép vào "/censor"
+          element: <HomePage />,
         },
       ],
     },

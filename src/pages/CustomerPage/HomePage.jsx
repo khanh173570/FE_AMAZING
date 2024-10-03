@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import HeaderUser from "./HeaderUser";
 import "./HomePage.scss";
-import phat from "/assets/assetsCustomer/phat.jpg";
 import ttknh from "/assets/assetsCustomer/ttknh.png";
 import vi from "/assets/assetsCustomer/vi.png";
 import tg from "/assets/assetsCustomer/tg.png";
 import vidt from "/assets/assetsCustomer/vidt.png";
 import remove from "/assets/assetsCustomer/remove.png";
-import { DatePicker } from 'antd';
 import axios from 'axios';
-
+import VnPayService from "./VnPayService";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 class HomePage extends Component {
   constructor(props) {
@@ -23,14 +23,6 @@ class HomePage extends Component {
         email: 'House@gmail.com',
         birthDate: null
       },
-      products: [
-        { id: 1, name: "Dish 1", price: 22.00, quantity: 1, image: phat },
-        { id: 2, name: "Dish 2", price: 15.00, quantity: 1, image: phat },
-        { id: 3, name: "Dish 3", price: 30.00, quantity: 1, image: phat },
-        { id: 4, name: "Dish 4", price: 25.00, quantity: 1, image: phat },
-        { id: 5, name: "Dish 5", price: 25.00, quantity: 1, image: phat },
-        { id: 6, name: "Dish 6", price: 25.00, quantity: 1, image: phat },
-      ],
       selectedProducts: [],
       provinces: [],
       districts: [],
@@ -38,13 +30,35 @@ class HomePage extends Component {
       selectedProvince: '',
       selectedDistrict: '',
       selectedWard: '',
+      continueClicked: false,
+      data: [],
+      products: [],
     };
+    this.vnp_TmnCode = "VNPAYTMMT"; // Thay bằng TMN Code của bạn
+    this.vnp_HashSecret = "vnpay@123456"; // Thay bằng Hash Secret của bạn
+    this.vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; // URL thanh toán sandbox
+    this.vnp_ReturnUrl = "https://www.yourwebsite.com/vnpay_return"; // URL trả về sau thanh toán
+
+    this.vnPayService = new VnPayService(
+      this.vnp_TmnCode,
+      this.vnp_HashSecret,
+      this.vnp_Url,
+      this.vnp_ReturnUrl
+    )
   }
   componentDidMount() {
+    const storedProducts = localStorage.getItem('cart');
+    console.log("check Data", storedProducts);
+    if (storedProducts) {
+      this.setState({ products: JSON.parse(storedProducts) });
+    }
+
     this.fetchProvinces();
-    const orderDetails = localStorage.getItem('orderDetails');
-    if (orderDetails) {
-      console.log('Retrieved Order Details:', JSON.parse(orderDetails));
+    this.fetchData();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.products !== this.state.products) {
+      localStorage.setItem('cart', JSON.stringify(this.state.products));
     }
   }
 
@@ -56,6 +70,20 @@ class HomePage extends Component {
       console.error("Error fetching provinces: ", error);
     }
   };
+  fetchData = async () => {
+    try {
+      const response = await fetch("https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570");
+      const result = await response.json();
+
+      // Filter the results to only include products with status "accepted"
+      const acceptedProducts = result.filter(item => item.status === 'Accepted');
+
+      this.setState({ data: acceptedProducts }); // Update the state with the filtered data
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
 
   handleProvinceChange = async (e) => {
     const provinceId = e.target.value;
@@ -87,39 +115,68 @@ class HomePage extends Component {
 
 
   increaseQuantity = (productId) => {
-    this.setState(prevState => ({
-      products: prevState.products.map(product =>
-        product.id === productId
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
-      )
-    }));
+    this.setState(prevState => {
+      const updatedProducts = prevState.products.map(product => {
+        if (product.id === productId) {
+          console.log(`Tăng số lượng cho sản phẩm: ${product.name}, Số lượng hiện tại: ${product.quantity}, Tồn kho: ${product.stock}`);
+          // Kiểm tra nếu số lượng trong giỏ hàng đã bằng hoặc vượt quá số lượng còn lại trong kho
+          if (product.quantity >= product.stock) {
+            alert(`Sản phẩm ${product.name} đã đạt số lượng tối đa trong kho.`);
+            return product; // Giữ nguyên nếu vượt quá số lượng tồn kho
+          }
+          return { ...product, quantity: product.quantity + 1 }; // Tăng số lượng nếu còn trong kho
+        }
+        return product;
+      });
+
+      // Lưu giỏ hàng vào localStorage
+      localStorage.setItem('cart', JSON.stringify(updatedProducts));
+      return { products: updatedProducts };
+    });
   };
 
   decreaseQuantity = (productId) => {
-    this.setState(prevState => ({
-      products: prevState.products.map(product =>
-        product.id === productId && product.quantity > 1
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      )
-    }));
+    this.setState(prevState => {
+      const updatedProducts = prevState.products.map(product => {
+        if (product.id === productId) {
+          console.log(`Giảm số lượng cho sản phẩm: ${product.name}, Số lượng hiện tại: ${product.quantity}, Tồn kho: ${product.stock}`);
+          // Giảm số lượng nếu còn nhiều hơn 1
+          if (product.quantity > 1) {
+            return { ...product, quantity: product.quantity - 1 };
+          } else {
+            alert(`Số lượng sản phẩm ${product.name} không thể nhỏ hơn 1.`);
+            return product; // Giữ nguyên nếu số lượng <= 1
+          }
+        }
+        return product;
+      });
+
+      // Lưu giỏ hàng vào localStorage
+      localStorage.setItem('cart', JSON.stringify(updatedProducts));
+      return { products: updatedProducts };
+    });
   };
+
+
 
   handleQuantityChange = (e, productId) => {
-    const newQuantity = e.target.value;
+    const { value } = e.target;
+    this.setState(prevState => {
+      const updatedProducts = prevState.products.map(product => {
+        if (product.id === productId) {
+          console.log(`thay đổi số lượng cho sản phẩm: ${product.name}, Số lượng hiện tại: ${product.quantity}, Tồn kho: ${product.stock}`);
+          // Kiểm tra và đảm bảo giá trị mới nằm trong phạm vi hợp lệ
+          const newQuantity = Math.max(1, Math.min(value, product.stock)); // Đảm bảo số lượng từ 1 đến stock
+          return { ...product, quantity: newQuantity };
+        }
+        return product;
+      });
 
-    //Nhập giá trị trống hoặc số lớn hơn 0
-    if (newQuantity === '' || parseInt(newQuantity, 10) >= 0) {
-      this.setState(prevState => ({
-        products: prevState.products.map(product =>
-          product.id === productId
-            ? { ...product, quantity: newQuantity }
-            : product
-        )
-      }));
-    }
+      localStorage.setItem('cart', JSON.stringify(updatedProducts));
+      return { products: updatedProducts };
+    });
   };
+
 
   handleQuantityBlur = (productId) => {
     this.setState(prevState => ({
@@ -173,9 +230,13 @@ class HomePage extends Component {
 
   //Xóa sản phẩm
   handleDelete = (productId) => {
-    this.setState(prevState => ({
-      products: prevState.products.filter(product => product.id !== productId)
-    }));
+    this.setState(prevState => {
+      const updatedProducts = prevState.products.filter(product => product.id !== productId);
+
+      // Lưu giỏ hàng cập nhật vào localStorage
+      localStorage.setItem('cart', JSON.stringify(updatedProducts));
+      return { products: updatedProducts };
+    });
   };
 
   handleCheckboxChange = (productId) => {
@@ -194,8 +255,13 @@ class HomePage extends Component {
   };
 
 
+
   handleOrderClick = () => {
     this.setState({ selectedItem: 'info' });
+  };
+  handleContinueClick = () => {
+    this.setState({ continueClicked: true });
+    window.location.href = "/";
   };
 
 
@@ -209,10 +275,100 @@ class HomePage extends Component {
     this.setState({ selectedItem: 'acceptpayment' });
   };
 
+  handlePayment = async () => {
+    const { products } = this.state;
+    // Tính toán tổng số tiền từ các sản phẩm
+    const totalAmount = products.reduce((total, product) => {
+      return total + (this.formatCurrency(product.price) * product.quantity);
+    }, 0);
+    try {
+      await Promise.all(
+        products.map(product => this.updateProductQuantity(product.id, product.quantity))
+      );
+
+      toast.success("Thanh toán thành công!", {
+        position: "top-right",
+        autoClose: 2000, // Toast will show for 5 seconds (5000ms)
+      });
+
+      // Set timeout for 5 seconds to wait before executing the next action
+      setTimeout(() => {
+        localStorage.removeItem('cart'); // Clear cart from localStorage
+        localStorage.removeItem('products'); // Clear products from localStorage
+        this.props.navigate("/"); // Navigate to home page
+      }, 2000); // 5 seconds delay
+
+    } catch (error) {
+      toast.error("Thanh toán thất bại. Vui lòng thử lại.");
+    }
+  };
+
+  // Hàm gọi API để cập nhật số lượng sản phẩm
+  updateProductQuantity = async (productId, quantityPurchased) => {
+    const mockAPI = `https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productId}`;
+
+    try {
+      // Lấy thông tin sản phẩm từ API trước
+      const productData = await fetch(mockAPI)
+        .then(response => response.json());
+
+      const currentQuantity = productData.quantity; // Lấy số lượng hiện tại từ API
+
+      // Tính toán số lượng còn lại
+      const remainingQuantity = currentQuantity - quantityPurchased;
+
+      // Kiểm tra nếu số lượng còn lại không đủ
+      if (remainingQuantity < 0) {
+        toast.error(`Số lượng sản phẩm ${productId} không đủ để mua.`, {
+          autoClose: 2000, // Set toast duration to 2 seconds
+        });
+        throw new Error(`Số lượng sản phẩm ${productId} không đủ để mua.`);
+      }
+
+      // Cập nhật lại số lượng trong API
+      return fetch(mockAPI, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quantity: remainingQuantity, // Gửi số lượng còn lại
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          toast.success(`Sản phẩm ${productId} đã được cập nhật. Số lượng còn lại: ${remainingQuantity}`, {
+            autoClose: 2000, // Set toast duration to 2 seconds
+          });
+          return data;
+        })
+        .catch(error => {
+          toast.error(`Lỗi khi cập nhật số lượng cho sản phẩm ${productId}.`, {
+            autoClose: 2000, // Set toast duration to 2 seconds
+          });
+          throw error;
+        });
+    } catch (error) {
+      toast.error(`Lỗi khi lấy thông tin sản phẩm ${productId}.`, {
+        autoClose: 2000, // Set toast duration to 2 seconds
+      });
+      throw error;
+    }
+  };
+
+
+  formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(amount);
+  }
+
+
 
 
   renderContent = () => {
     const { selectedItem, userProfileForm, products, selectedProducts, provinces, districts, wards, selectedProvince, selectedDistrict, selectedWard } = this.state;
+    const totalAmount = products.reduce((total, product) => {
+      return total + (product.price * product.quantity);
+    }, 0);
 
 
     switch (selectedItem) {
@@ -222,6 +378,7 @@ class HomePage extends Component {
           <div className="card-wrapper">
             <div className="product-column">
               {products.map((product) => (
+
                 <div key={product.id} className="card-container">
                   <div className="select-product">
                     <input
@@ -231,7 +388,7 @@ class HomePage extends Component {
                     />
                   </div>
                   <div className="image-container">
-                    <img src={product.image} className="food-image" />
+                    <img src={product.img} className="food-image" />
                   </div>
                   <div className="details">
                     <div className="info-row">
@@ -244,18 +401,24 @@ class HomePage extends Component {
                       <div className="column price">
                         <div className="item-container">
                           <h2 className="label">Price</h2>
-                          <span className="item">${product.price.toFixed(2)}</span>
+                          <p>{this.formatCurrency(product.price)}</p>
                         </div>
+
                       </div>
                       <div className="column quantity">
                         <div className="item-container">
                           <div className="quantity-control">
                             <div className="quantity-buttons">
+                              {/* Nút giảm số lượng */}
                               <button
                                 className="quantity-button decrease"
-                                onClick={() => this.decreaseQuantity(product.id)}>
+                                onClick={() => this.decreaseQuantity(product.id)}
+                                disabled={product.quantity <= 1} // Disable khi số lượng = 1
+                              >
                                 -
                               </button>
+
+                              {/* Hiển thị số lượng */}
                               <span className="quantity-display">
                                 <input
                                   type="number"
@@ -266,9 +429,13 @@ class HomePage extends Component {
                                   className="quantity-input"
                                 />
                               </span>
+
+                              {/* Nút tăng số lượng */}
                               <button
                                 className="quantity-button increase"
-                                onClick={() => this.increaseQuantity(product.id)}>
+                                onClick={() => this.increaseQuantity(product.id)}
+                                disabled={product.quantity >= product.stock} // Disable khi quantity >= stock
+                              >
                                 +
                               </button>
                             </div>
@@ -278,7 +445,10 @@ class HomePage extends Component {
                       <div className="column total">
                         <div className="item-container">
                           <h2 className="label">Total</h2>
-                          <span className="item">${(product.price * product.quantity).toFixed(2)}</span>
+                          <span className="item">
+                            {this.formatCurrency(product.price * product.quantity)}
+                          </span>
+
                         </div>
                       </div>
                       <div className="delete-icon">
@@ -293,24 +463,32 @@ class HomePage extends Component {
                   </div>
 
                 </div>
-
               ))}
-
               <div className="sticky-buttons">
-                <button className="continue-button">Tiếp tục xem sản phẩm</button>
-                <button className="update-cart-button">Cập nhật giỏ hàng</button>
+                {this.state.selectedProducts.length > 0 && (
+                  <div>
+                    {/* Các sản phẩm hoặc thông tin sản phẩm */}
+                    <button className="continue-button" onClick={this.handleContinueClick}>
+                      Tiếp tục xem sản phẩm
+                    </button>
+                  </div>
+                )}
+                {this.state.selectedProducts.length > 0 && (
+                  <button className="update-cart-button">Cập nhật giỏ hàng</button>
+                )}
               </div>
+
             </div>
             <div className="additional-column">
 
               <div className="order-summary">
                 <div style={{ maxHeight: '320px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', minHeight: '320px' }}>
+                  <table style={{ borderCollapse: 'separate' }}>
                     <thead>
                       <tr>
-                        <th style={{ border: '1px solid #ddd', padding: '1px' }}>Quantity</th>
-                        <th style={{ border: '1px solid #ddd', padding: '1px' }}>Name</th>
-                        <th style={{ border: '1px solid #ddd', padding: '1px' }}>Price</th>
+                        <th style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>Quantity</th>
+                        <th style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>Name</th>
+                        <th style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>Price</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -321,8 +499,9 @@ class HomePage extends Component {
                             <td className="order-item-qty" style={{ border: '1px solid #ddd', padding: '1px' }}>{product.quantity}</td>
                             <td className="order-item-name" style={{ border: '1px solid #ddd', padding: '1px' }}>{product.name}</td>
                             <td className="order-item-price" style={{ border: '1px solid #ddd', padding: '1px' }}>
-                              ${(product.price * product.quantity).toFixed(2)}
+                              {this.formatCurrency(product.price * product.quantity)}
                             </td>
+
                           </tr>
                         ))}
                       {selectedProducts.length === 0 && (
@@ -333,16 +512,14 @@ class HomePage extends Component {
                     </tbody>
                   </table>
                 </div>
-
-
-
                 <div className="order-total">
                   <h3>Total:</h3>
                   <span className="order-total-amount">
-                    ${products
-                      .filter((product) => selectedProducts.includes(product.id))
-                      .reduce((total, product) => total + product.price * product.quantity, 0)
-                      .toFixed(2)}
+                    {this.formatCurrency(
+                      products
+                        .filter((product) => selectedProducts.includes(product.id))
+                        .reduce((total, product) => total + product.price * product.quantity, 0)
+                    )}
                   </span>
                 </div>
                 <button className="order-button" onClick={this.handleOrderClick}> {/* Updated to use this.handleOrderClick */}
@@ -538,27 +715,55 @@ class HomePage extends Component {
                 </div>
               </div>
               <div className="order-summary1">
-                <h3>Đơn hàng  <span className="edit">Sửa</span></h3>
+                <h3>Đơn hàng </h3>
                 <div className="order-items">
-                  <div className="item">
-                    <span>1 x Tượng phật</span>
-                    <span>3.200.000</span>
-                  </div>
-                  <div className="item">
-                    <span>1 x Tượng phật</span>
-                    <span>1.300.000</span>
+                  <div style={{ maxHeight: '300px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', minHeight: '200px', margin: '0' }}>
+                      <thead>
+                        <tr>
+                          <th style={{ border: '1px solid #ddd', textAlign: 'center', padding: '5px' }}>Quantity</th>
+                          <th style={{ border: '1px solid #ddd', textAlign: 'center', padding: '5px' }}>Name</th>
+                          <th style={{ border: '1px solid #ddd', textAlign: 'center', padding: '5px' }}>Price</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {products
+                          .filter((product) => selectedProducts.includes(product.id))
+                          .map((product) => (
+                            <tr key={product.id} className="order-item">
+                              <td className="order-item-qty" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>{product.quantity}</td>
+                              <td className="order-item-name" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>{product.name}</td>
+                              <td className="order-item-price" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>
+                                {this.formatCurrency(product.price * product.quantity)}
+                              </td>
+                            </tr>
+                          ))}
+                        {selectedProducts.length === 0 && (
+                          <tr>
+                            <td colSpan="3" style={{ textAlign: 'center', padding: '8px' }}>No items selected</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+
+
                   </div>
                 </div>
+
                 <div className="total">
-                  <span>Thành tiền</span>
-                  <span className="price">4.500.000</span>
+                  <div className="price">
+                    <p>Total: {this.formatCurrency(totalAmount)}</p>
+                  </div>
+
+                  <button className="checkout-button" onClick={this.handlePayment}>
+                    Thanh toán
+                  </button>
                 </div>
-                <button className="checkout-button">Thanh toán</button>
               </div>
             </div>
           </div>
         );
-
 
       default:
         return <div>Select an item</div>;
@@ -580,7 +785,12 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+const HomePageWrapper = () => {
+  const navigate = useNavigate();
+  return <HomePage navigate={navigate} />;
+};
+
+export default HomePageWrapper;
 
 
 

@@ -105,17 +105,21 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start; /* Căn giữa nội dung theo chiều dọc */
-    padding: 10px; /* Tăng thêm padding để viền không quá sát nội dung */
-    border: 2px solid #ddd; /* Độ dày viền */
+    justify-content: flex-start;
+    /* Căn giữa nội dung theo chiều dọc */
+    padding: 10px;
+    /* Tăng thêm padding để viền không quá sát nội dung */
+    border: 2px solid #ddd;
+    /* Độ dày viền */
     border-radius: 5px;
     text-align: center;
     margin-bottom: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 10%; /* Đảm bảo độ cao full của cột */
+    height: 10%;
+    /* Đảm bảo độ cao full của cột */
     width: 25%;
-    
+
     &:hover {
       background-color: #edecf5;
       color: white;
@@ -123,23 +127,26 @@
 
     img {
       height: 5%;
-      
-      display: block; /* hoặc display: inline; */
+
+      display: block;
+      /* hoặc display: inline; */
       visibility: visible;
     }
 
     span {
       font-size: 15px;
-      font-weight:bolder ;
+      font-weight: bolder;
       color: black;
     }
 
     &.active {
-      background-color:rgb(218, 207, 207);
+      background-color: rgb(218, 207, 207);
     }
   }
+
   .row {
-    width: 100%; /* Đảm bảo hàng chiếm toàn bộ chiều rộng */
+    width: 100%;
+    /* Đảm bảo hàng chiếm toàn bộ chiều rộng */
   }
 }
 
@@ -167,7 +174,7 @@ $gray-800: #2d3748;
 }
 
 .product-column {
-
+  max-width: 1000px;
   max-height: 450px;
   /* Chiều cao tối đa */
   overflow-y: auto;
@@ -216,12 +223,13 @@ $gray-800: #2d3748;
 
 .card-container {
   display: flex;
+  flex: 1;
   background: $white;
   border-radius: 100px;
   border: 1px solid #c5b2b2;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-width: 80%;
+  max-width: 90%;
   width: 100%;
   margin-bottom: 10px;
   margin-left: 5%;
@@ -266,13 +274,14 @@ $gray-800: #2d3748;
   max-width: 10%;
 
   .food-image {
-    width: 100%;
-    height: 80%;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 1000px; /* Đặt kích thước cố định cho chiều rộng */
+    height: 50px; /* Đặt kích thước cố định cho chiều cao */
+    border-radius: 50%; /* Bo góc tròn cho hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh vừa khít và giữ tỉ lệ */
     margin-left: 30px;
     margin-right: 20px;
   }
+  
 }
 
 .details {
@@ -291,9 +300,9 @@ $gray-800: #2d3748;
 
 .column {
 
-  min-width: 100px;
+  min-width: 140px;
   /* Đặt chiều rộng tối thiểu */
-  margin: 0 10px;
+  margin: 0 20px;
   /* Tạo khoảng cách giữa các cột */
 }
 
@@ -353,7 +362,7 @@ $gray-800: #2d3748;
         .quantity-display {
           .quantity-input {
             margin-left: 10px;
-            width: 50px;
+            width: 60px;
             text-align: center;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-weight: bold;
@@ -448,7 +457,6 @@ $gray-800: #2d3748;
 .order-summary th,
 .order-summary td {
   padding: 1px;
-  text-align: center;
   border-bottom: 1px solid #e0e0e0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -460,8 +468,19 @@ $gray-800: #2d3748;
 
 .order-item {
   display: table-row;
-  height: auto;
+  height: 50px;
+
 }
+
+
+.order-item td{
+  padding: 1px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
 
 .order-item-qty,
 .order-item-name,
@@ -471,6 +490,7 @@ $gray-800: #2d3748;
   line-height: 20px;
   vertical-align: middle;
   overflow: hidden;
+  align-items: center;
 }
 
 .order-total {
@@ -593,7 +613,7 @@ $gray-800: #2d3748;
 .form-row {
   display: flex;
   gap: 20px;
-  margin-bottom: 20px;
+
 
   &:last-child {
     margin-bottom: 0;
@@ -714,7 +734,7 @@ $gray-800: #2d3748;
     .input-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 15px;
+      margin-bottom: 50px;
 
       .input-group {
         width: 50%;
@@ -735,12 +755,12 @@ $gray-800: #2d3748;
     }
 
     .full-width {
-      margin-bottom: 15px;
+      margin-bottom: 50px;
 
       h3 {
         color: #333;
         font-size: 16px;
-        margin-bottom: 5px;
+        margin-bottom: 15px;
       }
 
       input {
@@ -756,8 +776,8 @@ $gray-800: #2d3748;
 
       h3 {
         color: #333;
-        font-size: 20px;
-        margin-bottom: 10px;
+        font-size: 16px;
+        margin-bottom: 15px;
       }
 
       .buttons {
@@ -777,7 +797,7 @@ $gray-800: #2d3748;
           transition: all 0.3s ease;
 
           &.active {
-            background-color:red;
+            background-color: red;
             color: white;
             border-color: #8B4513;
           }
@@ -794,43 +814,43 @@ $gray-800: #2d3748;
 
 
 
-      h3 {
-        color: #333;
-        font-size: 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
+    h3 {
+      color: #333;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .edit {
-          color: #959ba3;
-          font-size: 25px;
-          cursor: pointer;
-          text-decoration: none;
-        }
-      }
-    
 
-    .order-items {
 
-      .item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        font-size: 20px;
-        color: black;
-      }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      /* Align item name and price on opposite sides */
+      padding: 5px 0;
+      /* Add padding between items */
+      border-bottom: 1px solid #ddd;
+      /* Optional: add border between items */
+    }
+
+    .item:last-child {
+      border-bottom: none;
+      /* Remove border from the last item */
     }
 
     .total {
-      display: flex;
-      justify-content: space-between;
+      display: flex; 
+      flex-direction: column; 
       margin-bottom: 10%;
+      margin-top: 10px;
       border-top: 1px solid #e0e0e0;
       font-weight: bold;
       font-size: 20px;
+      align-items: flex-start;
 
       .price {
+
         color: #FF0000;
       }
     }
@@ -849,32 +869,6 @@ $gray-800: #2d3748;
 
       &:hover {
         background-color:red;
-      }
-    }
-  }
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-  .order-form {
-    .form-container {
-      flex-direction: column;
-    }
-
-    .customer-info,
-    .order-summary1 {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .customer-info {
-      .input-row {
-        flex-direction: column;
-
-        .input-group {
-          width: 70%;
-          margin-bottom: 15px;
-        }
       }
     }
   }

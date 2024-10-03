@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './HeaderCustomer.css'; // Nhớ tạo file header.css để định dạng
 import companyLogo from "/assets/assetsCustomer/company_logo.png";
 import { UserOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined } from '@ant-design/icons'; // Đúng cách để import icon giỏ hàng
 
 const HeaderCustomer = () => {
     return (
@@ -20,6 +21,9 @@ const HeaderCustomer = () => {
                 </nav>
                 <Link to="/login"> {/* Link to the login page */}
                     <UserOutlined className="user-icon" /> {/* Thêm icon con người */}
+                </Link>
+                <Link to="/addToCart"> {/* Link to the login page */}
+                    <ShoppingCartOutlined className="cart-icon" /> {/* Thêm icon giỏ hàng */}
                 </Link>
             </header>
         </div>

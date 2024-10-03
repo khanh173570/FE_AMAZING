@@ -45,6 +45,12 @@
     margin-left: 150px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
     margin-bottom: 15px; 
 }
+.cart-icon {
+  font-size: 45px;
+  cursor: pointer;
+  margin-left: 150px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
+  margin-bottom: 15px; 
+}
 .user-icon:hover {
     transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
   }
