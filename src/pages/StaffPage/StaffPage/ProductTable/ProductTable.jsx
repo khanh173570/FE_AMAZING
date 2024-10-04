@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './ProductTable.css';
+import './ProductTable.css'
 import { AiOutlineSearch, AiOutlineCloudUpload, AiOutlineEdit } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import ProductDetailModal from '../ProductDetailModal/ProductDetailModal'; // Import the modal component

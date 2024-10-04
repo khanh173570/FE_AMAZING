@@ -1,5 +1,5 @@
 .producttable {
-    width: 80%;
+    width: 100%;
     padding: 10px;
     font-family: sans-serif;
     margin: 0 40px;
@@ -58,7 +58,7 @@ td {
 }
 
 th {
-    background-color: #483434;
+    background-color: #483434 !important;
     color: white;
 }
 

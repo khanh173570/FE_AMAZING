@@ -25,7 +25,7 @@ const CensorStaffPage = () => {
 
   return (
     <div className="staffpage">
-      <div className={`sidenav ${isSidebarOpen ? 'open' : 'closed'}`}>
+      <div className={`sidenav1 ${isSidebarOpen ? 'open1' : 'closed1'}`}>
         {/* Sidebar toggle button */}
         <button className="toggle-button" onClick={toggleSidebar}>
           {isSidebarOpen ? <IoIosArrowBack /> : <IoIosArrowForward />}

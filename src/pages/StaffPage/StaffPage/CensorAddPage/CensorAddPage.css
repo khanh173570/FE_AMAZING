@@ -3,7 +3,7 @@
     background-color: #e6e6e6;
 }
 
-.sidenav {
+.sidenav1 {
     background: #483434;
     position: relative;
     height: 100vh;
@@ -12,11 +12,11 @@
     padding: 0 30px;
 }
 
-.sidenav.open {
+.sidenav1.open {
     width: 17%;
 }
 
-.sidenav.closed {
+.sidenav1.closed {
     width: 85px;
     padding: 0 10px;
 }
@@ -54,12 +54,12 @@ ul li a:active {
     margin-bottom: -3px;
 }
 
-.sidenav-bottom {
+.sidenav1-bottom {
     margin-top: 450px;
     margin-left: 13px;
 }
 
-.sidenav-top {
+.sidenav1-top {
     margin-left: 13px;
     margin-top: 90px;
 }

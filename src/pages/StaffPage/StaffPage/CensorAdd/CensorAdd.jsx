@@ -34,10 +34,10 @@ const AddStaff = () => {
   };
 
   return (
-    <div className='addstaff'>
+    <div className='addstaff1'>
       <h1>Tạo tài khoản người kiểm duyệt</h1>
       <hr />
-      <form onSubmit={handleSubmit} className='add-form'>
+      <form onSubmit={handleSubmit} className='add-form1'>
         <div>
           <label>Tên nhân viên</label>
           <input

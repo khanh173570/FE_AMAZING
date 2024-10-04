@@ -9,20 +9,21 @@
     height: 100vh;
     transition: all 0.3s ease;
     overflow: hidden;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
 .sidenav.open {
-    width: 17%;
+    width: 20% !important;
 }
 
 .sidenav.closed {
-    width: 85px;
-    padding: 0 10px;
+    width: 85px !important;
+    padding: 0 10px !important;
 }
 
 ul {
     padding: 0;
+    margin-left: -20px;
 }
 
 ul li {
@@ -51,16 +52,16 @@ ul li a:active {
 .icon {
     margin-right: 10px;
     font-size: 18px;
-    margin-bottom: -3px;
+    margin-top: -5px;
 }
 
 .sidenav-bottom {
     margin-top: 450px;
-    margin-left: 13px;
+    margin-left: 10px;
 }
 
 .sidenav-top {
-    margin-left: 13px;
+    margin-left: 10px;
     margin-top: 90px;
 }
 
