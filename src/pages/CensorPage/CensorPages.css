@@ -19,7 +19,7 @@
   background-color: white;
   width: 90%;
   max-width: 1200px; /* Max width for larger screens */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  box-shadow: 0 2px 5px rgba(151, 200, 234, 0.1); /* Optional shadow for depth */
 }
 
 .title {

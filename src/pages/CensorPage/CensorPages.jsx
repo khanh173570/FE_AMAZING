@@ -145,31 +145,32 @@ const CensorPage = () => {
         <Table striped bordered hover>
           <thead className="header-row">
             <tr style={{ textAlign: "center" }}>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white" }}>
                 Tên Sản Phẩm
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
                 Nghệ Nhân
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
                 Mã Sản Phẩm
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
                 Giá Trị
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
                 Phân Loại
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" , color:"white" }}>
                 Trạng Thái
               </th>
               <th
                 style={{
                   backgroundColor: "#CFCFCF",
                   textAlign: "center",
-                  width: "250px",
+                  width: "250px"
+                  , color:"white" 
                 }}
-              >
+               >
                 Hành Động
               </th>
             </tr>
