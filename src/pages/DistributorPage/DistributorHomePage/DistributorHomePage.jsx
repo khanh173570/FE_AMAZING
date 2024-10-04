@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Avatar, message, Tag, Input, Button } from 'antd';
+import { Table, Avatar, message, Tag, Input, Button, Row, Col, Card } from 'antd';
 import axios from 'axios';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
@@ -13,25 +13,25 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    width: 130,
+    responsive: ['sm'],
     render: (text) => (
       <span style={{ color: '#1890ff', fontWeight: 'bold' }}>{text}</span>
-    ), // Apply custom color and font style
+    ),
   },
   {
     title: 'Artist',
     dataIndex: 'artist',
     key: 'artist',
-    width: 130,
+    responsive: ['md'],
     render: (text) => (
       <span style={{ color: '#ff5722', fontWeight: 'bold' }}>{text}</span>
-    ), // Apply custom color for artist
+    ),
   },
   {
     title: 'Category',
     dataIndex: 'category',
     key: 'category',
-    width: 130,
+    responsive: ['md'],
     filters: [
       { text: 'Gỗ', value: 'Gỗ' },
       { text: 'Tre', value: 'Tre' },
@@ -40,13 +40,13 @@ const columns = [
     onFilter: (value, record) => record.category === value,
     render: (text) => (
       <span style={{ color: '#3f51b5', fontWeight: 'bold' }}>{text}</span>
-    ), // Another custom color for category
+    ),
   },
   {
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    width: 130,
+    responsive: ['lg'],
     filters: [
       { text: 'Budget', value: 'Budget' },
       { text: 'Luxury', value: 'Luxury' },
@@ -57,22 +57,22 @@ const columns = [
     onFilter: (value, record) => record.type === value,
     render: (text) => (
       <span style={{ fontStyle: 'italic', color: '#ff9800', fontWeight: 'bold' }}>{text}</span>
-    ), // Custom style for type
+    ),
   },
   {
     title: 'Price',
     dataIndex: 'price',
     key: 'price',
-    width: 90,
+    responsive: ['sm'],
     render: (text) => (
       <span style={{ color: 'green', fontWeight: 'bold' }}>${text}</span>
-    ), // Custom color for price
+    ),
   },
   {
     title: 'Date',
     dataIndex: ['detail', 'date'],
     key: 'date',
-    width: 160,
+    responsive: ['md'],
     sorter: (a, b) => new Date(a.detail.date) - new Date(b.detail.date),
     render: (text) => (
       <span style={{ color: '#607d8b', fontWeight: 'bold' }}>
@@ -84,7 +84,7 @@ const columns = [
     title: 'Image',
     dataIndex: 'img',
     key: 'img',
-    width: 100,
+    responsive: ['lg'],
     render: (imgUrl, record) => (
       <Avatar src={imgUrl} alt={record.name} shape="circle" size={60} />
     ),
@@ -93,7 +93,6 @@ const columns = [
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
-    width: 100,
     filters: [
       {
         text: <Tag color="green">Accepted</Tag>,
@@ -118,7 +117,7 @@ const columns = [
 
       return (
         <Tag color={color}>
-          <span style={{ fontWeight: 'bold' }}>{status}</span> {/* Bold the status text */}
+          <span style={{ fontWeight: 'bold' }}>{status}</span>
         </Tag>
       );
     },
@@ -177,27 +176,34 @@ const DistributorHomePage = () => {
 
   return (
     <>
-      <h2 style={{ fontWeight: 'bold', margin: '16px 0', textAlign: 'center' }}>
-        Danh sách sản phẩm đã gửi
-      </h2>
+      <Row justify="center" style={{ marginBottom: '16px' }}>
+        <Col span={24}>
+          <h2 style={{ fontWeight: 'bold', textAlign: 'center' }}>
+            Danh sách sản phẩm đã gửi
+          </h2>
+        </Col>
+      </Row>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
-        <NavLink to="/seller/add-product" style={{ textDecoration: 'none', marginRight: '16px' }}>
-          <Button type="primary" icon={<FaPlus />}>
-            Add Product
-          </Button>
-        </NavLink>
+      <Row justify="space-between" style={{ marginBottom: '16px' }}>
+        <Col xs={24} sm={8} md={6}>
+          <NavLink to="/seller/add-product" style={{ textDecoration: 'none' }}>
+            <Button type="primary" icon={<FaPlus />}>
+              Add Product
+            </Button>
+          </NavLink>
+        </Col>
+        <Col xs={24} sm={16} md={12}>
+          <Search
+            placeholder="Search by name"
+            allowClear
+            onSearch={(value) => setSearchValue(value)}
+            onChange={(e) => setSearchValue(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </Col>
+      </Row>
 
-        <Search
-          placeholder="Search by name"
-          allowClear
-          onSearch={(value) => setSearchValue(value)}
-          onChange={(e) => setSearchValue(e.target.value)}
-          style={{ width: 300 }}
-        />
-      </div>
-
-      <div className="table-container">
+      <Card style={{ marginBottom: '24px' }}>
         <Table
           columns={columns}
           dataSource={filteredData}
@@ -208,12 +214,12 @@ const DistributorHomePage = () => {
             pageSizeOptions: ['5', '10', '15', '20'],
             onShowSizeChange: (_, newPageSize) => setPageSize(newPageSize),
           }}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: true, y: 500 }} // Enable both horizontal and vertical scrolling
           onRow={(record) => ({
             onClick: () => handleRowClick(record),
           })}
         />
-      </div>
+      </Card>
 
       <SellerProductDetailModal
         visible={modalVisible}
