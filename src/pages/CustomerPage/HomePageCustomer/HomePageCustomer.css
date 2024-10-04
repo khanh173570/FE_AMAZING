@@ -9,6 +9,7 @@ body {
 
 .sidebar-main {
   display: flex;
+  flex-direction: row; /* Bảo đảm layout nằm ngang */
 }
 
 .sidebar {
@@ -16,6 +17,8 @@ body {
   background-color: #343a40;
   color: white;
   height: 100vh;
+  padding: 20px; /* Thêm khoảng cách cho nội dung trong sidebar */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Thêm hiệu ứng bóng */
 }
 
 .sidebar a {
@@ -38,6 +41,11 @@ body {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s; /* Hiệu ứng hover */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Phóng to card khi hover */
 }
 
 .card-img-top {
@@ -51,9 +59,10 @@ body {
 
 .title {
   background-color: red;
-  width: 275px;
+  width: 100%; /* Đặt chiều rộng thành 100% */
   height: 50px;
   text-align: center;
+  margin-bottom: 20px; /* Thêm khoảng cách dưới title */
 }
 
 .titles {
@@ -65,4 +74,33 @@ body {
   padding: 20px;
 }
 
+/* Media Queries cho responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto; /* Tự động điều chỉnh chiều cao */
+  }
 
+  .main-content {
+    width: 100%;
+    padding: 10px; /* Thay đổi padding cho nhỏ hơn */
+  }
+
+  .sidebar-main {
+    flex-direction: column; /* Đặt layout dọc khi màn hình nhỏ */
+  }
+
+  .card {
+    margin-bottom: 10px; /* Giảm khoảng cách giữa các card */
+  }
+}
+
+@media (max-width: 576px) {
+  .card-img-top {
+    max-height: 150px; /* Giảm chiều cao hình ảnh cho màn hình nhỏ hơn */
+  }
+
+  .title {
+    height: 40px; /* Giảm chiều cao title */
+  }
+}

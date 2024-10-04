@@ -1,11 +1,70 @@
-.img {
-    width: 100%;
-    margin-bottom: 100px;
-}
-.headers {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 50px;
-    font-family: Arial;
- 
-}
+/* ProductDetail.css */
+
+/* General styles for the container */
+.container {
+    padding: 20px;
+  }
+  
+  /* Image styles */
+  .img {
+    width: 100%; /* Full width for responsiveness */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Reduced bottom margin for better spacing */
+  }
+  
+  /* Header styles */
+  .headers {
+    text-align: center; /* Center align text */
+    margin-bottom: 25px; /* Space below the header */
+    font-size: 2.5rem; /* Responsive font size */
+    font-family: Arial, sans-serif; /* Font family */
+  }
+  
+  /* Styles for the product info section */
+  strong {
+    display: inline-block; /* Ensure labels have a block-like display */
+    width: 150px; /* Fixed width for labels */
+  }
+  
+  /* Flexbox for status and buttons */
+  .status-container {
+    display: flex; /* Flexbox for layout */
+    align-items: center; /* Center items vertically */
+    margin-top: 10px; /* Margin above the container */
+  }
+  
+  /* Button styles */
+  button {
+    margin-left: 10px; /* Space between buttons */
+  }
+  
+  /* Media Queries for responsive adjustments */
+  @media (max-width: 768px) {
+    .headers {
+      font-size: 1.8rem; /* Smaller header on small screens */
+    }
+  
+    /* Adjust column layout on small screens */
+    .row {
+      flex-direction: column; /* Stack columns vertically */
+    }
+  
+    .img {
+      margin-bottom: 20px; /* Spacing below the image */
+    }
+  
+    strong {
+      width: auto; /* Allow labels to wrap on small screens */
+    }
+  
+    /* Responsive styles for the select element */
+    .status-container select {
+      width: 100%; /* Full width on small screens */
+    }
+  
+    /* Button adjustments */
+    button {
+      flex: 1; /* Allow buttons to grow */
+    }
+  }
+  

@@ -1,11 +1,40 @@
 .container {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.product-image {
+  max-width: 100%; /* Makes the image responsive */
+  height: auto;    /* Maintains aspect ratio */
+  display: block;  /* Centers the image */
+  margin: 0 auto;  /* Centers the image horizontally */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+      padding: 0 15px; /* Thêm khoảng cách bên cho container */
   }
-  
+
   .product-image {
-    max-width: 100%; /* Makes the image responsive */
-    height: auto;    /* Maintains aspect ratio */
-    display: block;  /* Centers the image */
-    margin: 0 auto;  /* Centers the image horizontally */
+      max-height: 400px; /* Giới hạn chiều cao cho hình ảnh trên màn hình nhỏ */
   }
-  
+
+  .row {
+      flex-direction: column; /* Đặt layout dọc cho các cột */
+  }
+
+  .col-md-6 {
+      width: 100%; /* Chiều rộng 100% cho cột khi màn hình nhỏ */
+      margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi cột */
+  }
+}
+
+@media (max-width: 576px) {
+  h2 {
+      font-size: 1.5rem; /* Giảm kích thước tiêu đề cho màn hình nhỏ */
+  }
+
+  p {
+      font-size: 0.9rem; /* Giảm kích thước văn bản cho màn hình nhỏ */
+  }
+}
