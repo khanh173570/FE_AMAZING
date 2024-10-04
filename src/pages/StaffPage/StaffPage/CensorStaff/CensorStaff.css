@@ -250,3 +250,96 @@ th {
     color: #fff;
     text-decoration: none;
 }
+
+
+@media (max-width: 1280px) {
+    .stafftable {
+        width: 80%;
+    }
+    .search-bar button{
+        width: 6%;
+    }
+    .add-staff-btn{
+        width: 30%;
+    }
+    .add-staff-btn a{
+        font-size: 13px;
+        align-items: center;
+        margin-top: 10px;
+    }
+    th, td{
+        font-size: 15px;
+    }
+    .edit-btn,
+    .delete-btn{
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .stafftable {
+        width: 80%;
+    }
+    .search-bar button{
+        width: 12%;
+    }
+    .search-bar input{
+        width: 200px;
+    }
+    .add-staff-btn{
+        width: 40%;
+    }
+    .add-staff-btn a{
+        font-size: 13px;
+        align-items: center;
+        margin-top: 10px;
+    }
+    th, td{
+        font-size: 12px;
+    }
+    .edit-btn,
+    .delete-btn{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stafftable {
+        width: 80%;
+    }
+    .search-bar button{
+        width: 2%;
+        margin-right: 150px;
+    }
+    .search-bar input{
+        width: 200px;
+    }
+    .add-staff-btn{
+        margin-left: -100px;
+        width: 50%;
+    }
+    .add-staff-btn a{
+        font-size: 13px;
+        align-items: center;
+        margin-top: 10px;
+    }
+    th, td{
+        font-size: 15px;
+    }
+    .edit-btn,
+    .delete-btn{
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 640px) {
+    .stafftable-table {
+        width: 30%;
+    }
+    table{
+        width: 10%;
+    }
+    .search-bar button{
+        width: 10%;
+    }
+}

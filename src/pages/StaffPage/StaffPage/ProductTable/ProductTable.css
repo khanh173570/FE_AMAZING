@@ -145,9 +145,31 @@ th {
     background-color: #ddd;
 }
 
+@media (max-width: 1280px) {
+    .producttable {
+        width: 80%;
+    }
+    .search-bar button{
+        width: 6%;
+    }
+}
+
 @media (max-width: 1024px) {
     .producttable {
         width: 80%;
+    }
+    .search-bar button{
+        width: 7%;
+    }
+    th, td{
+        font-size: 15px;
+    }
+    .upload-btn{
+        font-size: 16px;
+        flex-direction: column;
+    }
+    .edit-btn{
+        font-size: 16px;
     }
 }
 
@@ -155,27 +177,39 @@ th {
     .producttable {
         width: 80%;
     }
+    .search-bar button{
+        width: 12%;
+    }
+    th, td{
+        font-size: 13px;
+    }
+    .upload-btn,
+    .edit-btn{
+        font-size: 16px;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    .producttable-table {
+        width: 30%;
+    }
+    table{
+        width: 10%;
+    }
+    .search-bar button{
+        width: 10%;
+    }
 }
 
 @media (max-width: 425px) {
-    .producttable-top {
-        flex-direction: column;
-    }
-
     table {
-        font-size: 30px;
+        width: 20%;
     }
-
-    .search-bar input {
-        width: 100%;
-        max-width: 100%;
+    .search-bar button{
+        width: 10%;
     }
-
-    .pagination button {
-        padding: 6px 10px;
-    }
-
-    .confirm-popup-content {
-        padding: 15px;
+    .producttable-top h1{
+        font-size: 5px;
     }
 }

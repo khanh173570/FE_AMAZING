@@ -77,3 +77,9 @@ ul li a:active {
     border-radius: 4px;
     z-index: 1;
 }
+
+@media (max-width: 1280px) {
+    .sidenav.open .sidenav-top ul li a{
+        font-size: 1px;
+    }
+}
