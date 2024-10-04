@@ -39,18 +39,83 @@
     font-size: 20px;
     font-weight: bold;
   }
-.user-icon {
-    font-size: 45px;
-    cursor: pointer;
-    margin-left: 150px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
-    margin-bottom: 15px; 
-}
+
 .cart-icon {
   font-size: 45px;
   cursor: pointer;
-  margin-left: 150px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
+  margin-left: 75px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
+  margin-right: 75px;
   margin-bottom: 15px; 
 }
-.user-icon:hover {
-    transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
-  }
+/* Đồng bộ hóa div và li để trông giống nhau */
+.nav div, .nav li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px; /* Bo tròn góc cho cả hai */
+  transition: background-color 0.3s ease;
+  text-align: center; /* Căn giữa văn bản */
+  text-decoration: none; /* Xóa gạch chân của Link */
+  color: black; /* Màu văn bản */
+}
+
+/* Hiệu ứng hover cho cả div và li */
+.nav div:hover, .nav li:hover {
+  background-color: #ddd; /* Thay đổi màu nền khi hover */
+}
+
+/* Dành riêng cho Link bên trong div */
+.nav div a {
+  text-decoration: none; /* Xóa gạch chân của Link */
+  color: inherit; /* Kế thừa màu chữ từ div */
+}
+
+/* Nếu có icon đi kèm với text */
+.nav div a, .nav li {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Khoảng cách giữa icon và text */
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa; /* Example background color */
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.nav ul li {
+  margin: 0 15px;
+}
+
+.user-icon {
+  position: relative; /* Needed for dropdown positioning */
+  cursor: pointer;
+  font-size: 45PX;
+}
+
+.dropdown {
+  position: absolute; /* Position dropdown absolutely */
+  right: 0; /* Align dropdown to the right of the user icon */
+  background-color: white; /* Dropdown background color */
+  border: 1px solid #ddd; /* Dropdown border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.dropdown div {
+  padding: 10px; /* Space inside dropdown items */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.dropdown div:hover {
+  background-color: #f0f0f0; /* Change background on hover */
+}

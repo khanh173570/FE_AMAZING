@@ -7,10 +7,17 @@ import { toast } from 'react-toastify';
 const HomePageCustomer = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
+  const [userName, setUserName] = useState('');
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
+    // Fetch the user from localStorage
+    const user = JSON.parse(localStorage.getItem('account'));
+    if (user) {
+      setUserName(user.name);  // Assuming user object contains 'name'
+    }
+
     const fetchData = async () => {
       try {
         const response = await fetch("https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570");
@@ -34,6 +41,13 @@ const HomePageCustomer = () => {
   };
 
   const handleAddToCart = (product) => {
+    const user = localStorage.getItem('account');
+    if (!user) {
+      toast.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+      navigate('/login');
+      return;
+    }
+
     if (product.quantity <= 0) {
       toast.error("Sản phẩm này không còn hàng để thêm vào giỏ hàng.");
       return;
@@ -73,6 +87,9 @@ const HomePageCustomer = () => {
           <a href="#products">Products</a>
         </div>
         <div className="main-content">
+          {/* Welcome message */}
+          <h2 className="welcome-message" style={{textAlign:"center"}}>Xin chào, {userName ? userName : "Khách"}!</h2>
+          
           <div className="row">
             {data.map((item) => (
               <div className="col-md-6 col-lg-4 mb-4" key={item.id}>
@@ -81,7 +98,7 @@ const HomePageCustomer = () => {
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>
-                      <div className="titles">Nghệ nhân: {item.artist}</div>
+                      <div className="titles" style={{marginBottom:"20px"}}>Nghệ nhân: {item.artist}</div>
                       <div className="titles" style={{ color: "red" }}>Giá trị: {item.price}</div>
                       <div className="titles">Loại: {item.type}</div>
                       <div className="titles">Danh mục: {item.category}</div>
@@ -113,4 +130,3 @@ const HomePageCustomer = () => {
 };
 
 export default HomePageCustomer;
-
