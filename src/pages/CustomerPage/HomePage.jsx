@@ -16,22 +16,22 @@ class HomePage extends Component {
     this.state = {
       selectedItem: 'cart', // Default to 'cart'
       userProfileForm: {
-        name: 'Lê Văn Trung',
-        gender: 'Nam',
-        sdt: '0947225188',
-        email: 'House@gmail.com',
-        birthDate: null
+        name: '',
+        sdt: '',
+        email: '',
       },
-      selectedProducts: [],
       provinces: [],
       districts: [],
       wards: [],
       selectedProvince: '',
       selectedDistrict: '',
       selectedWard: '',
+      note: '' ,
+      fullAddress: '',
       continueClicked: false,
       data: [],
       products: [],
+      selectedProducts: [],
     };
   }
   componentDidMount() {
@@ -43,6 +43,16 @@ class HomePage extends Component {
 
     this.fetchProvinces();
     this.fetchData();
+    const account = JSON.parse(localStorage.getItem('account'));
+    if (account) {
+      this.setState({
+        userProfileForm: {
+          ...this.state.userProfileForm,
+          name: account.name || '',  
+          email: account.email || '', 
+        },
+      });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.products !== this.state.products) {
@@ -72,34 +82,110 @@ class HomePage extends Component {
     }
   };
 
-
   handleProvinceChange = async (e) => {
     const provinceId = e.target.value;
-    this.setState({ selectedProvince: provinceId, selectedDistrict: '', selectedWard: '', districts: [], wards: [] });
-
+    this.setState({ 
+      selectedProvince: provinceId, 
+      selectedDistrict: '', 
+      selectedWard: '', 
+      districts: [], 
+      wards: [], 
+      note: '',
+      fullAddress: '' // Reset địa chỉ khi chọn tỉnh mới
+    });
+  
     try {
       const response = await axios.get(`https://provinces.open-api.vn/api/p/${provinceId}?depth=2`);
-      this.setState({ districts: response.data.districts });
+      this.setState({ 
+        districts: response.data.districts, 
+        fullAddress: response.data.name // Cập nhật địa chỉ với tỉnh
+      });
     } catch (error) {
       console.error("Error fetching districts: ", error);
     }
   };
-
+  
   handleDistrictChange = async (e) => {
     const districtId = e.target.value;
-    this.setState({ selectedDistrict: districtId, selectedWard: '', wards: [] });
-
+    this.setState({ 
+      selectedDistrict: districtId, 
+      selectedWard: '', 
+      wards: [] 
+    });
+  
     try {
       const response = await axios.get(`https://provinces.open-api.vn/api/d/${districtId}?depth=2`);
-      this.setState({ wards: response.data.wards });
+      this.setState((prevState) => ({
+        wards: response.data.wards,
+        fullAddress: `${prevState.fullAddress}, ${response.data.name}` // Cập nhật địa chỉ với quận
+      }));
     } catch (error) {
       console.error("Error fetching wards: ", error);
     }
   };
-
   handleWardChange = (e) => {
-    this.setState({ selectedWard: e.target.value });
+    const wardId = e.target.value;
+    const wardName = e.target.options[e.target.selectedIndex].text;
+  
+    this.setState((prevState) => {
+      // Tách các phần của địa chỉ hiện có
+      const addressParts = prevState.fullAddress
+        ? prevState.fullAddress.split(',').map(part => part.trim())
+        : [];
+      
+      // Tìm các phần không phải là phường và ghi chú
+      const nonWardParts = addressParts.filter(part => {
+        // Giữ lại các phần không phải số (tỉnh, huyện) và phần ghi chú
+        return isNaN(part) || part.startsWith('Ghi chú:');
+      });
+  
+      // Tạo mảng mới với các phần địa chỉ
+      const newAddressParts = [
+        ...nonWardParts,
+        wardName,  // Thêm tên phường
+        wardId     // Thêm mã phường
+      ];
+  
+      // Kết hợp thành chuỗi địa chỉ mới
+      const newFullAddress = newAddressParts.join(', ');
+  
+      return {
+        selectedWard: wardId,
+        fullAddress: newFullAddress
+      };
+    });
   };
+  
+  handleNoteChange = (e) => {
+    const newNote = e.target.value; 
+    this.setState((prevState) => {
+      const baseState = { note: newNote };
+      if (!newNote.trim()) {
+        return baseState;
+      }
+  
+      const addressParts = prevState.fullAddress
+        ? prevState.fullAddress.split(',').map(part => part.trim())
+        : [];
+  
+      const nonNoteParts = addressParts.filter(part => !part.startsWith('Ghi chú:'));
+      
+      const newFullAddress = [
+        ...nonNoteParts,
+        `Ghi chú: ${newNote.trim()}`
+      ].join(', ');
+  
+      return {
+        ...baseState,
+        fullAddress: newFullAddress
+      };
+    });
+  };
+  
+  
+  
+  
+  
 
 
   increaseQuantity = (productId) => {
@@ -176,33 +262,29 @@ class HomePage extends Component {
     }));
   };
 
-
-
   handleUserProfileInputChange = (e) => {
-    const { name, value } = e.target;
-    this.setState(prevState => ({
+    this.setState({
       userProfileForm: {
-        ...prevState.userProfileForm,
-        [name]: value
-      }
-    }));
+        ...this.state.userProfileForm,
+        [e.target.name]: e.target.value,
+      },
+    });
   };
 
-  handleUserProfileDateChange = (date) => {
-    this.setState(prevState => ({
-      userProfileForm: {
-        ...prevState.userProfileForm,
-        birthDate: date
-      }
-    }));
-  };
+  //   const { name, value } = e.target;
+  //   this.setState(prevState => ({
+  //     userProfileForm: {
+  //       ...prevState.userProfileForm,
+  //       [name]: value
+  //     }
+  //   }));
+  // };
+
 
   handleUserProfileSubmit = (e) => {
-    e.preventDefault();
-    console.log('User Profile Form submitted:', {
-      ...this.state.userProfileForm,
-      birthDate: this.state.userProfileForm.birthDate ? this.state.userProfileForm.birthDate.format('YYYY-MM-DD') : null
-    });
+    e.preventDefault(); // Ngăn chặn trang reload
+    // Gọi hàm onSubmit được truyền từ lớp cha với dữ liệu đã nhập
+    this.props.onSubmit(this.state.userProfileForm);
   };
 
   handleSelectItem = (item) => {
@@ -250,10 +332,6 @@ class HomePage extends Component {
     window.location.href = "/";
   };
 
-
-
-
-
   handleSubmitInfoClick = () => {
     this.setState({ selectedItem: 'payment' });
   };
@@ -261,60 +339,60 @@ class HomePage extends Component {
     this.setState({ selectedItem: 'acceptpayment' });
   };
 
-handlePayment = async () => {
-  const { products, selectedProducts } = this.state;
+  handlePayment = async () => {
+    const { products, selectedProducts } = this.state;
 
-  // Tính toán tổng số tiền từ các sản phẩm được chọn
-  const totalAmount = products
-    .filter((product) => selectedProducts.includes(product.id))
-    .reduce((total, product) => total + (product.price * product.quantity), 0);
+    // Tính toán tổng số tiền từ các sản phẩm được chọn
+    const totalAmount = products
+      .filter((product) => selectedProducts.includes(product.id))
+      .reduce((total, product) => total + (product.price * product.quantity), 0);
 
-  if (totalAmount <= 0) {
-    toast.warn("Vui lòng chọn ít nhất một sản phẩm để thanh toán.");
-    return;
-  }
+    if (totalAmount <= 0) {
+      toast.warn("Vui lòng chọn ít nhất một sản phẩm để thanh toán.");
+      return;
+    }
 
-  try {
-    // Cập nhật số lượng cho các sản phẩm được chọn
-    await Promise.all(
-      products
-        .filter((product) => selectedProducts.includes(product.id))
-        .map(product => this.updateProductQuantity(product.id, product.quantity))
-    );
+    try {
+      // Cập nhật số lượng cho các sản phẩm được chọn
+      await Promise.all(
+        products
+          .filter((product) => selectedProducts.includes(product.id))
+          .map(product => this.updateProductQuantity(product.id, product.quantity))
+      );
 
-    // Giữ lại sản phẩm chưa thanh toán
-    const remainingProducts = products.filter((product) => !selectedProducts.includes(product.id));
+      // Giữ lại sản phẩm chưa thanh toán
+      const remainingProducts = products.filter((product) => !selectedProducts.includes(product.id));
 
-    // Cập nhật state với sản phẩm còn lại và xóa lựa chọn
-    this.setState({ products: remainingProducts, selectedProducts: [] });
+      // Cập nhật state với sản phẩm còn lại và xóa lựa chọn
+      this.setState({ products: remainingProducts, selectedProducts: [] });
 
-    // Lưu sản phẩm còn lại vào localStorage
-    localStorage.setItem('products', JSON.stringify(remainingProducts));
+      // Lưu sản phẩm còn lại vào localStorage
+      localStorage.setItem('products', JSON.stringify(remainingProducts));
 
-    toast.success("Thanh toán thành công!", {
-      position: "top-right",
-      autoClose: 2000,
-    });
+      toast.success("Thanh toán thành công!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
 
-    // Xóa sản phẩm đã thanh toán khỏi localStorage
-    const paidProducts = products.filter((product) => selectedProducts.includes(product.id));
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = cart.filter((item) => !paidProducts.some((paidProduct) => paidProduct.id === item.id));
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+      // Xóa sản phẩm đã thanh toán khỏi localStorage
+      const paidProducts = products.filter((product) => selectedProducts.includes(product.id));
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const updatedCart = cart.filter((item) => !paidProducts.some((paidProduct) => paidProduct.id === item.id));
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
 
-    // Set timeout for 2 seconds to wait before executing the next action
-    setTimeout(() => {
-      this.props.navigate("/"); // Navigate to home page
-    }, 2000);
+      // Set timeout for 2 seconds to wait before executing the next action
+      setTimeout(() => {
+        this.props.navigate("/"); // Navigate to home page
+      }, 2000);
 
-  } catch (error) {
-    toast.error("Thanh toán thất bại. Vui lòng thử lại.");
-  }
-};
+    } catch (error) {
+      toast.error("Thanh toán thất bại. Vui lòng thử lại.");
+    }
+  };
 
-  
-  
-  
+
+
+
 
   // Hàm gọi API để cập nhật số lượng sản phẩm
   updateProductQuantity = async (productId, quantityPurchased) => {
@@ -644,10 +722,17 @@ handlePayment = async () => {
                 <div className="form-column full-width">
                   <div className="form-group">
                     <label>Ghi chú (Số nhà, địa chỉ cụ thể)</label>
-                    <textarea rows="3" placeholder="" className="form-control" />
+                    <textarea
+                      rows="3"
+                      placeholder=""
+                      className="form-control"
+                      value={this.state.note} // Đặt giá trị của textarea từ state
+                      onChange={this.handleNoteChange} // Gọi hàm khi giá trị thay đổi
+                    />
                   </div>
                 </div>
               </div>
+
 
               {/* Submit button */}
               <button type="submit" className="submit-button" onClick={this.handleSubmitInfoClick}>Cập nhật</button>
@@ -697,8 +782,6 @@ handlePayment = async () => {
               </button>
             </form>
           </div>
-
-
         );
 
 
@@ -711,17 +794,30 @@ handlePayment = async () => {
                 <div className="input-row">
                   <div className="input-group">
                     <h3>Thông tin người nhận</h3>
-                    <input type="text" placeholder="Lê Văn Trung" />
+                    <input
+                      type="text"
+                      name="recipientName"
+                      placeholder="Lê Văn Trung"
+                      value={userProfileForm.name}
+                      onChange={this.handleUserProfileInputChange}
+                    />
                   </div>
                   <div className="input-group">
                     <h3>SĐT</h3>
-                    <input type="text" placeholder="0947225188" />
+                    <input
+                      type="text"
+                      name="recipientPhone"
+                      placeholder="0947225188"
+                      value={userProfileForm.sdt}
+                      onChange={this.handleUserProfileInputChange}
+                    />
                   </div>
                 </div>
                 <div className="full-width">
                   <h3>Địa chỉ nhận</h3>
-                  <input type="text" placeholder="Thanh Hóa, Hậu Lộc, Hưng Lộc, Số nhà 21" />
+                  <input type="text" value={this.state.fullAddress} readOnly /> {/* Hiển thị địa chỉ hoàn chỉnh */}
                 </div>
+
                 <div className="payment-methods">
                   <h3>Phương thức thanh toán</h3>
                   <div className="buttons">
