@@ -261,33 +261,60 @@ class HomePage extends Component {
     this.setState({ selectedItem: 'acceptpayment' });
   };
 
-  handlePayment = async () => {
-    const { products } = this.state;
-    // Tính toán tổng số tiền từ các sản phẩm
-    const totalAmount = products.reduce((total, product) => {
-      return total + (this.formatCurrency(product.price) * product.quantity);
-    }, 0);
-    try {
-      await Promise.all(
-        products.map(product => this.updateProductQuantity(product.id, product.quantity))
-      );
+handlePayment = async () => {
+  const { products, selectedProducts } = this.state;
 
-      toast.success("Thanh toán thành công!", {
-        position: "top-right",
-        autoClose: 2000, // Toast will show for 5 seconds (5000ms)
-      });
+  // Tính toán tổng số tiền từ các sản phẩm được chọn
+  const totalAmount = products
+    .filter((product) => selectedProducts.includes(product.id))
+    .reduce((total, product) => total + (product.price * product.quantity), 0);
 
-      // Set timeout for 5 seconds to wait before executing the next action
-      setTimeout(() => {
-        localStorage.removeItem('cart'); // Clear cart from localStorage
-        localStorage.removeItem('products'); // Clear products from localStorage
-        this.props.navigate("/"); // Navigate to home page
-      }, 2000); // 5 seconds delay
+  if (totalAmount <= 0) {
+    toast.warn("Vui lòng chọn ít nhất một sản phẩm để thanh toán.");
+    return;
+  }
 
-    } catch (error) {
-      toast.error("Thanh toán thất bại. Vui lòng thử lại.");
-    }
-  };
+  try {
+    // Cập nhật số lượng cho các sản phẩm được chọn
+    await Promise.all(
+      products
+        .filter((product) => selectedProducts.includes(product.id))
+        .map(product => this.updateProductQuantity(product.id, product.quantity))
+    );
+
+    // Giữ lại sản phẩm chưa thanh toán
+    const remainingProducts = products.filter((product) => !selectedProducts.includes(product.id));
+
+    // Cập nhật state với sản phẩm còn lại và xóa lựa chọn
+    this.setState({ products: remainingProducts, selectedProducts: [] });
+
+    // Lưu sản phẩm còn lại vào localStorage
+    localStorage.setItem('products', JSON.stringify(remainingProducts));
+
+    toast.success("Thanh toán thành công!", {
+      position: "top-right",
+      autoClose: 2000,
+    });
+
+    // Xóa sản phẩm đã thanh toán khỏi localStorage
+    const paidProducts = products.filter((product) => selectedProducts.includes(product.id));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = cart.filter((item) => !paidProducts.some((paidProduct) => paidProduct.id === item.id));
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    // Set timeout for 2 seconds to wait before executing the next action
+    setTimeout(() => {
+      this.props.navigate("/"); // Navigate to home page
+    }, 2000);
+
+  } catch (error) {
+    toast.error("Thanh toán thất bại. Vui lòng thử lại.");
+  }
+};
+
+  
+  
+  
 
   // Hàm gọi API để cập nhật số lượng sản phẩm
   updateProductQuantity = async (productId, quantityPurchased) => {
