@@ -47,9 +47,9 @@ const SellerAddProduct = () => {
       onFinish={onFinish}
       initialValues={{ quantity: 1 }} // Set initial value for quantity
     >
-      <Row gutter={24}>
+      <Row gutter={[24, 16]} justify="start">
         {/* First Column */}
-        <Col span={12}>
+        <Col xs={24} sm={12} lg={12}>
           <Form.Item
             label="Product Name"
             name="name"
@@ -114,7 +114,7 @@ const SellerAddProduct = () => {
         </Col>
 
         {/* Second Column */}
-        <Col span={12}>
+        <Col xs={24} sm={12} lg={12}>
           <Form.Item
             label="Image URL"
             name="img"
@@ -178,14 +178,18 @@ const SellerAddProduct = () => {
       </Row>
 
       <Form.Item>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <NavLink to="/seller" style={{ marginRight: '8px' }}>
-            <Button type="default">Back</Button>
-          </NavLink>
-          <Button type="primary" htmlType="submit" loading={loading}>
-            Add Product
-          </Button>
-        </div>
+        <Row gutter={[16, 8]} justify="end">
+          <Col>
+            <NavLink to="/seller">
+              <Button type="default">Back</Button>
+            </NavLink>
+          </Col>
+          <Col>
+            <Button type="primary" htmlType="submit" loading={loading}>
+              Add Product
+            </Button>
+          </Col>
+        </Row>
       </Form.Item>
     </Form>
   );
