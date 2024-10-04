@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Form, Input, InputNumber, Button, Row, Col, message, Select } from 'antd';
+import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import for navigation
-import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const { TextArea } = Input; // Ant Design TextArea for description
-const { Option } = Select;  // Ant Design Select component
+const { TextArea } = Input;
+const { Option } = Select;
 
 const SellerAddProduct = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // For navigation after successful submission
+  const [imageUrl, setImageUrl] = useState(null); // State to store the uploaded image URL
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
     setLoading(true);
 
-    // Construct product object with auto-filled status and date
     const productData = {
       ...values,
-      status: 'Pending', // Automatically set status
+      img: imageUrl, // Use the uploaded image URL
+      status: 'Pending',
       detail: {
         ...values.detail,
         date: new Date().toISOString().split('T')[0], // Set the date to the current date
       },
     };
 
-    // Send data to the API
     axios
       .post('https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570', productData)
       .then(() => {
@@ -40,12 +41,36 @@ const SellerAddProduct = () => {
       });
   };
 
+  // Function to handle image drop
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImageUrl(reader.result); // Set image URL to the base64 string
+    };
+    if (file) {
+      reader.readAsDataURL(file); // Convert file to base64 string
+    }
+  }, []);
+
+  // Function to remove selected image
+  const removeImage = () => {
+    setImageUrl(null); // Reset the image URL to allow another upload
+  };
+
+  // Configure react-dropzone
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: 'image/*',
+    multiple: false,
+  });
+
   return (
     <Form
       name="add_product"
       layout="vertical"
       onFinish={onFinish}
-      initialValues={{ quantity: 1 }} // Set initial value for quantity
+      initialValues={{ quantity: 1 }}
     >
       <Row gutter={[24, 16]} justify="start">
         {/* First Column */}
@@ -78,7 +103,6 @@ const SellerAddProduct = () => {
             />
           </Form.Item>
 
-          {/* Dropdown for Type */}
           <Form.Item
             label="Type"
             name="type"
@@ -92,7 +116,6 @@ const SellerAddProduct = () => {
             </Select>
           </Form.Item>
 
-          {/* Dropdown for Category */}
           <Form.Item
             label="Category"
             name="category"
@@ -115,12 +138,46 @@ const SellerAddProduct = () => {
 
         {/* Second Column */}
         <Col xs={24} sm={12} lg={12}>
+          {/* Image Dropzone */}
           <Form.Item
-            label="Image URL"
-            name="img"
-            rules={[{ required: true, message: 'Please enter the image URL' }]}
+            label="Product Image"
+            required
+            help={!imageUrl && 'Please upload an image'}
           >
-            <Input placeholder="Enter image URL" />
+            {!imageUrl ? (
+              <div
+                {...getRootProps()}
+                style={{
+                  border: '2px dashed #d9d9d9',
+                  padding: '20px',
+                  textAlign: 'center',
+                  background: isDragActive ? '#fafafa' : '',
+                  cursor: 'pointer',
+                }}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop the image here ...</p>
+                ) : (
+                  <p>Drag & drop an image here, or click to select one</p>
+                )}
+              </div>
+            ) : (
+              <div>
+                <img
+                  src={imageUrl}
+                  alt="Uploaded Product"
+                  style={{ marginTop: '10px', maxWidth: '100%' }}
+                />
+                <Button
+                  type="link"
+                  style={{ color: 'red', marginTop: '10px' }}
+                  onClick={removeImage}
+                >
+                  Remove Image
+                </Button>
+              </div>
+            )}
           </Form.Item>
 
           <Form.Item
