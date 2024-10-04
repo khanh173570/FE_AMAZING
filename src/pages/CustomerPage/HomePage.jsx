@@ -7,7 +7,6 @@ import tg from "/assets/assetsCustomer/tg.png";
 import vidt from "/assets/assetsCustomer/vidt.png";
 import remove from "/assets/assetsCustomer/remove.png";
 import axios from 'axios';
-import VnPayService from "./VnPayService";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,17 +33,6 @@ class HomePage extends Component {
       data: [],
       products: [],
     };
-    this.vnp_TmnCode = "VNPAYTMMT"; // Thay bằng TMN Code của bạn
-    this.vnp_HashSecret = "vnpay@123456"; // Thay bằng Hash Secret của bạn
-    this.vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; // URL thanh toán sandbox
-    this.vnp_ReturnUrl = "https://www.yourwebsite.com/vnpay_return"; // URL trả về sau thanh toán
-
-    this.vnPayService = new VnPayService(
-      this.vnp_TmnCode,
-      this.vnp_HashSecret,
-      this.vnp_Url,
-      this.vnp_ReturnUrl
-    )
   }
   componentDidMount() {
     const storedProducts = localStorage.getItem('cart');
@@ -254,8 +242,6 @@ class HomePage extends Component {
     }
   };
 
-
-
   handleOrderClick = () => {
     this.setState({ selectedItem: 'info' });
   };
@@ -366,9 +352,12 @@ class HomePage extends Component {
 
   renderContent = () => {
     const { selectedItem, userProfileForm, products, selectedProducts, provinces, districts, wards, selectedProvince, selectedDistrict, selectedWard } = this.state;
-    const totalAmount = products.reduce((total, product) => {
-      return total + (product.price * product.quantity);
-    }, 0);
+    const totalAmount =
+      products
+        .filter((product) => selectedProducts.includes(product.id))
+        .reduce((total, product) => total + (product.price * product.quantity), 0)
+
+
 
 
     switch (selectedItem) {
@@ -378,7 +367,6 @@ class HomePage extends Component {
           <div className="card-wrapper">
             <div className="product-column">
               {products.map((product) => (
-
                 <div key={product.id} className="card-container">
                   <div className="select-product">
                     <input
@@ -465,7 +453,8 @@ class HomePage extends Component {
                 </div>
               ))}
               <div className="sticky-buttons">
-                {this.state.selectedProducts.length > 0 && (
+                {/* Kiểm tra xem có sản phẩm nào trong giỏ hàng không */}
+                {products.length > 0 && (
                   <div>
                     {/* Các sản phẩm hoặc thông tin sản phẩm */}
                     <button className="continue-button" onClick={this.handleContinueClick}>
@@ -473,10 +462,11 @@ class HomePage extends Component {
                     </button>
                   </div>
                 )}
-                {this.state.selectedProducts.length > 0 && (
+                {products.length > 0 && (
                   <button className="update-cart-button">Cập nhật giỏ hàng</button>
                 )}
               </div>
+
 
             </div>
             <div className="additional-column">
@@ -715,10 +705,24 @@ class HomePage extends Component {
                 </div>
               </div>
               <div className="order-summary1">
-                <h3>Đơn hàng </h3>
+                <h3>Đơn hàng</h3>
                 <div className="order-items">
-                  <div style={{ maxHeight: '300px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', minHeight: '200px', margin: '0' }}>
+                  <div
+                    style={{
+                      maxHeight: '200px',
+                      overflowY: selectedProducts.length > 0 && selectedProducts.length * 50 > 100 ? 'auto' : 'hidden', // Điều chỉnh overflowY dựa trên số lượng sản phẩm được chọn
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <table
+                      style={{
+                        width: '100%',
+                        borderCollapse: 'collapse',
+                        minHeight: selectedProducts.length > 0 ? '100px' : '300px', // Giữ chiều cao tối thiểu
+                        margin: '0',
+                      }}
+                    >
                       <thead>
                         <tr>
                           <th style={{ border: '1px solid #ddd', textAlign: 'center', padding: '5px' }}>Quantity</th>
@@ -726,14 +730,17 @@ class HomePage extends Component {
                           <th style={{ border: '1px solid #ddd', textAlign: 'center', padding: '5px' }}>Price</th>
                         </tr>
                       </thead>
-
                       <tbody>
                         {products
                           .filter((product) => selectedProducts.includes(product.id))
                           .map((product) => (
                             <tr key={product.id} className="order-item">
-                              <td className="order-item-qty" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>{product.quantity}</td>
-                              <td className="order-item-name" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>{product.name}</td>
+                              <td className="order-item-qty" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>
+                                {product.quantity}
+                              </td>
+                              <td className="order-item-name" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>
+                                {product.name}
+                              </td>
                               <td className="order-item-price" style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>
                                 {this.formatCurrency(product.price * product.quantity)}
                               </td>
@@ -746,20 +753,23 @@ class HomePage extends Component {
                         )}
                       </tbody>
                     </table>
-
-
                   </div>
                 </div>
+                {selectedProducts.length > 0 && (
+                  <div className="total">
+                    <div className="price">
+                      <p>Total: {this.formatCurrency(totalAmount)}</p>
+                    </div>
+                    <button
+                      className="checkout-button"
+                      onClick={this.handlePayment}
+                      style={{ marginLeft: '0' }} // Tắt margin-left bằng inline style
+                    >
+                      Thanh toán
+                    </button>
 
-                <div className="total">
-                  <div className="price">
-                    <p>Total: {this.formatCurrency(totalAmount)}</p>
                   </div>
-
-                  <button className="checkout-button" onClick={this.handlePayment}>
-                    Thanh toán
-                  </button>
-                </div>
+                )}
               </div>
             </div>
           </div>

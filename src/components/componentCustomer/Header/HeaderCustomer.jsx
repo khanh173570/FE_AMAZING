@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './HeaderCustomer.css';
@@ -36,10 +37,28 @@ const HeaderCustomer = () => {
                 }).then(() => {
                     setIsLoggedIn(false); // Update logged-in state
                     console.log('User logged out, status:', false); // Debug: log logout status
-                    navigate("/login");
+                    navigate("/");
                 });
             }
         });
+    };
+
+    const handleCartClick = () => {
+        const user = localStorage.getItem('account');
+        if (!user) {
+            // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            Swal.fire({
+                title: 'Bạn cần đăng nhập để xem giỏ hàng.',
+                text: "Vui lòng đăng nhập để tiếp tục.",
+                icon: 'info',
+                confirmButtonText: 'OK',
+            }).then(() => {
+                navigate("/login"); // Điều hướng đến trang đăng nhập
+            });
+        } else {
+            // Nếu người dùng đã đăng nhập, điều hướng đến trang giỏ hàng
+            navigate("/addToCart");
+        }
     };
 
     return (
@@ -55,9 +74,9 @@ const HeaderCustomer = () => {
                         <div><Link to="/contact">Liên hệ</Link></div>
                     </ul>
                 </nav>
-                <Link to="/addToCart">
+                <div onClick={handleCartClick} style={{ cursor: "pointer" }}>
                     <ShoppingCartOutlined className="cart-icon" />
-                </Link>
+                </div>
                 <div className="user-icon" onClick={handleLogout} style={{ cursor: "pointer" }}>
                     <UserOutlined />
                 </div>

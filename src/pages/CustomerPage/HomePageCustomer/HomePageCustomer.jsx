@@ -40,33 +40,72 @@ const HomePageCustomer = () => {
     navigate(`/products/${id}`);
   };
 
+  // const handleAddToCart = (product) => {
+  //   const user = localStorage.getItem('account');
+  //   if (!user) {
+  //     toast.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+  //     navigate('/login');
+  //     return;
+  //   }
+
+  //   if (product.quantity <= 0) {
+  //     toast.error("Sản phẩm này không còn hàng để thêm vào giỏ hàng.");
+  //     return;
+  //   }
+
+  //   const existingProductIndex = cart.findIndex((cartItem) => cartItem.id === product.id);
+  //   if (existingProductIndex > -1) {
+  //     const updatedCart = [...cart];
+  //     updatedCart[existingProductIndex].quantity += 1;
+  //     setCart(updatedCart);
+  //     localStorage.setItem('cart', JSON.stringify(updatedCart));
+  //     toast.success(`${product.name} đã được thêm vào giỏ hàng!`);
+  //   } else {
+  //     const updatedCart = [...cart, { ...product, quantity: 1 }];
+  //     setCart(updatedCart);
+  //     localStorage.setItem('cart', JSON.stringify(updatedCart));
+  //     toast.success(`${product.name} đã được thêm vào giỏ hàng!`);
+  //   }
+  // };
   const handleAddToCart = (product) => {
     const user = localStorage.getItem('account');
+    
+    // Kiểm tra nếu người dùng chưa đăng nhập
     if (!user) {
       toast.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
       navigate('/login');
       return;
     }
-
+  
+    // Kiểm tra nếu sản phẩm có hàng
     if (product.quantity <= 0) {
       toast.error("Sản phẩm này không còn hàng để thêm vào giỏ hàng.");
       return;
     }
-
+  
+    // Lấy giỏ hàng hiện tại từ localStorage
+    const storedCart = localStorage.getItem('cart');
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+  
+    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
     const existingProductIndex = cart.findIndex((cartItem) => cartItem.id === product.id);
+  
     if (existingProductIndex > -1) {
+      // Nếu sản phẩm đã có, cập nhật số lượng
       const updatedCart = [...cart];
-      updatedCart[existingProductIndex].quantity += 1;
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      updatedCart[existingProductIndex].quantity += 1; // Tăng số lượng lên 1
+      setCart(updatedCart); // Cập nhật trạng thái giỏ hàng
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Lưu giỏ hàng mới vào localStorage
       toast.success(`${product.name} đã được thêm vào giỏ hàng!`);
     } else {
+      // Nếu sản phẩm chưa có, thêm sản phẩm mới vào giỏ hàng
       const updatedCart = [...cart, { ...product, quantity: 1 }];
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart); // Cập nhật trạng thái giỏ hàng
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Lưu giỏ hàng mới vào localStorage
       toast.success(`${product.name} đã được thêm vào giỏ hàng!`);
     }
   };
+  
 
   return (
     <div className="container-fluid">

@@ -47,6 +47,9 @@
   margin-right: 75px;
   margin-bottom: 15px; 
 }
+.cart-icon:hover {
+  color: red; /* Màu hover khi di chuột */
+}
 /* Đồng bộ hóa div và li để trông giống nhau */
 .nav div, .nav li {
   cursor: pointer;
@@ -100,6 +103,10 @@
   position: relative; /* Needed for dropdown positioning */
   cursor: pointer;
   font-size: 45PX;
+  transition: color 0.3s;
+}
+.user-icon:hover {
+  color: red; /* Màu hover khi di chuột */
 }
 
 .dropdown {
