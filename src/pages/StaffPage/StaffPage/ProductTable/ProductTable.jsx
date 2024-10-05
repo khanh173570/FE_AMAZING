@@ -113,31 +113,31 @@ const ProductTable = () => {
                 </div>
             </div>
             <div className="producttable-table">
-                <table>
-                    <thead>
+                <table className='producttable-table-section'>
+                    <thead className='stafftable-thead-section'>
                         <tr>
-                            <th>Tên sản phẩm</th>
-                            <th>Chất liệu</th>
-                            <th>Gía</th>
-                            <th>Nghệ nhân</th>
-                            <th>Trạng thái</th>
-                            <th>Hành động</th>
+                            <th className='producttable-first-row'>Tên sản phẩm</th>
+                            <th className='producttable-first-row'>Chất liệu</th>
+                            <th className='producttable-first-row'>Gía</th>
+                            <th className='producttable-first-row'>Nghệ nhân</th>
+                            <th className='producttable-first-row'>Trạng thái</th>
+                            <th className='producttable-first-row'>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentProducts.map((product) => (
                             <tr key={product.id}>
-                                <td>
+                                <td className='producttable-second-row'>
                                     <span 
                                         className="product-name" 
                                         onClick={() => handleProductClick(product.id)}>
                                         {product.name}
                                     </span>
                                 </td>
-                                <td>{product.category}</td>
-                                <td>${product.price}</td>
-                                <td>{product.artist}</td>
-                                <td>{product.status}</td>
+                                <td className='producttable-second-row'>{product.category}</td>
+                                <td className='producttable-second-row'>${product.price}</td>
+                                <td className='producttable-second-row'>{product.artist}</td>
+                                <td className='producttable-second-row'>{product.status}</td>
                                 <td>
                                     <button className="upload-btn" onClick={() => handleUploadClick(product)}>
                                         <AiOutlineCloudUpload />

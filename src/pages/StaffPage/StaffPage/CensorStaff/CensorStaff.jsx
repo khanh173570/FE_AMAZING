@@ -77,7 +77,7 @@ const StaffTable = () => {
         <h1>Danh sách người kiểm duyệt</h1>
         <hr />
         <div className="stafftable-actions">
-          <div className="search-bar">
+          <div className="search-bar-staff">
             <input
               type="text"
               placeholder='Nhập từ khóa tìm kiếm'
@@ -94,26 +94,26 @@ const StaffTable = () => {
         </div>
       </div>
       <div className="stafftable-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Tên</th>
-              <th>Email</th>
-              <th>Số điện thoại</th>
-              <th>Hành động</th>
+        <table className='stafftable-table-section'>
+          <thead className='stafftable-thead-section'>
+            <tr className='stafftable-first-row'>
+              <th className='producttable-first-row'>Tên</th>
+              <th className='producttable-first-row'>Email</th>
+              <th className='producttable-first-row'>Số điện thoại</th>
+              <th className='producttable-first-row'>Hành động</th>
             </tr>
           </thead>
           <tbody>
             {filteredStaff.map((member) => (
               <tr key={member.id}>
-                <td>
+                <td className='stafftable-second-row'>
                   <span className="name-btn" onClick={() => openDetailsModal(member)}>
                     {member.name}
                   </span>
                 </td>
-                <td>{member.email}</td>
-                <td>{member.phone}</td>
-                <td>
+                <td className='stafftable-second-row'>{member.email}</td>
+                <td className='stafftable-second-row'>{member.phone}</td>
+                <td className='stafftable-second-row'>
                   <button className="edit-btn">
                     <Link to={`/staff/editstaff/${member.id}`}>
                       <AiOutlineEdit />

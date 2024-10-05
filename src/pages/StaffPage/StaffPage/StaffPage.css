@@ -44,8 +44,13 @@ ul li a {
     transition: background-color 0.3s ease;
 }
 
-ul li a:hover,
-ul li a:active {
+.sidenav-top li a:hover,
+.sidenav-top li a:active {
+    background-color: #543f3f;
+}
+
+.sidenav-bottom li a:hover,
+.sidenav-bottom li a:active {
     background-color: #543f3f;
 }
 

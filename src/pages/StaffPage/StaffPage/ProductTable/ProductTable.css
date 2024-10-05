@@ -38,7 +38,7 @@
     justify-content: center;
 }
 
-table {
+.producttable-table-section {
     width: 100%;
     border-collapse: collapse;
     border-radius: 15px;
@@ -50,15 +50,15 @@ thead {
     background-color: #f2f2f2;
 }
 
-th,
-td {
+.producttable-first-row,
+.producttable-second-row {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-th {
-    background-color: #483434 !important;
+.producttable-first-row {
+    background-color: #483434;
     color: white;
 }
 
@@ -161,7 +161,7 @@ th {
     .search-bar button{
         width: 7%;
     }
-    th, td{
+    .producttable-first-row, .producttable-second-row{
         font-size: 15px;
     }
     .upload-btn{
@@ -180,7 +180,7 @@ th {
     .search-bar button{
         width: 12%;
     }
-    th, td{
+    .producttable-first-row, .producttable-second-row{
         font-size: 13px;
     }
     .upload-btn,
@@ -194,7 +194,7 @@ th {
     .producttable-table {
         width: 30%;
     }
-    table{
+    .producttable-table-section{
         width: 10%;
     }
     .search-bar button{

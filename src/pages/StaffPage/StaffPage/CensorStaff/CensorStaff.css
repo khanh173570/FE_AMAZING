@@ -32,14 +32,14 @@
     font-weight: 400;
 }
 
-.search-bar {
+.search-bar-staff {
     margin-top: 20px;
     display: flex;
     gap: 10px;
     width: 100%;
 }
 
-.search-bar input {
+.search-bar-staff input {
     padding: 10px;
     width: 400px;
     border: 1px solid #ccc;
@@ -47,7 +47,7 @@
     background-color: #e0e0e0;
 }
 
-.search-bar button {
+.search-bar-staff button {
     margin-left: -12px;
     width: 4%;
     padding: 10px;
@@ -61,7 +61,7 @@
     justify-content: center;
 }
 
-table {
+.stafftable-table-section {
     width: 100%;
     border-collapse: collapse;
     border-radius: 15px;
@@ -69,18 +69,18 @@ table {
     margin-top: 20px;
 }
 
-thead {
+.stafftable-thead-section {
     background-color: #f2f2f2;
 }
 
-th,
+.producttable-first-row,
 td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-th {
+.producttable-first-row {
     background-color: #483434;
     color: white;
 }
@@ -256,7 +256,7 @@ th {
     .stafftable {
         width: 80%;
     }
-    .search-bar button{
+    .search-bar-staff button{
         width: 6%;
     }
     .add-staff-btn{
@@ -280,10 +280,10 @@ th {
     .stafftable {
         width: 80%;
     }
-    .search-bar button{
+    .search-bar-staff button{
         width: 12%;
     }
-    .search-bar input{
+    .search-bar-staff input{
         width: 200px;
     }
     .add-staff-btn{
@@ -307,11 +307,11 @@ th {
     .stafftable {
         width: 80%;
     }
-    .search-bar button{
+    .search-bar-staff button{
         width: 2%;
         margin-right: 150px;
     }
-    .search-bar input{
+    .search-bar-staff input{
         width: 200px;
     }
     .add-staff-btn{
@@ -336,10 +336,10 @@ th {
     .stafftable-table {
         width: 30%;
     }
-    table{
+    .stafftable-table-section{
         width: 10%;
     }
-    .search-bar button{
+    .search-bar-staff button{
         width: 10%;
     }
 }
