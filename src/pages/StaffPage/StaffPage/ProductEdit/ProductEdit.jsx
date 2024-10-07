@@ -48,6 +48,7 @@ const ProductEdit = () => {
         <div>
           <label>Tên sản phẩm</label>
           <input
+            className='readonly-section'
             type="text"
             name="name"
             value={product.name}
@@ -80,6 +81,7 @@ const ProductEdit = () => {
           <div>
             <label htmlFor="category">Chất liệu sản phẩm</label>
             <input
+              className='readonly-section'
               type="text"
               id="category"
               name="category"
@@ -92,6 +94,7 @@ const ProductEdit = () => {
         <div>
           <label>Loại:</label>
           <input
+            className='readonly-section'
             type="text"
             name="type"
             value={product.type}

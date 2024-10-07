@@ -66,33 +66,34 @@ const ProductDetailModal = ({ productId, onClose }) => {
                     <div className="product-info-left">
                         <div>
                             <label>Nghệ nhân</label>
-                            <input type="text" value={productDetail.artist} readOnly />
+                            <input type="text" className='readonly-section' value={productDetail.artist} readOnly />
                         </div>
                         <div>
                             <label>Gía tiền</label>
-                            <input type="text" value={`$${productDetail.price}`} readOnly />
+                            <input type="text" className='readonly-section' value={`$${productDetail.price}`} readOnly />
                         </div>
                         <div>
                             <label>Loại sản phẩm</label>
-                            <input type="text" value={productDetail.type} readOnly />
+                            <input type="text" className='readonly-section' value={productDetail.type} readOnly />
                         </div>
                         <div>
                             <label>Trạng thái sản phẩm</label>
-                            <input type="text" value={productDetail.status} readOnly />
+                            <input type="text" className='readonly-section' value={productDetail.status} readOnly />
                         </div>
                     </div>
                     <div className="product-info-right">
                         <div>
                             <label>Chất liệu</label>
-                            <input type="text" value={productDetail.category} readOnly />
+                            <input type="text" className='readonly-section' value={productDetail.category} readOnly />
                         </div>
                         <div>
                             <label>Mô tả sản phẩm</label>
-                            <input type="text" value={productDetail.description} readOnly />
+                            <input type="text" className='readonly-section' value={productDetail.description} readOnly />
                         </div>
                         <div>
                             <label>Kích thước sản phẩm</label>
                             <input
+                                className='readonly-section'
                                 type="text"
                                 value={`${productDetail.detail.height} cm (H) x ${productDetail.detail.length} cm (L) x ${productDetail.detail.weight} kg`}
                                 readOnly
@@ -100,7 +101,7 @@ const ProductDetailModal = ({ productId, onClose }) => {
                         </div>
                         <div>
                             <label>Ngày thêm sản phẩm</label>
-                            <input type="text" value={productDetail.detail.date} readOnly />
+                            <input type="text" className='readonly-section' value={productDetail.detail.date} readOnly />
                         </div>
                     </div>
                 </div>

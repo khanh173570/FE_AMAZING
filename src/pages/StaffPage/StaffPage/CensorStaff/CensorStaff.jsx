@@ -156,22 +156,22 @@ const StaffTable = () => {
             <div className="detail-left">
               <div>
                 <label>Tên nhân viên</label>
-                <input type="text" value={selectedStaff.name} readOnly />
+                <input type="text" className='readonly-section' value={selectedStaff.name} readOnly />
               </div>
               <div>
                 <label>Email</label>
-                <input type="text" value={selectedStaff.email} readOnly />
+                <input type="text" className='readonly-section' value={selectedStaff.email} readOnly />
               </div>
             </div>
 
             <div className="detail-right">
               <div>
                 <label>Số điện thoại</label>
-                <input type="text" value={selectedStaff.phone} readOnly />
+                <input type="text" className='readonly-section' value={selectedStaff.phone} readOnly />
               </div>
               <div>
                 <label>Vai trò</label>
-                <input type="text" value={selectedStaff.role} readOnly />
+                <input type="text" className='readonly-section' value={selectedStaff.role} readOnly />
               </div>
             </div>
           </div>
