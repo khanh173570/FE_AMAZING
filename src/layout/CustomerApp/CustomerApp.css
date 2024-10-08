@@ -12,7 +12,7 @@ html, body, #root {
   
   .header {
     flex: 0 0 20%; /* Chiếm 20% chiều cao */
-    background-color: lightgray; /* Màu nền cho dễ nhìn */
+    background-color: white !important; /* Màu nền cho dễ nhìn */
   }
   
   .main {
