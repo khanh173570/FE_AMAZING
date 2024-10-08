@@ -26,7 +26,7 @@ class HomePage extends Component {
       selectedProvince: '',
       selectedDistrict: '',
       selectedWard: '',
-      note: '' ,
+      note: '',
       fullAddress: '',
       continueClicked: false,
       data: [],
@@ -48,8 +48,8 @@ class HomePage extends Component {
       this.setState({
         userProfileForm: {
           ...this.state.userProfileForm,
-          name: account.name || '',  
-          email: account.email || '', 
+          name: account.name || '',
+          email: account.email || '',
         },
       });
     }
@@ -84,35 +84,35 @@ class HomePage extends Component {
 
   handleProvinceChange = async (e) => {
     const provinceId = e.target.value;
-    this.setState({ 
-      selectedProvince: provinceId, 
-      selectedDistrict: '', 
-      selectedWard: '', 
-      districts: [], 
-      wards: [], 
+    this.setState({
+      selectedProvince: provinceId,
+      selectedDistrict: '',
+      selectedWard: '',
+      districts: [],
+      wards: [],
       note: '',
       fullAddress: '' // Reset địa chỉ khi chọn tỉnh mới
     });
-  
+
     try {
       const response = await axios.get(`https://provinces.open-api.vn/api/p/${provinceId}?depth=2`);
-      this.setState({ 
-        districts: response.data.districts, 
+      this.setState({
+        districts: response.data.districts,
         fullAddress: response.data.name // Cập nhật địa chỉ với tỉnh
       });
     } catch (error) {
       console.error("Error fetching districts: ", error);
     }
   };
-  
+
   handleDistrictChange = async (e) => {
     const districtId = e.target.value;
-    this.setState({ 
-      selectedDistrict: districtId, 
-      selectedWard: '', 
-      wards: [] 
+    this.setState({
+      selectedDistrict: districtId,
+      selectedWard: '',
+      wards: []
     });
-  
+
     try {
       const response = await axios.get(`https://provinces.open-api.vn/api/d/${districtId}?depth=2`);
       this.setState((prevState) => ({
@@ -126,66 +126,66 @@ class HomePage extends Component {
   handleWardChange = (e) => {
     const wardId = e.target.value;
     const wardName = e.target.options[e.target.selectedIndex].text;
-  
+
     this.setState((prevState) => {
       // Tách các phần của địa chỉ hiện có
       const addressParts = prevState.fullAddress
         ? prevState.fullAddress.split(',').map(part => part.trim())
         : [];
-      
+
       // Tìm các phần không phải là phường và ghi chú
       const nonWardParts = addressParts.filter(part => {
         // Giữ lại các phần không phải số (tỉnh, huyện) và phần ghi chú
         return isNaN(part) || part.startsWith('Ghi chú:');
       });
-  
+
       // Tạo mảng mới với các phần địa chỉ
       const newAddressParts = [
         ...nonWardParts,
         wardName,  // Thêm tên phường
         wardId     // Thêm mã phường
       ];
-  
+
       // Kết hợp thành chuỗi địa chỉ mới
       const newFullAddress = newAddressParts.join(', ');
-  
+
       return {
         selectedWard: wardId,
         fullAddress: newFullAddress
       };
     });
   };
-  
+
   handleNoteChange = (e) => {
-    const newNote = e.target.value; 
+    const newNote = e.target.value;
     this.setState((prevState) => {
       const baseState = { note: newNote };
       if (!newNote.trim()) {
         return baseState;
       }
-  
+
       const addressParts = prevState.fullAddress
         ? prevState.fullAddress.split(',').map(part => part.trim())
         : [];
-  
+
       const nonNoteParts = addressParts.filter(part => !part.startsWith('Ghi chú:'));
-      
+
       const newFullAddress = [
         ...nonNoteParts,
         `Ghi chú: ${newNote.trim()}`
       ].join(', ');
-  
+
       return {
         ...baseState,
         fullAddress: newFullAddress
       };
     });
   };
-  
-  
-  
-  
-  
+
+
+
+
+
 
 
   increaseQuantity = (productId) => {
@@ -523,6 +523,7 @@ class HomePage extends Component {
                                 />
                               </span>
 
+
                               {/* Nút tăng số lượng */}
                               <button
                                 className="quantity-button increase"
@@ -577,8 +578,8 @@ class HomePage extends Component {
             <div className="additional-column">
 
               <div className="order-summary">
-                <div style={{ maxHeight: '320px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-                  <table style={{ borderCollapse: 'separate' }}>
+                <div style={{ maxHeight: '350px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+                  <table className="table_order" style={{ borderCollapse: 'separate' }}>
                     <thead>
                       <tr>
                         <th style={{ border: '1px solid #ddd', padding: '1px', textAlign: 'center' }}>Quantity</th>

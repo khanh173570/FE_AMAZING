@@ -1,30 +1,66 @@
 
-.payment-navigation {
-  .nav-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start; /* Căn giữa nội dung theo chiều dọc */
-    padding: 10px; /* Tăng thêm padding để viền không quá sát nội dung */
-    border: 2px solid #ddd; /* Độ dày viền */
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    height: 10%; /* Đảm bảo độ cao full của cột */
-    width:35%;
+// .payment-navigation {
+//   .nav-item {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: flex-start; /* Căn giữa nội dung theo chiều dọc */
+//     padding: 10px; /* Tăng thêm padding để viền không quá sát nội dung */
+//     border: 2px solid #ddd; /* Độ dày viền */
+//     border-radius: 5px;
+//     text-align: center;
+//     margin-bottom: 10px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease;
+//     height: 10%; /* Đảm bảo độ cao full của cột */
+//     width:20%;
     
 
+//     img {
+//       max-width: 35%;
+//       padding-left: 70px;
+//       padding-right: 3%;
+//     }
+
+//     &.active {
+//       background-color: #2b2f5e;
+//     }
+//   }
+// }
+
+.payment-navigation {
+  display: flex;
+  flex-direction: row; // Sắp xếp các thẻ div theo hàng ngang
+  flex-wrap: wrap; // Cho phép các thẻ div xuống hàng nếu vượt quá độ rộng của container
+
+  .nav-item {
+    flex: 1; // Để mỗi thẻ div chiếm đều khoảng không gian còn lại
+    max-width: 25%; // Đảm bảo mỗi mục chỉ chiếm 25% độ rộng (4 mục chia đều cho 100%)
+    padding: 10px; // Thêm khoảng cách giữa nội dung và viền
+    display: flex;
+    flex-direction: row;
+    align-items: center; // Căn giữa dọc nội dung trong mỗi div
+    justify-content: center; // Căn giữa nội dung theo chiều ngang
+    border: 1px solid #ccc; // Đường viền mờ bao quanh mỗi mục
+    margin-bottom: 10px; // Khoảng cách giữa các mục theo chiều dọc
+    cursor: pointer;
+    transition: background-color 0.3s ease; // Hiệu ứng hover
+
+    &:hover {
+      background-color: #f0f0f0; // Thay đổi màu nền khi hover
+    }
+
     img {
-      max-width: 35%;
-      padding-left: 70px;
-      padding-right: 3%;
+      margin-right: 10px; // Khoảng cách giữa ảnh và văn bản
+      margin-left: 25%;
+      height: 50px; // Chiều cao ảnh
+      width: 50px; // Độ rộng ảnh
+      object-fit: contain; // Đảm bảo ảnh không bị cắt xén mà vẫn giữ tỉ lệ
     }
 
     &.active {
-      background-color: #2b2f5e;
+      background-color: #007bff; // Màu nền cho mục đang active
+      color: #fff; // Màu chữ cho mục đang active
     }
   }
 }
-

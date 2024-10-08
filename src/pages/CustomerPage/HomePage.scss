@@ -1,104 +1,103 @@
-.payment-method-container {
+.payment-form-container {
+  width: 90%; // Độ rộng 90% của container
+  margin: 0 auto; // Căn giữa form
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 
+  h1 {
+    text-align: center;
+    color: #ca0f0f;
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
 
-  .payment-form-container {
-    border: 0.5px solid #351010;
-    padding: 20px;
-    padding-bottom: 10px;
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 2%;
+  .payment-form {
+    display: flex;
+    flex-direction: column;
 
-    h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-weight: bolder;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      font-size: 40px;
-      color: #ca0f0f;
-    }
+    .payment-options-row {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 20px;
 
-    .payment-form {
-      .payment-options-row {
+      .payment-option {
+        flex: 1;
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 25px;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
 
-        .payment-option {
-          flex: 1;
+        label {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          background-color: #fff;
-          border: 1px solid #ddd;
-          border-radius: 5px;
+          font-size: 16px;
+          font-weight: bolder;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          color: #555;
+          margin-bottom: 10px;
+
+          img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 10px;
+          }
+        }
+
+        input {
+          width: 100%;
           padding: 10px;
-          margin-right: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 14px;
+          font-weight: bolder;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          outline: none;
 
-          &:last-child {
-            margin-right: 0;
+          &:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
           }
 
-          label {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            font-size: 15px;
-            font-weight: bolder;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            color: #333;
-
-            img {
-              width: 30%;
-              height: 50%;
-              margin-right: 10px;
-              object-fit: contain;
-            }
-          }
-
-          input {
-            flex: 1;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            transition: border 0.3s;
-
-            &:focus {
-              border-color: #007bff;
-              outline: none;
-            }
-
-            &:disabled {
-              background-color: #e9d9d9;
-              cursor: not-allowed;
-            }
+          &::placeholder {
+            font-style: italic;
+            color: #999;
           }
         }
       }
 
-      .update-button {
-        display: block;
-        width: 10%;
-        padding: 12px;
-        background-color: red;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bolder;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        cursor: pointer;
-        text-align: center;
-        margin: 0 auto;
-
-        &:hover {
-          background-color: #0056b3;
-        }
+      .payment-option+.payment-option {
+        margin-left: 20px; // Khoảng cách giữa các tùy chọn thanh toán
       }
     }
   }
+
+  .update-button {
+    background-color: red;
+    width: 10%;
+    margin-left: 45%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bolder;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 }
+
 
 .payment-navigation {
   .nav-item {
@@ -113,12 +112,12 @@
     /* Độ dày viền */
     border-radius: 5px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     height: 10%;
     /* Đảm bảo độ cao full của cột */
-    width: 25%;
+    width: 20%;
 
     &:hover {
       background-color: #edecf5;
@@ -136,6 +135,7 @@
     span {
       font-size: 15px;
       font-weight: bolder;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       color: black;
     }
 
@@ -150,433 +150,296 @@
   }
 }
 
-
-
-
-$orange-100: #fffaf0;
-$orange-200: #feebc8;
-$orange-500: #ed8936;
-$orange-600: #dd6b20;
-$orange-800: #9c4221;
-$yellow-100: #fffff0;
-$red-100: #fff5f5;
-$red-500: #f56565;
-$green-700: #2f855a;
-$white: #ffffff;
-$gray-200: #edf2f7;
-$gray-600: #718096;
-$gray-800: #2d3748;
-
 .card-wrapper {
   display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.product-column {
-  max-width: 1000px;
-  max-height: 450px;
-  /* Chiều cao tối đa */
-  overflow-y: auto;
-  /* Hiển thị thanh cuộn dọc nếu nội dung vượt quá chiều cao */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: bold;
-}
-
-.sticky-buttons {
-  position: sticky;
-  bottom: 0;
-  /* Đặt nút ở đáy của container */
-  background-color: rgb(250, 245, 245);
-  /* Màu nền cho nút */
-  padding-top: 40px;
-  padding-bottom: 20px;
-  z-index: 10;
-  /* Đảm bảo nút nằm trên các phần tử khác */
-  display: flex;
-  justify-content: center;
-  /* Căn giữa hai nút */
-  margin-left: -6%;
-
-
-  .continue-button,
-  .update-cart-button {
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-    margin: 0 5px;
-    /* Khoảng cách giữa các nút */
-    cursor: pointer;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bold;
-
-    &:hover {
-      background-color: #c22712;
-      /* Màu nền khi hover */
-    }
-  }
-}
-
-
-
-
-
-.card-container {
-  display: flex;
-  flex: 1;
-  background: $white;
-  border-radius: 100px;
-  border: 1px solid #c5b2b2;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  max-width: 90%;
-  width: 100%;
-  margin-bottom: 10px;
-  margin-left: 5%;
-
-
-}
-
-.select-product {
-  margin-right: auto;
-  /* Đẩy ô tick sang bên phải */
-  display: flex;
-  align-items: center;
-  border-radius: 50%;
-}
-
-.select-product input {
-  margin-right: 1px;
-  margin-left: 10px;
-  width: 15px;
-  height: 20px;
-}
-
-.item-container {
-  margin-bottom: 10px;
-}
-
-.quantity-buttons {
-  display: flex;
-  align-items: center;
-}
-
-
-
-
-.image-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  /* Căn giữa theo chiều ngang */
-  align-items: center;
-  /* Căn giữa theo chiều dọc */
-  max-width: 10%;
-
-  .food-image {
-    width: 1000px; /* Đặt kích thước cố định cho chiều rộng */
-    height: 50px; /* Đặt kích thước cố định cho chiều cao */
-    border-radius: 50%; /* Bo góc tròn cho hình ảnh */
-    object-fit: cover; /* Đảm bảo hình ảnh vừa khít và giữ tỉ lệ */
-    margin-left: 30px;
-    margin-right: 20px;
-  }
-  
-}
-
-.details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-around;
-  /* Để tạo khoảng cách đều nhau giữa các cột */
-  align-items: center;
   flex-wrap: wrap;
-}
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
 
-.column {
 
-  min-width: 140px;
-  /* Đặt chiều rộng tối thiểu */
-  margin: 0 20px;
-  /* Tạo khoảng cách giữa các cột */
-}
-
-.item-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.label {
-  font-size: 0.875rem;
-  color: $gray-600;
-  margin-bottom: 0.25rem;
-}
-
-.item {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: $gray-800;
-}
-
-.column.quantity {
-  display: flex;
-  align-items: center; // Căn giữa theo trục dọc
-  justify-content: center; // Căn giữa theo trục ngang
-  padding: 10px;
-
-  .item-container {
+  .product-column {
+    flex: 1 1 60%;
+    /* Đảm bảo cột sản phẩm chiếm 60% không gian */
+    min-width: 300px;
+    /* Đặt chiều rộng tối thiểu cho cột sản phẩm */
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    /* Khoảng cách giữa các thẻ sản phẩm */
+    max-height: 500px;
+    /* Đặt chiều cao tối đa cho cột sản phẩm */
+    overflow-y: auto;
+    /* Hiển thị thanh cuộn khi nội dung vượt quá chiều cao */
+    position: relative;
+    /* Để các nút có thể được đặt cố định ở phía dưới */
 
-    .quantity-control {
+    .card-container {
       display: flex;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       align-items: center;
+      gap: 20px;
 
-      .quantity-buttons {
+      .select-product {
+        flex-shrink: 0;
+      }
+
+      .image-container {
+        width: 80px;
+        height: 80px;
+
+        img.food-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+      }
+
+      .details {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        flex-grow: 1;
 
-
-        .quantity-button {
+        .info-row {
           display: flex;
-          background-color: red;
-          border: 1px solid #ccc;
-          padding: 0 6px;
-          margin: 0 auto;
-          border-radius: 50%;
-          font-size: 20px;
-          cursor: pointer;
-          color: white;
+          justify-content: space-between;
+          width: 100%;
 
-          &:hover {
-            background-color: red;
+          .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 15px;
+            flex-grow: 1;
+
+            .item-container {
+              text-align: center;
+
+              .label {
+                font-size: 14px;
+                font-weight: bold;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                margin-bottom: 5px;
+              }
+
+              .item {
+                font-size: 16px;
+                font-weight: bold;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              }
+            }
+          }
+
+          .quantity {
+            .quantity-control {
+              .quantity-buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .quantity-button {
+                  width: 30px;
+                  height: 30px;
+                  background-color: red;
+                  cursor: pointer;
+                  color: white;
+                  font-size: 18px;
+                  font-weight: bolder;
+                  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  border-radius: 50%;
+
+                  &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.6;
+                  }
+                }
+
+                .quantity-display {
+                  margin-left: 15px;
+
+                  .quantity-input {
+                    width: 50px;
+                    text-align: center;
+                    font-weight: bolder;
+                    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    border: none;
+                  }
+
+                  .quantity-input::-webkit-outer-spin-button,
+                  .quantity-input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                  }
+                }
+              }
+            }
           }
         }
+      }
 
-        .quantity-display {
-          .quantity-input {
-            margin-left: 10px;
-            width: 60px;
-            text-align: center;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-weight: bold;
-            border: none;
-            background: transparent;
-            font-size: 20px;
+      .delete-icon {
+        margin-left: 10px;
+
+        .delete-button {
+          background: none;
+          border: none;
+          cursor: pointer;
+
+          img.delete-icon {
+            width: 30px;
+            height: 30px;
           }
         }
       }
     }
+
+    /* Phần chứa các nút */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      /* Căn giữa các nút */
+      gap: 20px;
+      /* Khoảng cách giữa các nút */
+      margin-top: auto;
+      /* Đẩy các nút xuống dưới cùng */
+      margin-bottom: 0%;
+      width: 100%;
+      /* Đảm bảo các nút chiếm hết chiều rộng */
+    }
+
+    .button-container .btn {
+      flex: 1;
+      /* Đảm bảo các nút có độ rộng bằng nhau */
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
   }
-}
 
 
 
-@media (max-width: 640px) {
-  .card-container {
-    flex-direction: column;
+  .additional-column {
+    flex: 1 1 35%;
+    /* Đảm bảo cột phụ chiếm 35% không gian */
+    min-width: 250px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .order-summary {
+
+      overflow-y: auto;
+
+      .table_order {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+
+        th,
+        td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+
+        .order-item {
+          text-align: center;
+        }
+      }
+
+      .order-total {
+        display: flex;
+        color: red;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: bold;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        margin-left: 10px;
+        font-size: 18px;
+
+        .order-total-amount {
+          font-size: 35px;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          color: red;
+          margin-right: 80%;
+          margin-bottom: 8px;
+        }
+      }
+
+      .order-button {
+        background-color: red;
+        color: white;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 5px;
+        width: 95%;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        font-size: 16px;
+
+        &:hover {
+          background-color:red;
+        }
+      }
+    }
   }
 
-
-  .image-container {
-    max-width: 100%;
-  }
-
-  .column {
-    min-width: 100%;
-  }
-}
-
-.button-container {
-  display: flex;
-  justify-content: left;
-  /* Căn giữa các nút */
-  margin-top: 20px;
-  /* Khoảng cách giữa danh sách sản phẩm và các nút */
-  margin-left: 25%;
-
-
-}
-
-
-.delete-button {
-  display: flex;
-  justify-content: center;
-  margin-right: 20px;
-  /* Space between button and product */
-  background-color: none;
-  /* Button color */
-  cursor: pointer;
-  /* Pointer cursor */
-  border: none;
-}
-
-
-.delete-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
-  /* Set a size for the icon */
-  height: 40px;
-  /* Set a size for the icon */
-}
-
-
-
-
-.additional-column {
-  width: 40%;
-  background-color: #f5f7fa;
-  border-radius: 10px;
-  margin-left: 1%;
-  margin-right: 1%;
-}
-
-.additional-heading {
-  text-align: center;
-  font-weight: bold;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin-top: 0;
-}
-
-
-
-.order-summary table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1px;
-}
-
-.order-summary th,
-.order-summary td {
-  padding: 1px;
-  border-bottom: 1px solid #e0e0e0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.order-summary th {
-  font-weight: bold;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.order-item {
-  display: table-row;
-  height: 50px;
-
-}
-
-
-.order-item td{
-  padding: 1px;
-  text-align: center;
-  border-bottom: 1px solid #e0e0e0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-
-.order-item-qty,
-.order-item-name,
-.order-item-price {
-  display: table-cell;
-  height: 20px;
-  line-height: 20px;
-  vertical-align: middle;
-  overflow: hidden;
-  align-items: center;
-}
-
-.order-total {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  font-weight: bold;
-  padding-top: 10px;
-  border-top: 2px solid #e0e0e0;
-  margin-left: 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .sticky-buttons {
   position: sticky;
   bottom: 0;
   /* Đặt nút ở đáy của container */
-  background-color: rgb(250, 245, 245);
   /* Màu nền cho nút */
+  padding-top: 30px;
+  padding-bottom: 15px;
   z-index: 10;
   /* Đảm bảo nút nằm trên các phần tử khác */
   display: flex;
-  margin-left: 4%;
-}
-
-.order-total h3 {
-  margin: 0;
-  font-size: 1.1em;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.order-total-amount {
-  font-size: 1.2em;
-  color: #4CAF50;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.order-button {
-  width: 100%;
-  padding: 0.5rem;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: bold;
-  margin-top: 1.3rem;
-
-}
-
-.order-button:hover {
-  background-color: #45a049;
-}
-
-
-.button-container {
-  display: flex;
-  justify-content: space-between; // Để khoảng cách giữa hai nút
-  margin-top: auto; // Đẩy nút xuống dưới cùng của container
-}
-
-// Nếu bạn cần định dạng cho các nút
-.continue-button,
-.update-cart-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  // Các kiểu khác nếu cần
-}
-
-
-
-
-.fixed-buttons {
-  position: fixed;
-  bottom: 15%;
-  /* Cách từ đáy của viewport */
-  left: 20px;
-  /* Cách từ bên trái */
-  right: 20px;
-  /* Cách từ bên phải */
-  display: flex;
-  justify-content: left;
+  background-color: white;
+  justify-content: center;
   /* Căn giữa hai nút */
+  margin-left: -6%;
 
+    .continue-button,
+    .update-cart-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: red;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
 }
-
-
 
 
 
@@ -585,7 +448,7 @@ $gray-800: #2d3748;
   max-width: 90%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border: 0.5px solid rgb(175, 172, 169);
@@ -672,15 +535,11 @@ $gray-800: #2d3748;
   color: white;
   border: none;
   border-radius: 4px;
-
-  font-weight: 600;
+  width: 10%;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-left: 45%;
-
-  &:hover {
-    background-color: #3a7bc8;
-  }
 }
 
 // Responsive design
@@ -702,174 +561,185 @@ $gray-800: #2d3748;
 
 
 
+
+
+
 .order-form {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  max-width: 80%;
-  font-weight: bold;
+  width: 90%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 0.5px solid #2f855a;
-  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid #c4baba;
+  border-radius: 10px;
 
   h2 {
     text-align: center;
-    color: red;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+    color: #ca0f0f;
     font-size: 30px;
+    font-weight: bolder;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   .form-container {
     display: flex;
     justify-content: space-between;
-  }
 
-  .customer-info,
-  .order-summary1 {
-    width: 45%;
-  }
+    .customer-info {
+      flex: 1;
+      margin-right: 20px;
 
-  .customer-info {
-    .input-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 50px;
+      .input-row {
+        display: flex;
+        justify-content: space-between;
 
-      .input-group {
-        width: 50%;
+        .input-group {
+          flex: 1;
+          margin-right: 10px;
+          background-color: white;
+
+          h3 {
+            margin-bottom: 30px;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          }
+
+          input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #c4baba;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          }
+        }
+      }
+
+      .full-width {
+        margin-bottom: 15px;
 
         h3 {
-          color: #333;
+          margin-bottom: 30px;
+          color: black;
           font-size: 16px;
+          font-weight: bold;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
         input {
           width: 100%;
           padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 14px;
+          border: 1px solid #c4baba;
+          border-radius: 5px;
         }
       }
-    }
 
-    .full-width {
-      margin-bottom: 50px;
+      .payment-methods {
+        margin-top: 20px;
 
-      h3 {
-        color: #333;
-        font-size: 16px;
-        margin-bottom: 15px;
-      }
-
-      input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-    }
-
-    .payment-methods {
-
-      h3 {
-        color: #333;
-        font-size: 16px;
-        margin-bottom: 15px;
-      }
-
-      .buttons {
-        display: flex;
-        gap: 10px;
-
-        button {
-          flex: 1;
-          padding: 10px;
-          border: 1px solid #ccc;
-          background-color: #f9f9f9;
-          color: #333;
-          cursor: pointer;
-          font-size: 14px;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        h3 {
+          margin-bottom: 30px;
+          color: black;
+          font-size: 16px;
           font-weight: bold;
-          transition: all 0.3s ease;
-          margin-left: 0%;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
 
-          &.active {
-            background-color: red;
-            color: white;
-            border-color: #8B4513;
+        .buttons {
+          display: flex;
+          justify-content: space-between;
+
+          button {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+            background-color: white;
+            border: 1px solid #c4baba;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+              background-color: red;
+              color: #fff;
+            }
+
+            &.active {
+              background-color: red;
+              color: #fff;
+            }
+          }
+
+          button:last-child {
+            margin-right: 0;
           }
         }
       }
     }
-  }
 
-  .order-summary1 {
-    background-color: #fff;
-    justify-content: center;
-    text-align: center;
-    border-radius: 4px;
+    .order-summary1 {
+      flex: 1;
+      background-color: white;
+      padding: 15px;
+      border: 1px solid #c4baba;
+      border-radius: 10px;
 
+      h3 {
+        margin-bottom: 15px;
+        font-size: 30px;
+        font-weight: bold;
+        margin-left: 40%;
+        color: red;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-
-    h3 {
-      color: #333;
-      font-size: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      /* Align item name and price on opposite sides */
-      padding: 5px 0;
-      /* Add padding between items */
-      border-bottom: 1px solid #ddd;
-      /* Optional: add border between items */
-    }
-
-    .item:last-child {
-      border-bottom: none;
-      /* Remove border from the last item */
-    }
-
-    .total {
-      display: flex; 
-      flex-direction: column; 
-      margin-bottom: 10%;
-      margin-top: 10px;
-      border-top: 1px solid #e0e0e0;
-      font-weight: bold;
-      font-size: 20px;
-      align-items: flex-start;
-
-      .price {
-
-        color: #FF0000;
       }
-    }
 
-    .checkout-button {
-      width: 100%;
-      padding: 10px;
-      background-color: red;
-      color: white;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      font-weight: bold;
+      .order-items {
+        max-height: 200px; // Đặt chiều cao cố định cho danh sách sản phẩm
+        overflow-y: auto; // Thêm thanh cuộn dọc nếu nội dung quá dài
+        margin-bottom: 15px;
 
-      &:hover {
-        background-color:red;
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          th,
+          td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+          }
+
+          th {
+            background-color: #f9f9f9;
+          }
+        }
+      }
+
+      .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .price {
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        .checkout-button {
+          padding: 10px 20px;
+          background-color: red;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
       }
     }
   }
