@@ -138,7 +138,7 @@ const ProductTable = () => {
                                 <td className='producttable-second-row'>${product.price}</td>
                                 <td className='producttable-second-row'>{product.artist}</td>
                                 <td className='producttable-second-row'>{product.status}</td>
-                                <td>
+                                <td className='producttable-second-row'>
                                     <button className="upload-btn" onClick={() => handleUploadClick(product)}>
                                         <AiOutlineCloudUpload />
                                     </button>
