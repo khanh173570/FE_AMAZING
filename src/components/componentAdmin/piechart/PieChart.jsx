@@ -6,18 +6,18 @@ import "./index.scss";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 // eslint-disable-next-line react/prop-types
-const PieChart = ({ adminCount, userCount, staffCount, title }) => {
+const PieChart = ({ adminCount, userCount, staffCount, censorCount, sellerCount, title }) => {
   let data;
 
   if (title == "Total Account") {
     data = {
-      labels: ["Admin", "User", "Staff"],
+      labels: ["Admin", "User", "Staff", "Censor", "Seller"],
       datasets: [
         {
           label: "Number",
-          data: [adminCount, userCount, staffCount],
-          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-          hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+          data: [adminCount, userCount, staffCount, censorCount, sellerCount],
+          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
+          hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
         },
       ],
     };

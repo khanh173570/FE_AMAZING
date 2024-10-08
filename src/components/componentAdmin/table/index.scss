@@ -1,11 +1,33 @@
 .TableComponent {
   width: 100%;
+
   h1 {
     display: flex;
     justify-content: center;
   }
 
-  Table {
+  .ant-table-wrapper {
     width: 100%;
+
+    .ant-table {
+      width: 100%;
+      table-layout: fixed;
+      word-wrap: break-word;
+
+      .ant-table-thead > tr > th,
+      .ant-table-tbody > tr > td {
+        text-align: center;
+        padding: 8px;
+      }
+
+      .action-buttons {
+        display: flex;
+        justify-content: space-around; /* Evenly distribute buttons */
+
+        button {
+          width: 80px; /* Fixed width for both buttons */
+        }
+      }
+    }
   }
 }

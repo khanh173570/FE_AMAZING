@@ -10,23 +10,20 @@ function TableComponent({ columns, api, title, reload }) {
 
   const fetchData = async () => {
     try {
-      if (title == "List of user") {
+      if (title === "List of user") {
         const response = await axios.get(api);
         const sortedData = response.data.sort((a, b) => b.id - a.id);
-        const filterUser = sortedData.filter((user) => user.role == "user");
-        console.log("FilterUSer: ", filterUser);
+        const filterUser = sortedData.filter((user) => user.role === "user");
         setDataSource(filterUser);
         setLoading(false);
-      } else if (title == "List of staff") {
+      } else if (title === "List of staff") {
         const response = await axios.get(api);
         const sortedData = response.data.sort((a, b) => b.id - a.id);
-        const filterUser = sortedData.filter((user) => user.role == "staff");
-        console.log("FilterUSer: ", filterUser);
+        const filterUser = sortedData.filter((user) => user.role === "staff");
         setDataSource(filterUser);
         setLoading(false);
       } else {
         const response = await axios.get(api);
-        console.log("Response: ", response.data);
         const data = Array.isArray(response.data) ? response.data : [response.data];
         setDataSource(data);
         setLoading(false);
@@ -45,7 +42,12 @@ function TableComponent({ columns, api, title, reload }) {
   return (
     <div className="TableComponent">
       <h1>{title}</h1>
-      <Table dataSource={dataSource} columns={columns} loading={loading} />
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        loading={loading}
+        pagination={false} // Optional, depending on your needs
+      />
     </div>
   );
 }

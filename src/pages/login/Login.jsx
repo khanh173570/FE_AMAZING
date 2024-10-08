@@ -31,7 +31,7 @@ function Login() {
       if (matchedAccount.role === "admin") {
         localStorage.setItem("account", JSON.stringify(matchedAccount));
         toast.success("Login successfully");
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else if (matchedAccount.role === "user") {
         localStorage.setItem("account", JSON.stringify(matchedAccount));
         toast.success("Login successfully");

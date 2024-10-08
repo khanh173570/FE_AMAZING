@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import FormComponent from "../../../components/componentAdmin/form/Form";
 import { useEffect, useState } from "react";
+import "./changePassword.scss";
 
 function ChangePassword() {
   const [id, setId] = useState(null);
@@ -62,7 +63,7 @@ function ChangePassword() {
         <Input.Password placeholder="Enter your new password" />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" className="ChangePassword__button">
           Change password
         </Button>
       </Form.Item>

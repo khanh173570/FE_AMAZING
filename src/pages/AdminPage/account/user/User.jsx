@@ -5,6 +5,7 @@ import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 function User() {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,6 @@ function User() {
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
-
   const [users, setUsers] = useState([]);
 
   const columns = [
@@ -21,36 +21,43 @@ function User() {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      width: "20%",
     },
     {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
+      width: "20%",
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      width: "25%",
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
+      width: "15%",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      width: "10%",
       render: (status) => (status ? <Tag color="green">Active</Tag> : <Tag color="red">Not active</Tag>),
     },
     {
       title: "Action",
       dataIndex: "id",
       key: "id",
+      width: "10%",
       render: (id, record) => (
-        <>
+        <div className="action-buttons">
           <Button
             type="primary"
+            style={{ width: "80px" }} // Optional inline style for button width
             onClick={() => {
               form.setFieldsValue(record);
               setId(id);
@@ -63,15 +70,16 @@ function User() {
           <Popconfirm
             title="Delete"
             description="Are you sure to delete this user?"
-            onConfirm={() => {
-              handleDelete(id);
-            }}
+            onConfirm={() => handleDelete(id)}
             okText="Delete"
             cancelText="No"
           >
-            <Button danger>Delete</Button>
+            <Button danger style={{ width: "80px" }}>
+              Delete
+            </Button>{" "}
+            {/* Same width for Delete button */}
           </Popconfirm>
-        </>
+        </div>
       ),
     },
   ];
@@ -79,10 +87,9 @@ function User() {
   const handleDelete = async (id) => {
     setLoading(true);
     try {
-      const response = await axios.put(`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`, {
+      await axios.put(`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`, {
         status: false,
       });
-      console.log("Delete response: ", response);
       toast.success("Delete user successfully");
       setReload(!reload);
     } catch (error) {
@@ -105,9 +112,8 @@ function User() {
   const handleFinish = async (values) => {
     setLoading(true);
     try {
-      console.log("Values: ", values);
       if (edit && id) {
-        const response = await axios.put(`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`, {
+        await axios.put(`https://6692a166346eeafcf46da14d.mockapi.io/account/${id}`, {
           name: values.name,
           phone: values.phone,
           email: values.email,
@@ -115,10 +121,9 @@ function User() {
           role: "user",
           status: true,
         });
-        console.log("Response: ", response);
         toast.success("Update user successfully");
       } else {
-        const response = await axios.post("https://6692a166346eeafcf46da14d.mockapi.io/account", {
+        await axios.post("https://6692a166346eeafcf46da14d.mockapi.io/account", {
           name: values.name,
           phone: values.phone,
           email: values.email,
@@ -126,7 +131,6 @@ function User() {
           role: "user",
           status: true,
         });
-        console.log("Response: ", response);
         toast.success("Add user successfully");
       }
     } catch (error) {
@@ -141,18 +145,19 @@ function User() {
 
   const fetchData = async () => {
     const response = await axios.get("https://6692a166346eeafcf46da14d.mockapi.io/account");
-    const filterUsers = response.data.filter((user) => user.role == "user");
+    const filterUsers = response.data.filter((user) => user.role === "user");
     setUsers(filterUsers);
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   const exportPDF = () => {
     const doc = new jsPDF();
     doc.text("List of Users", 10, 10);
 
     const columns = ["Name", "Phone", "Email", "Role", "Status"];
-
     const rows = users.map((user) => [
       user.name,
       user.phone,
@@ -161,7 +166,7 @@ function User() {
       user.status ? "Active" : "Not active",
     ]);
 
-    doc.autoTable({
+    autoTable(doc, {
       head: [columns],
       body: rows,
     });
@@ -177,16 +182,16 @@ function User() {
       <Button onClick={exportPDF}>Export to PDF</Button>
       <TableComponent
         columns={columns}
-        api={`https://6692a166346eeafcf46da14d.mockapi.io/account`}
-        title={`List of user`}
+        api="https://6692a166346eeafcf46da14d.mockapi.io/account"
+        title="List of user"
         reload={reload}
       />
       <Modal
         open={open}
         title={edit ? "Update user" : "Add new user"}
-        onCancel={() => setOpen(false)}
+        onCancel={handleCloseModal}
         footer={[
-          <Button key="back" onClick={() => setOpen(false)} disabled={loading}>
+          <Button key="back" onClick={handleCloseModal} disabled={loading}>
             Back
           </Button>,
           <Button key="submit" type="primary" onClick={() => form.submit()} disabled={loading} loading={loading}>
@@ -195,42 +200,18 @@ function User() {
         ]}
       >
         <Form form={form} labelCol={{ span: 24 }} onFinish={handleFinish}>
-          <Form.Item
-            name="name"
-            label="Name"
-            rules={[
-              {
-                required: true,
-                message: "You must enter the name!",
-              },
-            ]}
-          >
+          <Form.Item name="name" label="Name" rules={[{ required: true, message: "You must enter the name!" }]}>
             <Input placeholder="Enter the name" />
           </Form.Item>
-          <Form.Item
-            name="phone"
-            label="Phone"
-            rules={[
-              {
-                required: true,
-                message: "You must enter the phone!",
-              },
-            ]}
-          >
+          <Form.Item name="phone" label="Phone" rules={[{ required: true, message: "You must enter the phone!" }]}>
             <Input placeholder="Enter the phone" />
           </Form.Item>
           <Form.Item
             name="email"
             label="Email"
             rules={[
-              {
-                required: true,
-                message: "You must enter the email!",
-              },
-              {
-                type: "email",
-                message: "Email is not valid type!",
-              },
+              { required: true, message: "You must enter the email!" },
+              { type: "email", message: "Email is not valid type!" },
             ]}
           >
             <Input placeholder="Enter the email" />
@@ -238,12 +219,7 @@ function User() {
           <Form.Item
             name="password"
             label="Password"
-            rules={[
-              {
-                required: true,
-                message: "You must enter the password!",
-              },
-            ]}
+            rules={[{ required: true, message: "You must enter the password!" }]}
           >
             <Input.Password placeholder="Enter the password" />
           </Form.Item>

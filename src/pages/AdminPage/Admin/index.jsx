@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserOutlined, LogoutOutlined,DashboardOutlined } from "@ant-design/icons";
+import { UserOutlined, LogoutOutlined, DashboardOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./index.scss";
@@ -67,7 +67,13 @@ const Admin = () => {
   return (
     <div className="admin">
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} collapsedWidth={150}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+          collapsedWidth={150}
+          width={230}
+        >
           <div className="admin__sidebar">
             <div className="admin__sidebar__content">
               <div className="demo-logo-vertical" />
@@ -80,7 +86,7 @@ const Admin = () => {
                   if (item.key === "logout") {
                     return {
                       ...item,
-                      onClick: handleLogout, // Assign logout handler
+                      onClick: handleLogout,
                     };
                   }
                   return item;

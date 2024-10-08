@@ -32,6 +32,13 @@
       .ant-layout-sider-collapsed & {
         width: 150px;
       }
+
+      .ant-menu-item,
+      .ant-menu-submenu-title {
+        display: flex;
+        justify-content: center; /* Căn giữa các mục menu theo chiều ngang */
+        text-align: center; /* Căn giữa văn bản */
+      }
     }
   }
 
