@@ -1,40 +1,44 @@
-.container {
-  margin-top: 20px;
+.k {
+  margin-top: 20px; 
+}
+
+.p {
+  vertical-align: middle; 
+}
+
+.table-responsive {
+  overflow-x: auto; 
 }
 
 .product-image {
-  max-width: 100%; /* Makes the image responsive */
-  height: auto;    /* Maintains aspect ratio */
-  display: block;  /* Centers the image */
-  margin: 0 auto;  /* Centers the image horizontally */
+  max-width: 100%; /* Ensure the image does not exceed the container width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Scale the image to fit */
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .container {
-      padding: 0 15px; /* Thêm khoảng cách bên cho container */
-  }
-
-  .product-image {
-      max-height: 400px; /* Giới hạn chiều cao cho hình ảnh trên màn hình nhỏ */
-  }
-
-  .row {
-      flex-direction: column; /* Đặt layout dọc cho các cột */
-  }
-
-  .col-md-6 {
-      width: 100%; /* Chiều rộng 100% cho cột khi màn hình nhỏ */
-      margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi cột */
-  }
+.btn {
+  margin-top: 20px; 
+  display: block; 
+  text-align: center; 
 }
 
-@media (max-width: 576px) {
-  h2 {
-      font-size: 1.5rem; /* Giảm kích thước tiêu đề cho màn hình nhỏ */
-  }
+.image-container {
+  width: 100%; 
+  height: auto; /* Allow height to adjust based on content */
+  display: flex; 
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start; /* Align items to the top */
+  overflow: hidden; /* Ensure any overflow is hidden */
+  padding-top: 75px; /* Use padding for top spacing instead of margin on the image */
+}
 
-  p {
-      font-size: 0.9rem; /* Giảm kích thước văn bản cho màn hình nhỏ */
-  }
+.image-container img {
+  width: 100%; /* Make image responsive to fill the container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Maintain aspect ratio without cropping */
+}
+
+.title {
+  text-align: center;
+  color: black;
 }

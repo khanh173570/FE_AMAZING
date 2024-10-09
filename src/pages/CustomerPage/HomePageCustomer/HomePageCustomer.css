@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+
 }
 
 .navbar {
@@ -13,13 +13,22 @@ body {
 }
 
 .sidebar {
-  width: 20%;
-  background-color: #343a40;
-  color: white;
-  height: 100vh;
-  padding: 20px; /* Thêm khoảng cách cho nội dung trong sidebar */
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Thêm hiệu ứng bóng */
+  background-color: black; /* Màu nền tùy chọn */
+  padding: 20px;
+  width: 250px; /* Chiều rộng của sidebar */
+  min-height: 100%; /* Đảm bảo sidebar có chiều cao tối thiểu bằng chiều dài của nội dung */
+  float: left; /* Đảm bảo sidebar nằm bên trái */
+  width: 350px;
 }
+
+.main-content {
+  margin-left: 50px; /* Đẩy nội dung chính sang bên phải của sidebar */
+  padding: 20px;
+  overflow: hidden; /* Tránh tràn nội dung */
+
+}
+
+
 
 .sidebar a {
   color: white;
@@ -41,44 +50,121 @@ body {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s; /* Hiệu ứng hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; /* Thêm hiệu ứng cho border */
+  border: none; /* Xóa viền mặc định */
+  border-radius: 15px; /* Bo góc cho card */
+  overflow: hidden; /* Đảm bảo nội dung không tràn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ khi không hover */
 }
 
 .card:hover {
-  transform: scale(1.05); /* Phóng to card khi hover */
+  transform: translateY(-10px) scale(1.05); /* Phóng to và di chuyển lên trên */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Tăng bóng đổ khi hover */
+  border: 2px solid #1E90FF; /* Thêm viền khi hover, màu có thể thay đổi */
 }
 
 .card-img-top {
   max-height: 200px;
   object-fit: cover;
+  transition: transform 0.3s ease; /* Hiệu ứng hover cho ảnh */
 }
+
+.card:hover .card-img-top {
+  transform: scale(1.1); /* Phóng to ảnh khi hover */
+}
+
+
 
 .card-body {
   flex-grow: 1;
 }
 
 .title {
-  background-color: red;
+  color: white;
   width: 100%; /* Đặt chiều rộng thành 100% */
-  height: 50px;
   text-align: center;
-  margin-bottom: 20px; /* Thêm khoảng cách dưới title */
+  white-space: nowrap; /* Sửa lỗi chính tả */
+  font-family: initial; /* Đặt font chữ về giá trị mặc định */
 }
 
 .titles {
   display: flex;
   justify-content: left;
+  transition: all 0.3s ease;
+}
+.artist:hover,
+.price:hover,
+.type:hover,
+.category:hover,
+.quantity:hover {
+  color: #1E90FF; /* Đổi màu chữ khi hover */
+  transform: scale(1.05); /* Phóng to phần tử khi hover */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Thêm bóng cho phần tử */
+  cursor: pointer; /* Thay đổi con trỏ thành tay khi hover */
 }
 
 .container-fluid {
   padding: 20px;
 }
+/* Kiểu chung cho phần thông tin sản phẩm */
+.titles {
+  font-family: 'Roboto', sans-serif; /* Sử dụng font chữ phổ biến cho trang web bán hàng */
+  font-size: 16px; /* Kích thước chữ dễ đọc */
+  font-weight: 400; /* Độ đậm vừa phải */
+  color: #333; /* Màu chữ xám đậm cho dễ nhìn */
+  margin-bottom: 10px; /* Khoảng cách giữa các dòng thông tin */
+}
+
+/* Phong cách đặc biệt cho phần nghệ nhân */
+.titles.artist {
+  font-weight: 500; /* Nhấn mạnh nghệ nhân với độ đậm */
+  color: #1E90FF; /* Màu xanh dương để tạo điểm nhấn */
+}
+
+/* Phong cách đặc biệt cho giá trị sản phẩm */
+.titles.price {
+  font-weight: 700; /* Nhấn mạnh giá trị với độ đậm hơn */
+  font-size: 18px; /* Tăng kích thước chữ cho giá */
+  color: red; /* Màu đỏ đặc trưng để làm nổi bật giá sản phẩm */
+}
+
+/* Phong cách cho loại sản phẩm và danh mục */
+.titles.type,
+.titles.category {
+  font-style: italic; /* Sử dụng chữ nghiêng cho phần loại và danh mục */
+  color: #555; /* Màu xám nhạt hơn */
+}
+
+/* Phong cách cho số lượng sản phẩm */
+.titles.quantity {
+  font-weight: 500; /* Nhấn mạnh số lượng sản phẩm */
+  color: green; /* Màu xanh để hiển thị tình trạng còn hàng */
+}
+/* Đặt phong cách cho các nút */
+.button-custom {
+  background-color: #E0FFFF; /* Màu nền ban đầu */
+  color: #1E90FF; /* Màu chữ */
+  white-space: nowrap; /* Ngăn không cho chữ xuống dòng */
+  margin: 0 10px; /* Khoảng cách giữa các nút */
+  border: none; /* Xóa viền nút */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+/* Hiệu ứng khi hover */
+.button-custom:hover {
+  background-color: #1E90FF; /* Đổi màu nền khi hover */
+  color: white; /* Đổi màu chữ khi hover */
+  transform: scale(1.05); /* Phóng to nút khi hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm bóng cho nút */
+}
+
 
 /* Media Queries cho responsive */
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
     height: auto; /* Tự động điều chỉnh chiều cao */
+    margin-left: 50px;
   }
 
   .main-content {
