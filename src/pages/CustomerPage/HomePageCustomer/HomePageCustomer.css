@@ -193,6 +193,13 @@ body {
   .card {
     margin-bottom: 10px; /* Giảm khoảng cách giữa các card */
   }
+  .center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+   
+  }
 }
 
 @media (max-width: 576px) {
@@ -203,4 +210,6 @@ body {
   .title {
     height: 40px; /* Giảm chiều cao title */
   }
+  
+  
 }
