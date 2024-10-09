@@ -1,66 +1,161 @@
 
 // .payment-navigation {
+//   display: flex;
+//   flex-direction: row; /* This ensures all items are aligned horizontally */
+//   justify-content: left; /* Optional: To evenly distribute space between items */
+//   align-items: flex-start; /* Optional: To vertically center the items */
+//   width: 100%;
+
 //   .nav-item {
+//     flex: 1; /* Mỗi phần tử chiếm đều không gian */
+//     padding: 10px; /* Khoảng cách bên trong mỗi mục */
 //     display: flex;
 //     flex-direction: row;
-//     align-items: center;
-//     justify-content: flex-start; /* Căn giữa nội dung theo chiều dọc */
-//     padding: 10px; /* Tăng thêm padding để viền không quá sát nội dung */
-//     border: 2px solid #ddd; /* Độ dày viền */
-//     border-radius: 5px;
-//     text-align: center;
-//     margin-bottom: 10px;
+//     align-items: center; /* Căn giữa nội dung theo chiều dọc */
+//     justify-content: center; /* Căn giữa theo chiều ngang */
+//     border: 1px solid #ccc; /* Đường viền mỏng */
+//     margin-bottom: 10px; /* Khoảng cách giữa các mục */
 //     cursor: pointer;
 //     transition: background-color 0.3s ease;
-//     height: 10%; /* Đảm bảo độ cao full của cột */
-//     width:20%;
-    
+
+//     &:hover {
+//       background-color: #f0f0f0;
+//     }
 
 //     img {
-//       max-width: 35%;
-//       padding-left: 70px;
-//       padding-right: 3%;
+//       margin-right: 15px;
+//       height: 50px;
+//       width: 50px;
+//       object-fit: contain;
+//     }
+
+//     span {
+//       font-size: 15px;
+//       font-weight: bolder;
+//       color: black;
 //     }
 
 //     &.active {
-//       background-color: #2b2f5e;
+//       background-color: #007bff;
+//       color: white;
+//     }
+//   }
+
+//   /* Các media query để thay đổi layout khi màn hình nhỏ */
+
+//   @media (max-width: 1200px) {
+//     .nav-item {
+//       max-width: 33.33%; /* Ba mục mỗi hàng cho màn hình từ 1200px trở xuống */
+//     }
+//   }
+
+//   @media (max-width: 992px) {
+//     .nav-item {
+//       max-width: 50%; /* Hai mục mỗi hàng cho màn hình từ 992px trở xuống */
+//     }
+//   }
+
+//   @media (max-width: 768px) {
+//     .nav-item {
+//       max-width: 25%; /* Mỗi phần tử chiếm 25% chiều rộng, để có 4 mục trên 1 hàng */
+//       display: flex;
+//       flex-direction: row; /* Đảm bảo các phần tử vẫn nằm ngang */
+//       align-items: center; /* Căn giữa các mục theo chiều dọc */
+//     }
+
+//     /* Đảm bảo kích thước ảnh phù hợp với màn hình nhỏ */
+//     .nav-item img {
+//       height: 30px;
+//       width: 30px;
+//     }
+//   }
+
+//   @media (max-width: 576px) {
+//     .nav-item {
+//       max-width: 100%; /* Mỗi mục chiếm toàn bộ chiều rộng trên màn hình nhỏ */
 //     }
 //   }
 // }
 
+
 .payment-navigation {
   display: flex;
-  flex-direction: row; // Sắp xếp các thẻ div theo hàng ngang
-  flex-wrap: wrap; // Cho phép các thẻ div xuống hàng nếu vượt quá độ rộng của container
+  flex-direction: row; /* Ensure all items are aligned horizontally */
+  justify-content: left; /* Optional: To evenly distribute space between items */
+  align-items: flex-start; /* Optional: To vertically align items at the start */
+  width: 100%;
 
   .nav-item {
-    flex: 1; // Để mỗi thẻ div chiếm đều khoảng không gian còn lại
-    max-width: 25%; // Đảm bảo mỗi mục chỉ chiếm 25% độ rộng (4 mục chia đều cho 100%)
-    padding: 10px; // Thêm khoảng cách giữa nội dung và viền
+    flex: 1; /* Ensure each item takes equal space */
+    padding: 10px; /* Internal padding for each item */
     display: flex;
-    flex-direction: row;
-    align-items: center; // Căn giữa dọc nội dung trong mỗi div
-    justify-content: center; // Căn giữa nội dung theo chiều ngang
-    border: 1px solid #ccc; // Đường viền mờ bao quanh mỗi mục
-    margin-bottom: 10px; // Khoảng cách giữa các mục theo chiều dọc
+    flex-direction: row; /* Align image and text horizontally */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    border: 1px solid #ccc; /* Thin border */
+    margin-bottom: 10px; /* Bottom margin between items */
     cursor: pointer;
-    transition: background-color 0.3s ease; // Hiệu ứng hover
+    transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #f0f0f0; // Thay đổi màu nền khi hover
+      background-color: #f0f0f0;
     }
 
     img {
-      margin-right: 10px; // Khoảng cách giữa ảnh và văn bản
-      margin-left: 25%;
-      height: 50px; // Chiều cao ảnh
-      width: 50px; // Độ rộng ảnh
-      object-fit: contain; // Đảm bảo ảnh không bị cắt xén mà vẫn giữ tỉ lệ
+      margin-right: 15px;
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+    }
+
+    span {
+      font-size: 15px;
+      font-weight: bolder;
+      color: black;
     }
 
     &.active {
-      background-color: #007bff; // Màu nền cho mục đang active
-      color: #fff; // Màu chữ cho mục đang active
+      background-color: #dae0e6;
+      color: white;
+    }
+  }
+
+  /* Media Queries to handle layout changes on smaller screens */
+
+  @media (max-width: 1200px) {
+    .payment-navigation {
+      flex-direction: row; /* Keep the items in a row for larger screens */
+    }
+  }
+
+  @media (max-width: 992px) {
+    .payment-navigation {
+      flex-direction: row; /* Still in row on medium screens */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .payment-navigation {
+      flex-direction: row; /* Change to column layout for small screens */
+    }
+
+    .nav-item {
+      flex: 1; /* Ensure each item takes up equal space */
+      width: 100%; /* Each item takes full width */
+    }
+
+    /* Ensure images are responsive on smaller screens */
+    .nav-item img {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .nav-item {
+      flex: 1; /* Ensure each item takes up equal space */
+      width: 100%; /* Each item takes full width */
     }
   }
 }
+

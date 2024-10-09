@@ -480,7 +480,7 @@ class HomePage extends Component {
                       onChange={() => this.handleCheckboxChange(product.id)}
                     />
                   </div>
-                  <div className="image-container">
+                  <div className="image1-container">
                     <img src={product.img} className="food-image" />
                   </div>
                   <div className="details">
