@@ -12,10 +12,9 @@ const HomePageCustomer = () => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-   
     const user = JSON.parse(localStorage.getItem("account"));
     if (user) {
-      setUserName(user.name); 
+      setUserName(user.name);
     }
 
     const fetchData = async () => {
@@ -89,7 +88,7 @@ const HomePageCustomer = () => {
     <div className="container-fluid">
       <div className="sidebar-main">
         <div className="sidebar">
-          <h4 className="title">Bạn đang cần gì?</h4>
+          <h4 className="title" style={{color:"white"}}>Bạn đang cần gì?</h4>
           <InputGroup className="mb-3">
             <FormControl
               placeholder="Tìm kiếm theo tên hoặc loại"
@@ -97,8 +96,14 @@ const HomePageCustomer = () => {
               aria-describedby="basic-addon2"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              className="custom-input" // Add custom class here
             />
-            <Button variant="outline-light" onClick={handleSearch}>
+            <Button
+              variant="outline-light"
+              onClick={handleSearch}
+              style={{ margin: 0 }} // Remove margin
+              className="custom-button"
+            >
               Tìm kiếm
             </Button>
           </InputGroup>
@@ -139,13 +144,13 @@ const HomePageCustomer = () => {
 
                     <div className="d-flex justify-content-center">
                       <Button
-                        className="button-custom" 
+                        className="button-custom"
                         onClick={() => handleViewDetail(item.id)}
                       >
                         Xem Chi Tiết
                       </Button>
                       <Button
-                        className="button-custom" 
+                        className="button-custom"
                         onClick={() => handleAddToCart(item)}
                       >
                         Thêm vào giỏ hàng

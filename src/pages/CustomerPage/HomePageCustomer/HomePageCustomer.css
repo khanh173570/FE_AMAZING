@@ -28,6 +28,20 @@ body {
 
 }
 
+.custom-input {
+  height: 50px; /* Set a fixed height */
+  padding: 10px; /* Adjust padding as needed */
+}
+
+.custom-button {
+  height: 50px; /* Match height with input */
+  padding: 10px 20px; /* Adjust padding for the button */
+  display: flex; /* Ensure the button aligns well */
+  align-items: center; /* Center content vertically */
+}
+.custom-button:hover {
+  background-color: green;
+}
 
 
 .sidebar a {
