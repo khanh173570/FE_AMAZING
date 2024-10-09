@@ -13,8 +13,48 @@ const SellerAddProduct = () => {
   const [imageUrl, setImageUrl] = useState(null); // State to store the uploaded image URL
   const navigate = useNavigate();
 
-  const onFinish = (values) => {
+  const checkProductExists = async (name, idProduct) => {
+    try {
+      const { data } = await axios.get('https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570');
+      
+      // Check for existing product name
+      const isNameExists = data.some(product => product.name === name);
+      if (isNameExists) {
+        message.error('Name already exists');
+        return false;
+      }
+
+      // Check for existing idProduct
+      const isIdProductExists = data.some(product => product.detail.idProduct === idProduct);
+      if (isIdProductExists) {
+        message.error('idProduct already exists');
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      message.error('Failed to validate product information');
+      return false;
+    }
+  };
+
+  const onFinish = async (values) => {
     setLoading(true);
+
+    // Validate idProduct is positive
+    if (values.detail.idProduct <= 0) {
+      message.error('idProduct must be a positive number');
+      setLoading(false);
+      return;
+    }
+
+    // Check if product name or idProduct already exists
+    const isProductValid = await checkProductExists(values.name, values.detail.idProduct);
+    if (!isProductValid) {
+      setLoading(false);
+      return;
+    }
 
     const productData = {
       ...values,
@@ -43,13 +83,13 @@ const SellerAddProduct = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
-  
+
     // Check file size (e.g., limit to 2MB)
     if (file.size > 2 * 1024 * 1024) {
       message.error('File size must be less than 2MB');
       return;
     }
-  
+
     // Create an image object to check its dimensions
     const img = new Image();
     img.src = URL.createObjectURL(file);
@@ -58,7 +98,7 @@ const SellerAddProduct = () => {
         message.error('Image dimensions must be less than 800x800 pixels');
         return;
       }
-      
+
       // If the dimensions are acceptable, proceed to convert to base64
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -67,8 +107,7 @@ const SellerAddProduct = () => {
       reader.readAsDataURL(file); // Convert file to base64 string
     };
   }, []);
-  
-  
+
   // Function to remove selected image
   const removeImage = () => {
     setImageUrl(null); // Reset the image URL to allow another upload
@@ -154,7 +193,6 @@ const SellerAddProduct = () => {
 
         {/* Second Column */}
         <Col xs={24} sm={12} lg={12}>
-       
 
           <Form.Item
             label="Quantity"
@@ -208,8 +246,8 @@ const SellerAddProduct = () => {
             <Input placeholder="Enter product ID" />
           </Form.Item>
 
-             {/* Image Dropzone */}
-             <Form.Item
+          {/* Image Dropzone */}
+          <Form.Item
             label="Product Image"
             required
             help={!imageUrl && 'Please upload an image'}
