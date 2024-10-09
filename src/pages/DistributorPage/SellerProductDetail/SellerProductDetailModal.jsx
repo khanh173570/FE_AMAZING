@@ -50,6 +50,13 @@ const SellerProductDetailModal = ({ visible, onClose, productId, refreshData }) 
   // Format date to dd/mm/yyyy
   const formattedDate = new Date(detail.date).toLocaleDateString('en-GB');
 
+  const confirmDelete = () => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this product?',
+      onOk: handleDelete,
+    });
+  };
+  
   return (
     <Modal
       title="Product Details"
@@ -57,15 +64,18 @@ const SellerProductDetailModal = ({ visible, onClose, productId, refreshData }) 
       onCancel={onClose}
       footer={[
         status === 'Pending' && (
-          <Button
-            key="delete"
-            type="primary"
-            danger
-            onClick={handleDelete}
-            style={{ backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' }} // Custom style for the delete button
-          >
-            Delete Product
-          </Button>
+       
+// Button for deleting product
+<Button
+  key="delete"
+  type="primary"
+  danger
+  onClick={confirmDelete}
+  loading={loading}
+  style={{ backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' }}
+>
+  Delete Product
+</Button>
         ),
         <Button key="close" onClick={onClose}>
           Close
@@ -78,18 +88,24 @@ const SellerProductDetailModal = ({ visible, onClose, productId, refreshData }) 
           <h3>{name}</h3>
           <p><strong>Artist:</strong> {artist}</p>
           <p><strong>Price:</strong> ${price}</p>
-          <p><strong>Type:</strong> <span style={{ fontStyle: 'italic' }}>{type}</span></p>
-          <Tag color={status === 'Accepted' ? 'green' : status === 'Rejected' ? 'red' : 'yellow'}>
-            {status}
-          </Tag>
-          <p><strong>Date:</strong> {formattedDate}</p> {/* Display formatted date */}
+          <p><strong>Category:</strong> {productDetails.category}</p>
+          <p><strong>Type:</strong> <span >{type}</span></p>
+         
+         
         </div>
       </div>
+    
       <p><strong>Description:</strong> {description}</p>
       <p>
         <strong>Dimensions:</strong> {detail.height} cm (H) x {detail.length} cm (L) x {detail.weight} kg
       </p>
-      <p><strong>Category:</strong> {productDetails.category}</p>
+      <p><strong>Date:</strong> {formattedDate}</p> {/* Display formatted date */}
+      <p>
+        <strong>Status:</strong>{ <Tag color={status === 'Accepted' ? 'green' : status === 'Rejected' ? 'red' : 'yellow'}>
+            {status}
+          </Tag>}
+      </p>
+     
     </Modal>
   );
 };

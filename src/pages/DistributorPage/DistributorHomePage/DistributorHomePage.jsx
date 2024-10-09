@@ -13,7 +13,9 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    responsive: ['sm', 'md'], // Visible on small and medium screens
+    responsive: ['sm'],
+    width: 150, // Adjust the width here (in pixels or percentage)
+
     render: (text) => (
       <span style={{ color: '#1890ff', fontWeight: 'bold' }}>{text}</span>
     ),
@@ -22,7 +24,9 @@ const columns = [
     title: 'Artist',
     dataIndex: 'artist',
     key: 'artist',
-    responsive: ['sm', 'md'], // Visible on small and medium screens
+    responsive: ['md'],
+    width: 150, // Adjust the width here (in pixels or percentage)
+
     render: (text) => (
       <span style={{ color: '#ff5722', fontWeight: 'bold' }}>{text}</span>
     ),
@@ -31,10 +35,13 @@ const columns = [
     title: 'Category',
     dataIndex: 'category',
     key: 'category',
-    responsive: ['sm', 'md'], // Visible on small and medium screens
+    responsive: ['md'],
+    width: 170, // Adjust the width here (in pixels or percentage)
+
     filters: [
       { text: 'Gỗ', value: 'Gỗ' },
       { text: 'Tre', value: 'Tre' },
+      { text: 'Sứ', value: 'Sứ' },
     ],
     filterMultiple: true,
     onFilter: (value, record) => record.category === value,
@@ -46,7 +53,7 @@ const columns = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    responsive: ['sm', 'md'], // Visible on small and medium screens
+    responsive: ['md'],
     filters: [
       { text: 'Budget', value: 'Budget' },
       { text: 'Luxury', value: 'Luxury' },
@@ -63,22 +70,68 @@ const columns = [
     title: 'Price',
     dataIndex: 'price',
     key: 'price',
-    responsive: ['sm', 'md'], // Visible on small and medium screens
+    responsive: ['md'],
     render: (text) => (
       <span style={{ color: 'green', fontWeight: 'bold' }}>${text}</span>
+    ),
+  },
+  {
+    title: 'Date',
+    dataIndex: ['detail', 'date'],
+    key: 'date',
+    responsive: ['sm'],
+    sorter: (a, b) => new Date(a.detail.date) - new Date(b.detail.date),
+    render: (text) => (
+      <span style={{ color: '#607d8b', fontWeight: 'bold' }}>
+        {new Date(text).toLocaleDateString()}
+      </span>
     ),
   },
   {
     title: 'Image',
     dataIndex: 'img',
     key: 'img',
-    responsive: ['sm', 'md'], // Visible on small and medium screens
+    responsive: ['sm'],
     render: (imgUrl, record) => (
       <Avatar src={imgUrl} alt={record.name} shape="circle" size={60} />
     ),
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    responsive: ['md'],
+
+    filters: [
+      {
+        text: <Tag color="green">Accepted</Tag>,
+        value: 'Accepted',
+      },
+      {
+        text: <Tag color="red">Rejected</Tag>,
+        value: 'Rejected',
+      },
+      {
+        text: <Tag color="yellow">Pending</Tag>,
+        value: 'Pending',
+      },
+    ],
+    filterMultiple: true,
+    onFilter: (value, record) => record.status.includes(value),
+    render: (status) => {
+      let color = 'default';
+      if (status === 'Accepted') color = 'green';
+      else if (status === 'Rejected') color = 'red';
+      else if (status === 'Pending') color = 'yellow';
+
+      return (
+        <Tag color={color}>
+          <span style={{ fontWeight: 'bold' }}>{status}</span>
+        </Tag>
+      );
+    },
   }
 ];
-
 
 const DistributorHomePage = () => {
   const [data, setData] = useState([]);
