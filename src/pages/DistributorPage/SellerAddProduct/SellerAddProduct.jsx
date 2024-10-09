@@ -179,6 +179,7 @@ const SellerAddProduct = () => {
             <Select placeholder="Select category">
               <Option value="Gỗ">Gỗ</Option>
               <Option value="Tre">Tre</Option>
+              <Option value="Sứ">Sứ</Option>
             </Select>
           </Form.Item>
 
