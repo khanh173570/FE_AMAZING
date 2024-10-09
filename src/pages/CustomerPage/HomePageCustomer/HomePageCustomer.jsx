@@ -88,7 +88,9 @@ const HomePageCustomer = () => {
     <div className="container-fluid">
       <div className="sidebar-main">
         <div className="sidebar">
-          <h4 className="title" style={{color:"white"}}>Bạn đang cần gì?</h4>
+          <h4 className="title" style={{ color: "white" }}>
+            Bạn đang cần gì?
+          </h4>
           <InputGroup className="mb-3">
             <FormControl
               placeholder="Tìm kiếm theo tên hoặc loại"
@@ -128,7 +130,8 @@ const HomePageCustomer = () => {
                   />
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
-                    <Card.Text>
+                    <Card.Text >
+                      <div className="center-text">
                       <div className="titles artist">
                         Nghệ nhân: {item.artist}
                       </div>
@@ -140,6 +143,8 @@ const HomePageCustomer = () => {
                       <div className="titles quantity">
                         Số lượng: {item.quantity}
                       </div>
+                      </div>
+                      
                     </Card.Text>
 
                     <div className="d-flex justify-content-center">
