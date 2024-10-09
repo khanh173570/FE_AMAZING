@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Form, Input, InputNumber, Button, Row, Col, message, Select } from 'antd';
+import { Form, Input, InputNumber, Button, Row, Col, message, Select, Card } from 'antd';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -41,18 +41,34 @@ const SellerAddProduct = () => {
       });
   };
 
-  // Function to handle image drop
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImageUrl(reader.result); // Set image URL to the base64 string
-    };
-    if (file) {
-      reader.readAsDataURL(file); // Convert file to base64 string
+  
+    // Check file size (e.g., limit to 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      message.error('File size must be less than 2MB');
+      return;
     }
+  
+    // Create an image object to check its dimensions
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      if (img.width > 800 || img.height > 800) {
+        message.error('Image dimensions must be less than 800x800 pixels');
+        return;
+      }
+      
+      // If the dimensions are acceptable, proceed to convert to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result); // Set image URL to the base64 string
+      };
+      reader.readAsDataURL(file); // Convert file to base64 string
+    };
   }, []);
-
+  
+  
   // Function to remove selected image
   const removeImage = () => {
     setImageUrl(null); // Reset the image URL to allow another upload
@@ -138,47 +154,7 @@ const SellerAddProduct = () => {
 
         {/* Second Column */}
         <Col xs={24} sm={12} lg={12}>
-          {/* Image Dropzone */}
-          <Form.Item
-            label="Product Image"
-            required
-            help={!imageUrl && 'Please upload an image'}
-          >
-            {!imageUrl ? (
-              <div
-                {...getRootProps()}
-                style={{
-                  border: '2px dashed #d9d9d9',
-                  padding: '20px',
-                  textAlign: 'center',
-                  background: isDragActive ? '#fafafa' : '',
-                  cursor: 'pointer',
-                }}
-              >
-                <input {...getInputProps()} />
-                {isDragActive ? (
-                  <p>Drop the image here ...</p>
-                ) : (
-                  <p>Drag & drop an image here, or click to select one</p>
-                )}
-              </div>
-            ) : (
-              <div>
-                <img
-                  src={imageUrl}
-                  alt="Uploaded Product"
-                  style={{ marginTop: '10px', maxWidth: '100%' }}
-                />
-                <Button
-                  type="link"
-                  style={{ color: 'red', marginTop: '10px' }}
-                  onClick={removeImage}
-                >
-                  Remove Image
-                </Button>
-              </div>
-            )}
-          </Form.Item>
+       
 
           <Form.Item
             label="Quantity"
@@ -230,6 +206,47 @@ const SellerAddProduct = () => {
             rules={[{ required: true, message: 'Please enter the product ID' }]}
           >
             <Input placeholder="Enter product ID" />
+          </Form.Item>
+
+             {/* Image Dropzone */}
+             <Form.Item
+            label="Product Image"
+            required
+            help={!imageUrl && 'Please upload an image'}
+          >
+            {!imageUrl ? (
+              <div
+                {...getRootProps()}
+                style={{
+                  border: '2px dashed #d9d9d9',
+                  padding: '20px',
+                  textAlign: 'center',
+                  background: isDragActive ? '#fafafa' : '',
+                  cursor: 'pointer',
+                }}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop the image here ...</p>
+                ) : (
+                  <p>Drag & drop an image here, or click to select one</p>
+                )}
+              </div>
+            ) : (
+              <Card
+                hoverable
+                style={{ width: 240, marginTop: '10px' }}
+                cover={<img alt="Uploaded Product" src={imageUrl} style={{ objectFit: 'contain', height: 200 }} />}
+              >
+                <Button
+                  type="link"
+                  style={{ color: 'red', marginTop: '10px' }}
+                  onClick={removeImage}
+                >
+                  Remove Image
+                </Button>
+              </Card>
+            )}
           </Form.Item>
         </Col>
       </Row>

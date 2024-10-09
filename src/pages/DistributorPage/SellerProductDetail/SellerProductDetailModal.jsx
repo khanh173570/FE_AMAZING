@@ -41,10 +41,6 @@ const SellerProductDetailModal = ({ visible, onClose, productId, refreshData }) 
     }
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
   if (!productDetails) {
     return null; // Return nothing if there are no details
   }
