@@ -32,13 +32,16 @@
     font-weight: bold;
   }
 
-.cart-icon {
-  font-size: 45px;
-  cursor: pointer;
-  margin-left: 150px; /* Khoảng cách với các phần tử bên trái, không chạm vào rìa */
-  margin-right: 45px;
-  margin-bottom: 15px; 
+  .cart-icon {
+    font-size: 45px;
+    cursor: pointer;
+    margin-left: 150px; /* Khoảng cách với các phần tử bên trái */
+    margin-right: 45px;
+    margin-bottom: 15px; 
+    position: relative;
+
 }
+
 .cart-icon:hover {
   color: red; /* Màu hover khi di chuột */
 }

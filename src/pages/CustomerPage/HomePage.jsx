@@ -578,7 +578,7 @@ class HomePage extends Component {
             <div className="additional-column">
 
               <div className="order-summary">
-                <div style={{ maxHeight: '350px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ maxHeight: '250px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
                   <table className="table_order" style={{ borderCollapse: 'separate' }}>
                     <thead>
                       <tr>
@@ -881,16 +881,17 @@ class HomePage extends Component {
                 </div>
                 {selectedProducts.length > 0 && (
                   <div className="total">
-                    <div className="price">
-                      <p>Total: {this.formatCurrency(totalAmount)}</p>
-                    </div>
+   
                     <button
                       className="checkout-button"
                       onClick={this.handlePayment}
-                      style={{ marginLeft: '0' }} // Tắt margin-left bằng inline style
+                      style={{ marginLeft: '4%' }} // Tắt margin-left bằng inline style
                     >
                       Thanh toán
                     </button>
+                    <div className="price">
+                      <p>Total: {this.formatCurrency(totalAmount)}</p>
+                    </div>
 
                   </div>
                 )}
