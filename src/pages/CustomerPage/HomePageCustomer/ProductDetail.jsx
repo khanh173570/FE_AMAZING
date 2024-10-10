@@ -9,7 +9,7 @@ const ProductDetailHome = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${id}`);
+        const response = await fetch(`https://666a8f987013419182cfc970.mockapi.io/api/example/${id}`);
         const result = await response.json();
         setProduct(result);
       } catch (error) {

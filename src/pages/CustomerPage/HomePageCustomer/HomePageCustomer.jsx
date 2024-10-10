@@ -126,6 +126,7 @@ const HomePageCustomer = () => {
                     variant="top"
                     src={item.img}
                     alt={item.name}
+                    style={{ height: '250px', objectFit: 'cover' }}
                     className="card-img-top"
                   />
                   <Card.Body>

@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CensorPages.css";
 import { Pagination } from "../../components/Pagination/Pagination.jsx";
+import { purple } from "@mui/material/colors";
 
 const CensorPage = () => {
   const [data, setData] = useState([]);
@@ -124,53 +125,100 @@ const CensorPage = () => {
           className="col-md-6 search"
           style={{ display: "flex", alignItems: "center" }}
         >
-          <Form.Control
-            type="text"
-            placeholder="Tìm kiếm theo tên hoặc danh mục"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ marginRight: "10px", width: "450px", textAlign: "center" }}
-          />
-          <Button variant="primary" onClick={handleSearch}>
-            Search
-          </Button>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Form.Control
+              type="text"
+              placeholder="Tìm kiếm theo tên hoặc danh mục"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{ width: "450px", textAlign: "center" }}
+            />
+            <Button onClick={handleSearch} style={{marginBottom:"20px"}}>
+              Search
+            </Button>
+          </div>
         </div>
       </div>
 
       <div className="border-container">
-      <div style={{ backgroundColor: "red", textAlign: "center", height: "100px", lineHeight: "100px",color:"white", fontSize: "50px" }}>
-    Danh Sách Sản Phẩm Đang Chờ Duyệt
-</div>
+        <div
+          style={{
+            backgroundColor: "red",
+            textAlign: "center",
+            height: "100px",
+            lineHeight: "100px",
+            color: "white",
+            fontSize: "50px",
+          }}
+        >
+          Danh Sách Sản Phẩm Đang Chờ Duyệt
+        </div>
 
         <Table striped bordered hover>
           <thead className="header-row">
             <tr style={{ textAlign: "center" }}>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white" }}>
+              <th className="tth"
+                style={{
+                  backgroundColor: "purple",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 Tên Sản Phẩm
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
+              <th  className="tth"
+                style={{
+                  backgroundColor: "purple",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 Nghệ Nhân
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
+              <th  className="tth"
+                style={{
+                  backgroundColor: "purple",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 Mã Sản Phẩm
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
+              <th  className="tth"
+                style={{
+                  backgroundColor: "purple",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 Giá Trị
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center", color:"white"  }}>
+              <th  className="tth"
+                style={{
+                  backgroundColor: "purple",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 Phân Loại
               </th>
-              <th style={{ backgroundColor: "#CFCFCF", textAlign: "center" , color:"white" }}>
+              <th  className="tth"
+                style={{
+                  backgroundColor: "purple",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
                 Trạng Thái
               </th>
-              <th
+              <th  className="tth"
                 style={{
-                  backgroundColor: "#CFCFCF",
+                  backgroundColor: "purple",
                   textAlign: "center",
-                  width: "250px"
-                  , color:"white" 
+                  width: "250px",
+                  color: "white",
                 }}
-               >
+              >
                 Hành Động
               </th>
             </tr>
@@ -182,16 +230,16 @@ const CensorPage = () => {
                 currentPage * postsPerPage
               )
               .map((item) => (
-                <tr key={item.id}>
-                  <td style={{ textAlign: "center" }}>{item.name}</td>
-                  <td style={{ textAlign: "center" }}>{item.artist}</td>
-                  <td style={{ textAlign: "center" }}>{item.id}</td>
-                  <td style={{ textAlign: "center" }}>${item.price}</td>
-                  <td style={{ textAlign: "center" }}>{item.type}</td>
-                  <td style={{ textAlign: "center" }}>{item.status}</td>
+                <tr key={item.id} className="tdd">
+                  <td style={{ textAlign: "center", verticalAlign: "middle"}}>{item.name}</td>
+                  <td style={{ textAlign: "center", verticalAlign: "middle" }}>{item.artist}</td>
+                  <td style={{ textAlign: "center", verticalAlign: "middle" }}>{item.id}</td>
+                  <td style={{ textAlign: "center",verticalAlign: "middle" }}>${item.price}</td>
+                  <td style={{ textAlign: "center",verticalAlign: "middle" }}>{item.type}</td>
+                  <td style={{ textAlign: "center",verticalAlign: "middle" }}>{item.status}</td>
                   <td style={{ display: "flex", justifyContent: "center" }}>
                     <Link to={`/censor/product/${item.id}`}>
-                      <Button variant="info" style={{ marginRight: "10px" }}>
+                      <Button variant="info" style={{ marginRight: "10px", marginBottom:"20px" }}>
                         Xem Chi Tiết
                       </Button>
                     </Link>
