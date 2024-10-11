@@ -15,9 +15,10 @@
     align-items: center;
     padding: 10px 20px;
     background-color: #f8f8f8;
+    overflow: hidden; /* Đảm bảo không có phần tử nào vượt quá giới hạn */
   }
 .header-logo {
-    width: 190px; /* Kích thước ảnh logo */
+    width: 150px !important; /* Kích thước ảnh logo */
     height: 120px;
     flex: 0 0 auto; /* Không cho logo mở rộng */
     margin-right: 60px; /* Khoảng cách giữa logo và chữ */
@@ -25,7 +26,7 @@
 .nav ul {
     list-style: none;
     display: flex;
-    gap: 100px;
+    gap: 75px;
     margin: 0;
     padding: 0;
     white-space: nowrap;  /* Ngăn chặn việc ngắt dòng */
@@ -46,4 +47,28 @@
   }
 .icon:hover {
     transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
+  }
+  @media (max-width: 768px) {
+    .header {
+        padding: 10px 10px; /* Giảm padding */
+        flex-direction: row; 
+        align-items: center; /* Căn giữa cho các phần tử */
+    }
+  
+    .header-logo {
+        margin-right: 0; /* Bỏ khoảng cách bên phải */
+        margin-bottom: 10px; /* Thêm khoảng cách dưới logo */
+        width: 80px !important;
+        height: auto !important;  
+    }
+  
+    .nav ul {
+        flex-direction: row; /* Xếp theo chiều dọc */
+        gap: 5px !important; /* Khoảng cách giữa các mục */
+        width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+    }
+  
+    .nav li {
+        font-size: 13px !important; /* Giảm kích thước chữ */
+    }
   }

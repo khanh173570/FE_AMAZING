@@ -3,7 +3,7 @@
     padding: 10px;
     text-align: left;
     border-top: 2px solid red;
-    min-height: 200px; /* Chiều cao tối thiểu của footer */
+    max-width: 100%; 
     display: flex;
     flex-direction: column; /* Đảm bảo nội dung xếp từ trên xuống dưới */
     justify-content: space-between; /* Đảm bảo phần nội dung được giãn đều */
@@ -45,23 +45,24 @@
     display: flex;
     justify-content: space-around; /* Căn các cột đều nhau */
     align-items: flex-start; /* Đẩy các cột lên phía trên */
-    gap: 70px; /* Tạo khoảng cách giữa các phần */
+    gap: 20px; /* Tạo khoảng cách giữa các phần */
     margin: 0;
     padding: 0; /* Xóa toàn bộ padding trong phần này */
 }
 
 .footer-contact, .footer-services, .footer-about, .footer-policy {
-    flex: 1;
-    padding: 0 15px;
-    margin: 0;
-    text-align: left; /* Căn trái cho tất cả các phần */
+    flex: 1 ;
+    padding: 0 15px ;
+    margin: 0 ;
+    text-align: left ; /* Căn trái cho tất cả các phần */
 }
 
 .footer-contact h4, .footer-services h4, .footer-about h4, .footer-policy h4{
     margin: 0; /* Xóa bỏ margin trên các tiêu đề để đẩy lên sát phần trên */
     padding: 0; /* Đảm bảo không có padding */
-    font-size: 16px;
+    font-size: 20px ;
     line-height: 1.5; /* Thay đổi giá trị này để điều chỉnh khoảng cách dòng */
+    text-align: center; 
 }
 
 .footer-contact p, .footer-services ul, .footer-about ul, .footer-policy ul {   
@@ -69,16 +70,18 @@
     line-height: 2.0; /* Thay đổi giá trị này để điều chỉnh khoảng cách dòng */
 }
 
-.footer-services ul, .footer-about ul, .footer-policy ul {
+.footer-services ul, .footer-about ul, .footer-policy ul{
     list-style-type: none;
     padding: 0;
+    text-align: center; 
 }
 
 .footer-services li, .footer-about li, .footer-policy li {
-    margin-bottom: 5px;
+    margin-bottom: 0.5px !important;
+    line-height: 0.3 !important;
 }
 .icon {
-    margin-right: px;
+    margin-right: 5px;
 }
 
 .icon-home::before {
@@ -93,10 +96,119 @@
     content: '✉️'; /* Biểu tượng email */
 }
 .footer-bottom {
-    width: 100%;
-    text-align: left; /* Căn trái cho nội dung */
-    padding: 10px;
+    width: 100% ;
+    text-align: center !important;
+    padding: 15px ;
     background-color: white;
     font-size: 16px;
     color: #666;
+}
+.footer-services li a, .footer-about li a, .footer-policy li a {
+    color: black; /* Màu mặc định */
+    text-decoration: none; /* Không gạch chân mặc định */
+    transition: color 0.3s, text-decoration 0.3s; /* Hiệu ứng chuyển màu */
+}
+.footer-services li a:hover, 
+.footer-about li a:hover, 
+.footer-policy li a:hover {
+    color: red; /* Đổi màu đỏ khi hover */
+    text-decoration: underline; /* Gạch chân khi hover */
+    text-decoration-color: red; /* Màu gạch chân là đỏ */
+}
+/* Media Queries để đảm bảo footer responsive */
+@media (max-width: 768px) {
+    .footer-section {
+        flex-direction: row; /* Xếp các cột theo chiều dọc */
+        gap: 5px !important; /* Khoảng cách giữa các cột */
+    }
+    .footer-contact, .footer-services li, .footer-about li, .footer-policy li {
+        padding: 0 !important; /* Bỏ padding bên trong cột */
+        text-align: center !important; /* Căn giữa cho các cột */
+        font-size: 12px !important;
+    }
+    .footer-services li a, 
+    .footer-about li a, 
+    .footer-policy li a {
+        font-weight: normal; /* In đậm nội dung liên kết */
+        font-size: 13px; /* Kích thước chữ cho liên kết */
+        color: black; /* Màu mặc định */
+        transition: color 0.3s, text-decoration 0.3s;
+    }
+    .footer-services li a:hover, 
+    .footer-about li a:hover, 
+    .footer-policy li a:hover {
+        color: darkred; /* Đổi màu thành một màu tối hơn khi hover trên màn hình nhỏ */
+        text-decoration: underline; /* Gạch chân khi hover */
+}
+    .footer-contact h4, 
+    .footer-services h4, 
+    .footer-about h4, 
+    .footer-policy h4 {
+        font-size: 17px !important; /* Tăng kích thước tiêu đề cho dễ đọc */
+    }
+    .company-license
+    {
+        font-size: 13px !important;
+    }
+    .footer-gpkd
+    {
+        width: 120px !important;
+        height: auto !important;
+    }
+    .footer-bottom
+    {
+        font-size: 12px !important;
+    }
+    .company-name {
+        font-size: 20px !important; /* Giảm kích thước logo công ty trên màn hình nhỏ */
+    }
+}
+@media (max-width: 480px) {
+    .footer-section {
+        flex-direction: row; /* Xếp các cột theo chiều dọc */
+        gap: 5px !important; /* Khoảng cách giữa các cột */
+    }
+    .footer-services li a, 
+    .footer-about li a, 
+    .footer-policy li a {
+        font-weight: normal; /* In đậm nội dung liên kết */
+        font-size: 10px; /* Kích thước chữ cho liên kết */
+        color: black; /* Màu mặc định */
+        transition: color 0.3s, text-decoration 0.3s;
+    }
+    .footer-services li a:hover, 
+    .footer-about li a:hover, 
+    .footer-policy li a:hover {
+        color: darkred; /* Đổi màu thành một màu tối hơn khi hover trên màn hình nhỏ */
+        text-decoration: underline; /* Gạch chân khi hover */
+
+}
+    .footer-contact, .footer-services, .footer-about, .footer-policy {
+        padding: 0; /* Bỏ padding bên trong cột */
+        text-align: center; /* Căn giữa cho các cột */
+        font-size: 10px !important;
+    }
+
+    .footer-contact h4, 
+    .footer-services h4, 
+    .footer-about h4, 
+    .footer-policy h4 {
+        font-size: 10px !important; /* Tăng kích thước tiêu đề cho dễ đọc */
+    }
+    .company-license
+    {
+        font-size: 10px !important;
+    }
+    .footer-gpkd
+    {
+        width: 80px !important;
+        height: auto !important;
+    }
+    .footer-bottom
+    {
+        font-size: 10px !important;
+    }
+    .company-name {
+        font-size: 13px !important; /* Giảm kích thước logo công ty trên màn hình nhỏ */
+    }
 }

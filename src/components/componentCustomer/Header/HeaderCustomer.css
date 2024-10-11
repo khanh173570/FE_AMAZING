@@ -1,5 +1,5 @@
 
-.header {
+.headerr {
     width: 100%;    
     display: flex;
     justify-content: space-between;
@@ -9,15 +9,15 @@
     overflow: hidden; /* Đảm bảo không có phần tử nào vượt quá giới hạn */
   }
 .header-logo {
-    width: 190px; /* Kích thước ảnh logo */
+    width: 150px; /* Kích thước ảnh logo */
     height: 120px;
     flex: 0 0 auto; /* Không cho logo mở rộng */
-    margin-right: 60px; /* Khoảng cách giữa logo và chữ */
+    margin-right: 50px; /* Khoảng cách giữa logo và chữ */
 }
 .nav ul {
     list-style: none;
     display: flex;
-    gap: 115px !important;
+    gap: 150px;
     margin: 0;
     padding: 0;
     white-space: nowrap;  /* Ngăn chặn việc ngắt dòng */
@@ -28,16 +28,16 @@
     display: flex;         /* Để căn giữa nội dung bên trong */
     flex-direction: column; /* Để icon và text nằm trên cùng một trục */
     align-items: center;   /* Căn giữa theo chiều dọc */
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
   }
 
   .cart-icon {
-    font-size: 45px;
+    font-size: 35px;
     cursor: pointer;
     margin-left: 150px; /* Khoảng cách với các phần tử bên trái */
-    margin-right: 45px;
-    margin-bottom: 15px; 
+    margin-right: 55px;
+    margin-bottom: 10px; 
     position: relative;
 
 }
@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   border-radius: 5px; /* Bo tròn góc cho cả hai */
   transition: background-color 0.3s ease;
@@ -66,7 +66,6 @@
   text-decoration: underline; /* Gạch chân khi hover */
   text-decoration-color: red; /* Màu gạch chân */
   transform: scale(1.1); /* Phóng to lên 10% khi hover */
-
 }
 
 /* Dành riêng cho Link bên trong div */
@@ -81,7 +80,7 @@
   align-items: center;
   gap: 5px; /* Khoảng cách giữa icon và text */
 }
-.header {
+.headerr {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -92,6 +91,7 @@
 .nav ul {
   display: flex;
   list-style: none;
+  gap: 120px !important;
 }
 
 .nav ul li {
@@ -101,10 +101,10 @@
 .user-icon {
   position: relative; /* Needed for dropdown positioning */
   cursor: pointer;
-  font-size: 45PX;
+  font-size: 35PX;
   margin-left: 10px; /* Khoảng cách với giỏ hàng */
   transition: color 0.3s;
-  margin-bottom: 15px; 
+  margin-bottom: 10px; 
 }
 .user-icon:hover {
   color: red; /* Màu hover khi di chuột */
@@ -126,4 +126,74 @@
 
 .dropdown div:hover {
   background-color: #f0f0f0; /* Change background on hover */
+}
+@media (max-width: 768px) {
+  .headerr {
+      padding: 10px 10px; /* Giảm padding */
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+  }
+
+  .header-logo {
+      margin-right: 0; /* Bỏ khoảng cách bên phải */
+      margin-bottom: 10px; /* Thêm khoảng cách dưới logo */
+      width: 80px !important;
+      height: auto !important;  
+  }
+
+  .nav ul {
+      flex-direction: row; /* Xếp theo chiều dọc */
+      width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  }
+  .nav div, .nav li {
+    font-size: 14px;
+  }
+
+  .cart-icon {
+    font-size: 25px !important;
+      margin-bottom: 10px; /* Thêm khoảng cách dưới giỏ hàng */
+      margin-left: 100px; 
+  }
+
+  .user-icon {
+    font-size: 25px !important; 
+      margin-left: 2px; 
+  }
+}
+@media (max-width: 480px) {
+  .header {
+      padding: 10px 10px; /* Giảm padding */
+      flex-direction: row; 
+      align-items: flex-start; /* Căn trái cho các phần tử */
+  }
+
+  .header-logo {
+      margin-right: 0; /* Bỏ khoảng cách bên phải */
+      margin-bottom: 10px; /* Thêm khoảng cách dưới logo */
+      width: 80px;
+      height: auto !important;  
+  }
+
+  .nav ul {
+      display: flex; /* Sử dụng flexbox */
+      justify-content: center; /* Căn giữa menu */
+      flex-direction: row; /* Xếp theo chiều dọc */
+      gap: 5px  ; /* Khoảng cách giữa các mục */
+      width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+
+  }
+
+  .nav li {
+      font-size: 19px !important; /* Giảm kích thước chữ */
+  }
+
+  .cart-icon {
+      margin-left: 0; /* Bỏ khoảng cách bên trái */
+      margin-bottom: 10px; /* Thêm khoảng cách dưới giỏ hàng */
+  }
+
+  .user-icon {
+      margin-left: 0; /* Bỏ khoảng cách bên trái */
+  }
 }

@@ -17,7 +17,7 @@
       background-color: #f8f8f8;
     }
   .header-logo {
-      width: 190px; /* Kích thước ảnh logo */
+      width: 150px; /* Kích thước ảnh logo */
       height: 120px;
       flex: 0 0 auto; /* Không cho logo mở rộng */
       margin-right: 60px; /* Khoảng cách giữa logo và chữ */
@@ -25,7 +25,7 @@
   .nav ul {
       list-style: none;
       display: flex;
-      gap: 100px;
+      gap: 75px;
       margin: 0;
       padding: 0;
       white-space: nowrap;  /* Ngăn chặn việc ngắt dòng */
