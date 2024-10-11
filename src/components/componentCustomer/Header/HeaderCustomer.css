@@ -1,5 +1,5 @@
 
-.headerr {
+.header {
     width: 100%;    
     display: flex;
     justify-content: space-between;
@@ -80,7 +80,7 @@
   align-items: center;
   gap: 5px; /* Khoảng cách giữa icon và text */
 }
-.headerr {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;

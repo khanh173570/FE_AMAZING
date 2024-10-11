@@ -63,7 +63,7 @@ const HeaderCustomer = () => {
 
     return (
         <div>
-            <header className="headerr">
+            <header className="header">
                 <img src={companyLogo} alt="Logo Công ty" className="header-logo" />
                 <nav className="nav">
                     <ul>

@@ -26,7 +26,7 @@
 .nav ul {
     list-style: none;
     display: flex;
-    gap: 75px;
+    gap: 70px !important;
     margin: 0;
     padding: 0;
     white-space: nowrap;  /* Ngăn chặn việc ngắt dòng */
