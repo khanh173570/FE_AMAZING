@@ -36,12 +36,14 @@ function StaffPage() {
         <ul className="sidenav-top">
           <li>
             <Link to="/staff">
-              <LuPackageOpen className="icon" /> {isSidebarOpen && 'Sản phẩm'}
+              <LuPackageOpen className="icon" />
+              <span className="link-text">{isSidebarOpen && 'Sản phẩm'}</span>
             </Link>
           </li>
           <li>
             <Link to="/staff/censorstaff">
-              <FaRegUser className="icon" /> {isSidebarOpen && 'Người kiểm duyệt'}
+              <FaRegUser className="icon" />
+              <span className="link-text">{isSidebarOpen && 'Người kiểm duyệt'}</span>
             </Link>
           </li>
         </ul>
@@ -49,7 +51,8 @@ function StaffPage() {
         <ul className="sidenav-bottom">
           <li>
             <Link to="#" onClick={handleLogout}>
-              <MdOutlineLogout className="icon" /> {isSidebarOpen && 'Đăng xuất'}
+              <MdOutlineLogout className="icon" />
+              <span className="link-text">{isSidebarOpen && 'Đăng xuất'}</span>
             </Link>
           </li>
         </ul>

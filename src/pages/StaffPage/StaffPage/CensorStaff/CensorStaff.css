@@ -7,6 +7,7 @@
 }
 
 .stafftable-actions {
+    margin-top: -18px;
     display: flex;
     justify-content: space-between;
 }
@@ -20,7 +21,7 @@
     cursor: pointer;
 }
 
-.add-staff-btn:hover{
+.add-staff-btn:hover {
     background: #543f3f;
 }
 
@@ -67,7 +68,7 @@
 }
 
 
-.search-bar-staff button:hover{
+.search-bar-staff button:hover {
     background: #543f3f;
 }
 
@@ -93,6 +94,13 @@
     padding: 4px 0 4px 10px;
 }
 
+.stafftable-second-row input[type="checkbox"] {
+    display: block;
+    margin: 0 auto;
+    /* This will center the checkbox */
+    transform: scale(1.3);
+}
+
 .producttable-first-row {
     background-color: #483434;
     color: white;
@@ -109,7 +117,7 @@
 
 
 .delete-btn:hover,
-.edit-btn:hover{
+.edit-btn:hover {
     background: #e0e0e0;
     border-radius: 50%;
     transition: background-color 0.3s ease;
@@ -135,7 +143,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2000; /* Higher z-index */
+    z-index: 2000;
+    /* Higher z-index */
 }
 
 .confirm-modal-content {
@@ -162,7 +171,7 @@
     color: #fff;
 }
 
-.details-modal{
+.details-modal {
     display: flex;
     flex-direction: column;
 }
@@ -189,7 +198,7 @@
     text-align: center;
 }
 
-.details-modal-content{
+.details-modal-content {
     display: flex;
     justify-content: space-between;
     gap: 20px;
@@ -200,12 +209,12 @@
     height: 30%;
 }
 
-.details-modal-content div{
+.details-modal-content div {
     display: flex;
     flex-direction: column;
 }
 
-.name-btn{
+.name-btn {
     cursor: pointer;
 }
 
@@ -225,7 +234,7 @@
     margin: 13px 20px;
 }
 
-.close1{
+.close1 {
     position: absolute;
     font-size: 24px;
     cursor: pointer;
@@ -236,14 +245,14 @@
 }
 
 .detail-left,
-.detail-right{
+.detail-right {
     display: flex;
     flex-direction: column;
     flex: 1;
     gap: 15px;
 }
 
-.modal-buttons1{
+.modal-buttons1 {
     background-color: #fff;
     margin-top: -35px;
     padding-bottom: 15px;
@@ -268,9 +277,49 @@
     background-color: #624848;
 }
 
-.edit-button1 a{
+.edit-button1 a {
     color: #fff;
     text-decoration: none;
+}
+
+.stafftable-checkbox {
+    transform: scale(1.2);
+    /* Increase size of individual checkboxes */
+    cursor: pointer;
+}
+
+.picked-count {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.picked-count p {
+    margin: 0;
+    margin-top: 20px;
+}
+
+.delete-all-btn {
+    background-color: #483434;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px; /* Add some space between the text and the button */
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-all-btn:hover {
+    background-color: #543f3f;
+}
+
+.delete-all-btn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 
@@ -278,22 +327,28 @@
     .stafftable {
         width: 80%;
     }
-    .search-bar-staff button{
+
+    .search-bar-staff button {
         width: 6%;
     }
-    .add-staff-btn{
+
+    .add-staff-btn {
         width: 30%;
     }
-    .add-staff-btn a{
+
+    .add-staff-btn a {
         font-size: 13px;
         align-items: center;
         margin-top: 10px;
     }
-    .producttable-first-row, .stafftable-second-row{
+
+    .producttable-first-row,
+    .stafftable-second-row {
         font-size: 15px;
     }
+
     .edit-btn,
-    .delete-btn{
+    .delete-btn {
         font-size: 19px;
     }
 }
@@ -302,25 +357,32 @@
     .stafftable {
         width: 80%;
     }
-    .search-bar-staff button{
+
+    .search-bar-staff button {
         width: 12%;
     }
-    .search-bar-staff input{
+
+    .search-bar-staff input {
         width: 200px;
     }
-    .add-staff-btn{
+
+    .add-staff-btn {
         width: 40%;
     }
-    .add-staff-btn a{
+
+    .add-staff-btn a {
         font-size: 13px;
         align-items: center;
         margin-top: 10px;
     }
-    .producttable-first-row, .stafftable-second-row{
+
+    .producttable-first-row,
+    .stafftable-second-row {
         font-size: 12px;
     }
+
     .edit-btn,
-    .delete-btn{
+    .delete-btn {
         font-size: 15px;
     }
 }
@@ -329,39 +391,127 @@
     .stafftable {
         width: 80%;
     }
-    .search-bar-staff button{
+
+    .search-bar-staff button {
         width: 2%;
         margin-right: 150px;
     }
-    .search-bar-staff input{
+
+    .search-bar-staff input {
         width: 200px;
     }
-    .add-staff-btn{
+
+    .add-staff-btn {
         margin-left: -100px;
         width: 50%;
     }
-    .add-staff-btn a{
+
+    .add-staff-btn a {
         font-size: 13px;
         align-items: center;
         margin-top: 10px;
     }
-    .producttable-first-row, .stafftable-second-row{
+
+    .producttable-first-row,
+    .stafftable-second-row {
         font-size: 15px;
     }
+
     .edit-btn,
-    .delete-btn{
+    .delete-btn {
         font-size: 19px;
     }
 }
 
 @media (max-width: 640px) {
-    .stafftable-table {
-        width: 30%;
-    }
-    .stafftable-table-section{
+    .search-bar-staff button {
         width: 10%;
     }
-    .search-bar-staff button{
-        width: 10%;
+}
+
+/* Media queries for screen sizes 425px and below */
+@media (max-width: 427px) {
+
+    .producttable-first-row,
+    .stafftable-second-row {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .name-btn {
+        font-size: 14px;
+    }
+
+    .stafftable-checkbox {
+        width: 18px;
+        height: 18px;
+    }
+
+    .stafftable {
+        margin: 0 5px;
+    }
+
+    .stafftable-thead-section {
+        display: none;
+        /* Hide the header for smaller screens */
+    }
+
+    .stafftable-tr-section {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .stafftable-second-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+    }
+
+    .stafftable-second-row:before {
+        content: attr(data-label);
+        /* Display the label from the "data-label" attribute */
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .delete-btn,
+    .edit-btn {
+        font-size: 18px;
+    }
+
+    .stafftable-actions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-staff-btn {
+        margin-left: 30px;
+        width: 70%;
+    }
+
+    .search-bar-staff input {
+        width: 800px;
+    }
+}
+
+/* For even smaller screens (320px and below) */
+@media (max-width: 320px) {
+
+    .producttable-first-row,
+    .stafftable-second-row {
+        font-size: 12px;
+        padding: 4px;
+    }
+
+    .stafftable-checkbox {
+        width: 15px;
+        height: 15px;
+    }
+
+    .stafftable-second-row:before {
+        font-size: 12px;
     }
 }

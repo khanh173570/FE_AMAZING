@@ -6,7 +6,7 @@
 .sidenav {
     background: #483434;
     position: relative;
-    height: 100vh;
+    height: auto;
     transition: all 0.3s ease;
     overflow: hidden;
     padding: 0 20px;
@@ -14,11 +14,13 @@
 
 .sidenav.open {
     width: 20% !important;
+    height: auto;
 }
 
 .sidenav.closed {
     width: 95px !important;
     padding: 0 10px !important;
+    height: auto;
 }
 
 ul {
@@ -40,7 +42,6 @@ ul li a {
     font-family: sans-serif;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     transition: background-color 0.3s ease;
 }
 
@@ -82,8 +83,64 @@ ul li a {
     z-index: 1;
 }
 
-@media (max-width: 1280px) {
-    .sidenav.open .sidenav-top ul li a{
-        font-size: 1px;
+
+@media (max-width: 1440px) {
+    .sidenav{
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .icon,
+    .link-text{
+        font-size: 13px;
+    }
+
+    .sidenav-top li a,
+    .sidenav-bottom li a{
+        margin: -7px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .link-text {
+        display: none;
+        /* Hide the text */
+    }
+
+    .sidenav-top li,
+    .sidenav-bottom li {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .sidenav.open {
+        width: 15% !important;
+    }
+
+}
+
+@media (max-width: 427px) {
+    .link-text {
+        display: none;
+        /* Hide the text */
+    }
+
+    .sidenav-top li{
+        margin-left: -10px;
+    }
+    
+    .sidenav-bottom li {
+        margin-left: -20px;
+    }
+
+    .sidenav.open {
+        width: 20% !important;
+    }
+
+    .sidenav-bottom li a {
+        font-size: 17px;
+        margin-right: -20px;
     }
 }

@@ -12,7 +12,10 @@ const ProductTable = () => {
     const [selectedProductId, setSelectedProductId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false); // State for confirmation popup
+    const [isConfirmUploadAllOpen, setIsConfirmUploadAllOpen] = useState(false); // State for upload all confirmation popup
     const [productToUpload, setProductToUpload] = useState(null); // Product to be uploaded
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,10 +25,10 @@ const ProductTable = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570');
-                
+
                 // Filter products by status 'accepted'
                 const acceptedProducts = response.data.filter(product => product.status === 'Accepted');
-                
+
                 setProducts(acceptedProducts);
                 setFilteredProducts(acceptedProducts); // Initially set filtered products to accepted products
             } catch (error) {
@@ -57,17 +60,14 @@ const ProductTable = () => {
         try {
             // Upload the product to the second API link
             await axios.post('https://666a8f987013419182cfc970.mockapi.io/api/example', productToUpload);
-    
-            // After successful upload, delete the product from the original MockAPI
-            await axios.delete(`https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productToUpload.id}`);
-    
+
             // Remove the deleted product from the table by updating the products and filteredProducts states
             const updatedProducts = products.filter(product => product.id !== productToUpload.id);
             const updatedFilteredProducts = filteredProducts.filter(product => product.id !== productToUpload.id);
-    
+
             setProducts(updatedProducts); // Update the products state
             setFilteredProducts(updatedFilteredProducts); // Update the filtered products state
-    
+
             alert('Sản phẩm đã được tải lên và xóa thành công!');
         } catch (error) {
             console.error('Error uploading or deleting product:', error);
@@ -77,7 +77,52 @@ const ProductTable = () => {
             setProductToUpload(null); // Clear the product to upload
         }
     };
-    
+
+    const handleConfirmUploadAll = async () => {
+        try {
+            // Loop through selected products and upload each one
+            for (const productId of selectedProducts) {
+                const product = products.find(p => p.id === productId);
+
+                // Upload product to the second API link
+                await axios.post('https://666a8f987013419182cfc970.mockapi.io/api/example', product);
+            }
+
+            // Update the UI by removing uploaded products
+            const updatedProducts = products.filter(product => !selectedProducts.includes(product.id));
+            setProducts(updatedProducts);
+            setFilteredProducts(updatedProducts);
+            setSelectedProducts([]); // Clear selected products after upload
+
+            alert('Tất cả sản phẩm đã được tải lên và xóa thành công!');
+        } catch (error) {
+            console.error('Error uploading or deleting products:', error);
+            alert('Có lỗi xảy ra khi tải lên hoặc xóa sản phẩm.');
+        } finally {
+            setIsConfirmUploadAllOpen(false); // Close the confirmation popup
+        }
+    };
+
+    const handleUploadAllClick = () => {
+        setIsConfirmUploadAllOpen(true); // Open confirmation popup for uploading all
+    };
+
+    const handleSelectAll = () => {
+        if (selectAll) {
+            setSelectedProducts([]); // Deselect all products
+        } else {
+            setSelectedProducts(currentProducts.map((product) => product.id)); // Select all products
+        }
+        setSelectAll(!selectAll); // Toggle select all state
+    };
+
+    const handleSelectProduct = (id) => {
+        if (selectedProducts.includes(id)) {
+            setSelectedProducts(selectedProducts.filter(productId => productId !== id)); // Deselect product
+        } else {
+            setSelectedProducts([...selectedProducts, id]); // Select product
+        }
+    };
 
     const handleProductClick = (productId) => {
         setSelectedProductId(productId);
@@ -96,6 +141,7 @@ const ProductTable = () => {
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const isAllSelected = currentProducts.length > 0 && selectedProducts.length === currentProducts.length;
 
     return (
         <div className='producttable'>
@@ -106,43 +152,61 @@ const ProductTable = () => {
                     <input
                         type="text"
                         placeholder='Nhập từ khóa tìm kiếm'
-                        value={searchTerm} // Bind the input value to searchTerm state
-                        onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm on change
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button onClick={handleSearch}><AiOutlineSearch /></button>
                 </div>
             </div>
+
             <div className="producttable-table">
                 <table className='producttable-table-section'>
-                    <thead className='stafftable-thead-section'>
-                        <tr>
+                    <thead className='producttable-thead-section'>
+                        <tr className='producttable-tr-section'>
+                            {/* Select All checkbox in the header */}
+                            <th className='producttable-first-row' style={{ textAlign: 'center' }}>
+                                <input
+                                    className='producttable-checkbox'
+                                    type="checkbox"
+                                    onChange={handleSelectAll}
+                                    checked={isAllSelected}
+                                />
+                            </th>
                             <th className='producttable-first-row'>Tên sản phẩm</th>
                             <th className='producttable-first-row'>Chất liệu</th>
-                            <th className='producttable-first-row'>Gía</th>
+                            <th className='producttable-first-row'>Giá</th>
                             <th className='producttable-first-row'>Nghệ nhân</th>
                             <th className='producttable-first-row'>Trạng thái</th>
                             <th className='producttable-first-row'>Hành động</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='producttable-tbody-section'>
                         {currentProducts.map((product) => (
                             <tr key={product.id}>
-                                <td className='producttable-second-row'>
-                                    <span 
-                                        className="product-name" 
+                                <td className='producttable-second-row' data-label="Chọn" style={{ textAlign: 'center' }}>
+                                    <input
+                                        type="checkbox"
+                                        className='producttable-checkbox'
+                                        checked={selectedProducts.includes(product.id)}
+                                        onChange={() => handleSelectProduct(product.id)}
+                                    />
+                                </td>
+                                <td className='producttable-second-row' data-label="Tên sản phẩm">
+                                    <span
+                                        className="product-name"
                                         onClick={() => handleProductClick(product.id)}>
                                         {product.name}
                                     </span>
                                 </td>
-                                <td className='producttable-second-row'>{product.category}</td>
-                                <td className='producttable-second-row'>${product.price}</td>
-                                <td className='producttable-second-row'>{product.artist}</td>
-                                <td className='producttable-second-row'>{product.status}</td>
-                                <td className='producttable-second-row'>
+                                <td className='producttable-second-row' data-label="Chất liệu">{product.category}</td>
+                                <td className='producttable-second-row' data-label="Giá">${product.price}</td>
+                                <td className='producttable-second-row' data-label="Nghệ nhân">{product.artist}</td>
+                                <td className='producttable-second-row' data-label="Trạng thái">{product.status}</td>
+                                <td className='producttable-second-row' data-label="Hành động">
                                     <button className="upload-btn" onClick={() => handleUploadClick(product)}>
                                         <AiOutlineCloudUpload />
                                     </button>
-                                    <button className="edit-btn" >
+                                    <button className="edit-btn">
                                         <Link to={`/staff/editproduct/${product.id}`}>
                                             <AiOutlineEdit />
                                         </Link>
@@ -154,23 +218,41 @@ const ProductTable = () => {
                 </table>
             </div>
 
-            {/* Pagination controls */}
-            <div className="pagination">
-                {Array.from({ length: Math.ceil(filteredProducts.length / productsPerPage) }, (_, i) => (
+            {/* Pagination and selected product count */}
+            <div className="pagination-wrapper">
+                <div className="selected-and-upload-container">
+                    {/* Display number of selected products */}
+                    <p>{selectedProducts.length} sản phẩm đã được chọn</p>
+
+                    {/* Upload all selected products button */}
                     <button
-                        key={i + 1}
-                        onClick={() => paginate(i + 1)}
-                        className={currentPage === i + 1 ? 'active' : ''}
+                        className={`upload-all-btn ${selectedProducts.length === 0 ? 'disabled' : ''}`}
+                        onClick={handleUploadAllClick}
+                        disabled={selectedProducts.length === 0} // Disable when no products are selected
                     >
-                        {i + 1}
+                        Tải lên tất cả
                     </button>
-                ))}
+                </div>
+
+                {/* Pagination controls */}
+                <div className="pagination">
+                    {Array.from({ length: Math.ceil(filteredProducts.length / productsPerPage) }, (_, i) => (
+                        <button
+                            key={i + 1}
+                            onClick={() => paginate(i + 1)}
+                            className={currentPage === i + 1 ? 'active' : ''}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                </div>
             </div>
 
+
             {isModalOpen && (
-                <ProductDetailModal 
-                    productId={selectedProductId} 
-                    onClose={handleCloseModal} 
+                <ProductDetailModal
+                    productId={selectedProductId}
+                    onClose={handleCloseModal}
                 />
             )}
 
@@ -182,6 +264,18 @@ const ProductTable = () => {
                         <p>Bạn có chắc chắn muốn tải lên sản phẩm này không?</p>
                         <button onClick={handleConfirmUpload}>Xác nhận</button>
                         <button onClick={() => setIsConfirmOpen(false)}>Hủy</button>
+                    </div>
+                </div>
+            )}
+
+            {/* Confirmation Popup for uploading all selected products */}
+            {isConfirmUploadAllOpen && (
+                <div className="confirm-popup">
+                    <div className="confirm-popup-content">
+                        <h3>Xác nhận</h3>
+                        <p>Bạn có chắc chắn muốn tải tất cả sản phẩm đã chọn lên không?</p>
+                        <button onClick={handleConfirmUploadAll}>Xác nhận</button>
+                        <button onClick={() => setIsConfirmUploadAllOpen(false)}>Hủy</button>
                     </div>
                 </div>
             )}
