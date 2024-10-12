@@ -3,6 +3,7 @@ import axios from 'axios';
 import './CensorStaff.css';
 import { AiOutlineSearch, AiOutlineEdit, AiOutlinePlus, AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 
 const StaffTable = () => {
   const [staff, setStaff] = useState([]);
@@ -182,17 +183,22 @@ const StaffTable = () => {
                 <td className='stafftable-second-row' data-label="Email">{member.email}</td>
                 <td className='stafftable-second-row' data-label="Số điện thoại">{member.phone}</td>
                 <td className='stafftable-second-row' data-label="Hành động">
-                  <button className="edit-btn">
-                    <Link to={`/staff/editstaff/${member.id}`}>
-                      <AiOutlineEdit />
-                    </Link>
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => openConfirmModal(member.id)}
-                  >
-                    <AiOutlineDelete />
-                  </button>
+                  <Tooltip title="Chỉnh sửa" arrow>
+                    <button className="edit-btn">
+                      <Link to={`/staff/editstaff/${member.id}`}>
+                        <AiOutlineEdit />
+                      </Link>
+                    </button>
+                  </Tooltip>
+
+                  <Tooltip title="Xóa" arrow>
+                    <button
+                      className="delete-btn"
+                      onClick={() => openConfirmModal(member.id)}
+                    >
+                      <AiOutlineDelete />
+                    </button>
+                  </Tooltip>
                 </td>
               </tr>
             ))}
@@ -202,12 +208,12 @@ const StaffTable = () => {
         {/* Picked staff count, always visible */}
         <div className="picked-count">
           <p>{pickedStaff.length} nhân viên đã được chọn</p>
-            <button
-              className={`delete-all-btn ${pickedStaff.length === 0 ? 'disabled' : ''}`}
-              onClick={openDeleteAllConfirmModal}
-              disabled={pickedStaff.length === 0}>
-              Xóa tất cả
-            </button>         
+          <button
+            className={`delete-all-btn ${pickedStaff.length === 0 ? 'disabled' : ''}`}
+            onClick={openDeleteAllConfirmModal}
+            disabled={pickedStaff.length === 0}>
+            Xóa tất cả
+          </button>
         </div>
 
       </div>

@@ -136,11 +136,14 @@ ul li a {
     }
 
     .sidenav.open {
-        width: 20% !important;
+        width: 25% !important;
     }
 
     .sidenav-bottom li a {
         font-size: 17px;
         margin-right: -20px;
+    }
+    .toggle-button{
+        right: 10px;
     }
 }

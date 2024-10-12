@@ -164,3 +164,31 @@ p {
     background: #483434;
     color: #fff;
 }
+
+@media (max-width: 1025px) {
+    .modal-content{
+        width: 50%;
+        height: 90%;
+    }
+    .readonly-section{
+        font-size: 10px;
+    }
+    .product-info-label{
+        font-size: 10px;
+    }
+    .modal-buttons button{
+        font-size: 10px;
+        width: 20%;
+        height: 33px;
+    }
+    .modal-content h2{
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 426px) {
+    .modal-content{
+        width: 100%;
+        height: auto;
+    }
+}

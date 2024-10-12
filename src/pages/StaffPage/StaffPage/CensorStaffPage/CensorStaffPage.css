@@ -6,23 +6,26 @@
 .sidenav {
     background: #483434;
     position: relative;
-    height: 100vh;
+    height: auto;
     transition: all 0.3s ease;
     overflow: hidden;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
 .sidenav.open {
-    width: 17%;
+    width: 20% !important;
+    height: auto;
 }
 
 .sidenav.closed {
-    width: 85px;
-    padding: 0 10px;
+    width: 95px !important;
+    padding: 0 10px !important;
+    height: auto;
 }
 
 ul {
     padding: 0;
+    margin-left: -20px;
 }
 
 ul li {
@@ -34,12 +37,11 @@ ul li a {
     text-decoration: none;
     font-size: 15px;
     display: block;
-    padding: 12px 10px;
+    padding-left: 18px;
     border-radius: 8px;
     font-family: sans-serif;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     transition: background-color 0.3s ease;
 }
 
@@ -54,18 +56,17 @@ ul li a {
 }
 
 .icon {
-    margin-right: 10px;
     font-size: 18px;
-    margin-bottom: -3px;
+    margin-top: -5px;
 }
 
 .sidenav-bottom {
     margin-top: 450px;
-    margin-left: 13px;
+    margin-left: 10px;
 }
 
 .sidenav-top {
-    margin-left: 13px;
+    margin-left: 10px;
     margin-top: 90px;
 }
 
@@ -80,4 +81,66 @@ ul li a {
     padding: 10px;
     border-radius: 4px;
     z-index: 1;
+}
+
+
+@media (max-width: 1440px) {
+    .sidenav{
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .icon,
+    .link-text{
+        font-size: 13px;
+    }
+
+    .sidenav-top li a,
+    .sidenav-bottom li a{
+        margin: -7px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .link-text {
+        display: none;
+        /* Hide the text */
+    }
+
+    .sidenav-top li,
+    .sidenav-bottom li {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .sidenav.open {
+        width: 15% !important;
+    }
+
+}
+
+@media (max-width: 427px) {
+    .link-text {
+        display: none;
+        /* Hide the text */
+    }
+
+    .sidenav-top li{
+        margin-left: -10px;
+    }
+    
+    .sidenav-bottom li {
+        margin-left: -20px;
+    }
+
+    .sidenav.open {
+        width: 20% !important;
+    }
+
+    .sidenav-bottom li a {
+        font-size: 17px;
+        margin-right: -20px;
+    }
 }

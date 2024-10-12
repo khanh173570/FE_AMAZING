@@ -4,6 +4,7 @@ import './ProductTable.css'
 import { AiOutlineSearch, AiOutlineCloudUpload, AiOutlineEdit } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import ProductDetailModal from '../ProductDetailModal/ProductDetailModal'; // Import the modal component
+import { Tooltip } from '@mui/material';
 
 const ProductTable = () => {
     const [products, setProducts] = useState([]);
@@ -203,14 +204,19 @@ const ProductTable = () => {
                                 <td className='producttable-second-row' data-label="Nghệ nhân">{product.artist}</td>
                                 <td className='producttable-second-row' data-label="Trạng thái">{product.status}</td>
                                 <td className='producttable-second-row' data-label="Hành động">
-                                    <button className="upload-btn" onClick={() => handleUploadClick(product)}>
-                                        <AiOutlineCloudUpload />
-                                    </button>
-                                    <button className="edit-btn">
-                                        <Link to={`/staff/editproduct/${product.id}`}>
-                                            <AiOutlineEdit />
-                                        </Link>
-                                    </button>
+                                    <Tooltip title="Tải lên User" arrow>
+                                        <button className="upload-btn" onClick={() => handleUploadClick(product)}>
+                                            <AiOutlineCloudUpload />
+                                        </button>
+                                    </Tooltip>
+
+                                    <Tooltip title="Chỉnh sửa" arrow>
+                                        <button className="edit-btn">
+                                            <Link to={`/staff/editproduct/${product.id}`}>
+                                                <AiOutlineEdit />
+                                            </Link>
+                                        </button>
+                                    </Tooltip>
                                 </td>
                             </tr>
                         ))}
