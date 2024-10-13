@@ -262,23 +262,23 @@ class HomePage extends Component {
     }));
   };
 
-  handleUserProfileInputChange = (e) => {
-    this.setState({
+  handleUserProfileInputChange = (event) => {
+    const { name, value } = event.target;
+  
+    // Kiểm tra nếu giá trị không phải là số hoặc dài hơn 10 ký tự
+    if (!/^\d*$/.test(value) || value.length > 10) {
+      return; // Ngăn không cho cập nhật trạng thái nếu không hợp lệ
+    }
+  
+    // Cập nhật trạng thái nếu hợp lệ
+    this.setState(prevState => ({
       userProfileForm: {
-        ...this.state.userProfileForm,
-        [e.target.name]: e.target.value,
+        ...prevState.userProfileForm,
+        [name]: value,
       },
-    });
-  };
-
-  //   const { name, value } = e.target;
-  //   this.setState(prevState => ({
-  //     userProfileForm: {
-  //       ...prevState.userProfileForm,
-  //       [name]: value
-  //     }
-  //   }));
-  // };
+    }));
+  }
+  
 
 
   handleUserProfileSubmit = (e) => {
@@ -339,64 +339,89 @@ class HomePage extends Component {
     this.setState({ selectedItem: 'acceptpayment' });
   };
 
+
+
+
   handlePayment = async () => {
     const { products, selectedProducts } = this.state;
-
-    // Tính toán tổng số tiền từ các sản phẩm được chọn
+  
     const totalAmount = products
       .filter((product) => selectedProducts.includes(product.id))
       .reduce((total, product) => total + (product.price * product.quantity), 0);
-
+  
+    console.log("Total Amount:", totalAmount);
+  
     if (totalAmount <= 0) {
       toast.warn("Vui lòng chọn ít nhất một sản phẩm để thanh toán.");
       return;
     }
-
+  
     try {
-      // Cập nhật số lượng cho các sản phẩm được chọn
       await Promise.all(
         products
           .filter((product) => selectedProducts.includes(product.id))
           .map(product => this.updateProductQuantity(product.id, product.quantity))
       );
-
-      // Giữ lại sản phẩm chưa thanh toán
+  
       const remainingProducts = products.filter((product) => !selectedProducts.includes(product.id));
-
-      // Cập nhật state với sản phẩm còn lại và xóa lựa chọn
+      console.log("Remaining Products:", remainingProducts);
+  
       this.setState({ products: remainingProducts, selectedProducts: [] });
-
-      // Lưu sản phẩm còn lại vào localStorage
       localStorage.setItem('products', JSON.stringify(remainingProducts));
-
+  
+      const paidProductsData = products
+        .filter((product) => selectedProducts.includes(product.id))
+        .map(product => ({
+          nameDelete: product.name,
+          artistDelete: product.artist,
+          priceDelete: product.price,
+          typeDelete: product.type,
+          statusDelete: product.status,
+          imgDelete: product.img,
+          descriptionDelete: product.description,
+          categoryDelete: product.category,
+          quantityDelete: product.quantity,
+          detailDelete: product.detail,
+          idDelete: product.id,
+          totalDelete: product.price * product.quantity,
+        }));
+  
+      console.log("Paid Products Data:", paidProductsData);
+      const requestBody = {
+        products: paidProductsData
+      };
+  
+      console.log("Request Body:", requestBody);
+  
+      // Use axios to post data
+      const response = await axios.post('https://6692a166346eeafcf46da14d.mockapi.io/test', requestBody);
+  
+      console.log("Response Data:", response.data);
+      console.log("Response Status:", response.status);
+  
+      // Check response status
+      if (response.status !== 201) {
+        throw new Error(`Failed to save paid products: ${response.status} ${response.data}`);
+      }
+  
       toast.success("Thanh toán thành công!", {
         position: "top-right",
         autoClose: 2000,
       });
-
-      // Xóa sản phẩm đã thanh toán khỏi localStorage
-      const paidProducts = products.filter((product) => selectedProducts.includes(product.id));
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const updatedCart = cart.filter((item) => !paidProducts.some((paidProduct) => paidProduct.id === item.id));
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-      // Set timeout for 2 seconds to wait before executing the next action
+  
       setTimeout(() => {
-        this.props.navigate("/"); // Navigate to home page
+        this.props.navigate("/");
       }, 2000);
-
+  
     } catch (error) {
       toast.error("Thanh toán thất bại. Vui lòng thử lại.");
+      console.error("Payment error:", error.response ? error.response.data : error.message);
     }
   };
-
-
-
-
-
+ 
   // Hàm gọi API để cập nhật số lượng sản phẩm
-  updateProductQuantity = async (productId, quantityPurchased) => {
-    const mockAPI = `https://66665901a2f8516ff7a322ea.mockapi.io/KhanhTPSE173570/${productId}`;
+  updateProductQuantity = async (id, quantityPurchased) => {
+    const mockAPI = `https://666a8f987013419182cfc970.mockapi.io/api/example/${id}`;
 
     try {
       // Lấy thông tin sản phẩm từ API trước
@@ -410,10 +435,10 @@ class HomePage extends Component {
 
       // Kiểm tra nếu số lượng còn lại không đủ
       if (remainingQuantity < 0) {
-        toast.error(`Số lượng sản phẩm ${productId} không đủ để mua.`, {
+        toast.error(`Số lượng sản phẩm ${id} không đủ để mua.`, {
           autoClose: 2000, // Set toast duration to 2 seconds
         });
-        throw new Error(`Số lượng sản phẩm ${productId} không đủ để mua.`);
+        throw new Error(`Số lượng sản phẩm ${id} không đủ để mua.`);
       }
 
       // Cập nhật lại số lượng trong API
@@ -428,19 +453,20 @@ class HomePage extends Component {
       })
         .then(response => response.json())
         .then(data => {
-          toast.success(`Sản phẩm ${productId} đã được cập nhật. Số lượng còn lại: ${remainingQuantity}`, {
+          toast.success(`Sản phẩm ${id} đã được cập nhật. Số lượng còn lại: ${remainingQuantity}`, {
             autoClose: 2000, // Set toast duration to 2 seconds
           });
           return data;
         })
         .catch(error => {
-          toast.error(`Lỗi khi cập nhật số lượng cho sản phẩm ${productId}.`, {
+          toast.error(`Lỗi khi cập nhật số lượng cho sản phẩm ${id}.`, {
             autoClose: 2000, // Set toast duration to 2 seconds
           });
           throw error;
         });
     } catch (error) {
-      toast.error(`Lỗi khi lấy thông tin sản phẩm ${productId}.`, {
+      console.log(`Error fetching product information for ID ${id}:`, error);
+      toast.error(`Lỗi khi lấy thông tin sản phẩm ${id}.`, {
         autoClose: 2000, // Set toast duration to 2 seconds
       });
       throw error;
@@ -470,7 +496,8 @@ class HomePage extends Component {
       case 'cart':
         return (
           <div className="card-wrapper">
-            <div className="product-column">
+            {/* <div className="product-column"> */}
+            <div className={`product-column ${products.length === 0 ? 'empty' : ''}`}>
               {products.map((product) => (
                 <div key={product.id} className="card-container">
                   <div className="select-product">
@@ -576,7 +603,6 @@ class HomePage extends Component {
 
             </div>
             <div className="additional-column">
-
               <div className="order-summary">
                 <div style={{ maxHeight: '250px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
                   <table className="table_order" style={{ borderCollapse: 'separate' }}>
@@ -652,8 +678,13 @@ class HomePage extends Component {
                       name="sdt"
                       value={userProfileForm.sdt}
                       onChange={this.handleUserProfileInputChange}
+                      maxLength={10} // Giới hạn số lượng ký tự tối đa là 10
+                      pattern="\d{10}" // Chỉ cho phép nhập 10 chữ số
+                      title="Vui lòng nhập đúng 10 chữ số" // Hiển thị thông báo khi không hợp lệ
+                      required // Bắt buộc nhập trường này
                     />
                   </div>
+
                 </div>
 
                 {/* Column 2 */}
@@ -881,7 +912,7 @@ class HomePage extends Component {
                 </div>
                 {selectedProducts.length > 0 && (
                   <div className="total">
-   
+
                     <button
                       className="checkout-button"
                       onClick={this.handlePayment}

@@ -123,6 +123,9 @@
 
 }
 
+
+
+
 .card-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -139,6 +142,10 @@
     max-height: 400px;
     overflow-y: auto;
     position: relative;
+
+    &.empty {
+      display: none;
+    }
 
     .card-container {
       display: flex;
@@ -290,16 +297,22 @@
   }
 
   .additional-column {
-    flex: 1 1 35%;
+    flex: 1 1 25%;
     min-width: 250px;
     background-color: #fff;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+
+    // Center the column when product-column is empty
+    &.empty {
+      width: 60%; /* Set width to 60% when product-column is empty */
+      margin: 0 auto; /* Center the additional-column */
+    }
 
     .order-summary {
-      overflow-y: auto;
 
       .table_order {
         width: 100%;
@@ -318,7 +331,6 @@
         display: flex;
         color: red;
         font-weight: bold;
-        justify-content: space-between;
         align-items: center;
         margin-top: 20px;
         margin-left: 10px;
@@ -344,7 +356,7 @@
         padding: 10px 10px;
         border: none;
         border-radius: 5px;
-        width: 95%;
+        width: 98%;
         font-weight: bold;
         cursor: pointer;
         margin-top: 20px;
@@ -386,7 +398,6 @@
 
   /* Media queries for responsiveness */
   @media (max-width: 1024px) {
-
     .product-column,
     .additional-column {
       flex: 1 1 100%;
@@ -440,7 +451,6 @@
   }
 
   @media (max-width: 480px) {
-
     .product-column,
     .additional-column {
       padding: 10px;
@@ -469,6 +479,11 @@
     }
   }
 }
+
+
+
+
+
 
 
 
