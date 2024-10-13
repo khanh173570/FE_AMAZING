@@ -66,11 +66,11 @@ const HeaderCustomer = () => {
             <header className="header">
                 <img src={companyLogo} alt="Logo Công ty" className="header-logo" />
                 <nav className="nav">
-                    <ul>
-                        <div><Link to="/">Trang chủ</Link></div>
-                        <div><Link to="/products">Sản phẩm</Link></div>
-                        <div><Link to="/about">Giới thiệu</Link></div>
-                        <div><Link to="/news">Tin tức</Link></div>
+                    <ul style={{ display: 'flex', listStyle: 'none', padding: '0', margin: '0' }}>
+                        <div style={{ marginRight: '30px' }}><Link to="/">Trang chủ</Link></div>
+                        <div style={{ marginRight: '30px' }}><Link to="/products">Sản phẩm</Link></div>
+                        <div style={{ marginRight: '30px' }}><Link to="/about">Giới thiệu</Link></div>
+                        <div style={{ marginRight: '30px' }}><Link to="/news">Tin tức</Link></div>
                         <div><Link to="/contact">Liên hệ</Link></div>
                     </ul>
                 </nav>
