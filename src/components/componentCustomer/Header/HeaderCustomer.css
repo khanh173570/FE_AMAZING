@@ -35,7 +35,7 @@
   .cart-icon {
     font-size: 35px;
     cursor: pointer;
-    margin-left: 150px; /* Khoảng cách với các phần tử bên trái */
+    margin-left: 320px; /* Khoảng cách với các phần tử bên trái */
     margin-right: 55px;
     margin-bottom: 10px; 
     position: relative;
